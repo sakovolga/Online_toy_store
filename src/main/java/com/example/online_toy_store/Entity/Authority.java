@@ -7,39 +7,37 @@ import jakarta.persistence.Table;
 import lombok.*;
 
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
+
 @Entity
-@Table(name = "order_details")
+@Table(name = "authorities")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-public class OrderDetail {
+public class Authority {
 
     @Id
-    @Column(name = "od_id")
-    private UUID odId;
+    @Column(name = "a_id")
+    private UUID aId;
 
-    private Order order;
+    @Column(name = "authority_name")
+    private String authorityName;
 
-    private Product product;
-
-    @Column(name = "quantity")
-    private int quantity;
-
-    private String orderComment;
+    private Set<Role> roles;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OrderDetail that = (OrderDetail) o;
-        return quantity == that.quantity && Objects.equals(odId, that.odId) && Objects.equals(orderComment, that.orderComment);
+        Authority authority = (Authority) o;
+        return Objects.equals(aId, authority.aId) && Objects.equals(authorityName, authority.authorityName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(odId, quantity, orderComment);
+        return Objects.hash(aId, authorityName);
     }
 }

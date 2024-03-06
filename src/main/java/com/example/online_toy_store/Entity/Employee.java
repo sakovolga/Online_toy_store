@@ -1,7 +1,5 @@
 package com.example.online_toy_store.Entity;
 
-import com.example.online_toy_store.Entity.Enums.City;
-import com.example.online_toy_store.Entity.Enums.Country;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -12,41 +10,40 @@ import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
+
 @Entity
-@Table(name = "customers")
+@Table(name = "employees")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-public class Customer {
+public class Employee {
 
     @Id
-    @Column(name = "c_id")
-    private UUID cId;
+    @Column(name = "e_id")
+    private UUID eId;
 
     private User user;
 
-    @Column(name = "created_at")
-    private LocalDate createdAt;
+    @Column(name = "hire_date")
+    private LocalDate hireDate;
 
-    @Column(name = "card_number")
-    private String cardNumber;
+    @Column(name = "date_of_dismissal")
+    private LocalDate dateOfDismissal;
 
-    private Set<Order> customerOrders;
-
-    private Set<Review> customerReviews;
+    private Set<Order> employeeOrders;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Customer customer = (Customer) o;
-        return Objects.equals(cId, customer.cId) && Objects.equals(createdAt, customer.createdAt);
+        Employee employee = (Employee) o;
+        return Objects.equals(eId, employee.eId) && Objects.equals(hireDate, employee.hireDate) && Objects.equals(dateOfDismissal, employee.dateOfDismissal);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(cId, createdAt);
+        return Objects.hash(eId, hireDate, dateOfDismissal);
     }
 }

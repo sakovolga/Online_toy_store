@@ -9,29 +9,32 @@ import jakarta.persistence.Table;
 import lombok.*;
 
 import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
+
 @Entity
-@Table(name = "suppliers")
+@Table(name = "users")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-public class Supplier {
+public class User {
 
     @Id
-    @Column(name = "s_id")
-    private UUID sId;
+    @Column(name = "u_id")
+    private UUID uID;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "user_name")
+    private String userName;
 
-    @Column(name = "contact_name")
-    private String contactName;
+    @Column(name = "password")
+    private String password;
 
-    @Column(name = "phone")
-    private String phone;
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
 
     @Column(name = "address")
     private String address;
@@ -45,16 +48,18 @@ public class Supplier {
     @Column(name = "country")
     private Country country;
 
-    private Set<Product> products;
+    private Set<Role> roles;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Supplier supplier = (Supplier) o;
-        return Objects.equals(sId, supplier.sId) && Objects.equals(name, supplier.name) && Objects.equals(contactName, supplier.contactName) && Objects.equals(phone, supplier.phone);
+        User user = (User) o;
+        return Objects.equals(uID, user.uID) && Objects.equals(userName, user.userName) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName);
     }
+
     @Override
     public int hashCode() {
-        return Objects.hash(sId, name, contactName, phone);
+        return Objects.hash(uID, userName, firstName, lastName);
     }
 }
