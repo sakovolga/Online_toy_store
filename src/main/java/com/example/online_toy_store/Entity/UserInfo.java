@@ -1,7 +1,6 @@
 package com.example.online_toy_store.Entity;
 
 import com.example.online_toy_store.Entity.Enums.City;
-import com.example.online_toy_store.Entity.Enums.Country;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -11,27 +10,25 @@ import lombok.*;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
+
 @Entity
-@Table(name = "suppliers")
+@Table(name = "users_info")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-public class Supplier {
+public class UserInfo {
 
     @Id
-    @Column(name = "s_id")
-    private UUID sId;
+    @Column(name = "ui_id")
+    private UUID uID;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "user_name")
+    private String userName;
 
-    @Column(name = "phone")
-    private String phone;
-
-    @Column(name = "email")
-    private String email;
+    @Column(name = "password")
+    private String password;
 
     @Column(name = "address")
     private String address;
@@ -42,21 +39,24 @@ public class Supplier {
     @Column(name = "postal_code")
     private String postalCode;
 
-    @Column(name = "country")
-    private Country country;
+    @Column(name = "email")
+    private String email;
 
-    private Set<Product> products;
+    @Column(name = "card_number")
+    private String cardNumber;
+
+    private Set<Role> roles;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Supplier supplier = (Supplier) o;
-        return Objects.equals(sId, supplier.sId) && Objects.equals(name, supplier.name) && Objects.equals(phone, supplier.phone);
+        UserInfo userInfo = (UserInfo) o;
+        return Objects.equals(uID, userInfo.uID) && Objects.equals(userName, userInfo.userName) && Objects.equals(password, userInfo.password) && Objects.equals(postalCode, userInfo.postalCode);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(sId, name, phone);
+        return Objects.hash(uID, userName, password, postalCode);
     }
 }

@@ -23,12 +23,10 @@ public class Order {
     @Column(name = "o_id")
     private UUID oId;
 
-    private Customer customer;
+    private User user;
 
     @Column(name = "order_date")
     private LocalDate orderDate;
-
-    private Employee manager;
 
     private PromoCode promoCode;
 

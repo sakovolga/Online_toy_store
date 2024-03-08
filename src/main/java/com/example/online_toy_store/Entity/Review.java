@@ -22,9 +22,9 @@ public class Review {
 
     @Id
     @Column(name = "rv_id")
-    private UUID rId;
+    private UUID rvId;
 
-    private Customer customer;
+    private User user;
 
     private Product product;
 
@@ -45,11 +45,11 @@ public class Review {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Review review = (Review) o;
-        return Objects.equals(rId, review.rId) && Objects.equals(reviewDate, review.reviewDate) && Objects.equals(reviewTitle, review.reviewTitle);
+        return Objects.equals(rvId, review.rvId) && Objects.equals(reviewDate, review.reviewDate) && Objects.equals(reviewTitle, review.reviewTitle);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(rId, reviewDate, reviewTitle);
+        return Objects.hash(rvId, reviewDate, reviewTitle);
     }
 }
