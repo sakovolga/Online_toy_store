@@ -36,7 +36,7 @@ public class Order {
     private LocalDate orderDate;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "promocode_id", referencedColumnName = "pc_id")
+    @JoinColumn(name = "promo_code_id", referencedColumnName = "pc_id")
     private PromoCode promoCode;
 
     @Column(name = "order_status")

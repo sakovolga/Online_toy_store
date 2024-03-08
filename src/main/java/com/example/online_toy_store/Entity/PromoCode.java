@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 @Entity
-@Table(name = "promocodes")
+@Table(name = "promo_codes")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
