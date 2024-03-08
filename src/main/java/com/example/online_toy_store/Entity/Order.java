@@ -28,14 +28,14 @@ public class Order {
     @Column(name = "o_id")
     private UUID oId;
 
-    @ManyToOne(cascade = {MERGE, PERSIST, REFRESH}, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "u_id")
     private User user;
 
     @Column(name = "order_date")
     private LocalDate orderDate;
 
-    @ManyToOne(cascade = {MERGE, PERSIST, REFRESH}, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "promocode_id", referencedColumnName = "pc_id")
     private PromoCode promoCode;
 

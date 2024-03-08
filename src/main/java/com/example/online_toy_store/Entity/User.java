@@ -42,7 +42,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Country country;
 
-    @OneToOne(cascade = {MERGE, PERSIST, REFRESH}, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_info", referencedColumnName = "ui_id")
     private UserInfo userInfo;
 

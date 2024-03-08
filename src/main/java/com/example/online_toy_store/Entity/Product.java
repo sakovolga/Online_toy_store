@@ -47,7 +47,7 @@ public class Product {
     @Column(name = "is_available")
     private boolean isAvailable;
 
-    @ManyToOne(cascade = {MERGE, PERSIST, REFRESH}, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "supplier_id", referencedColumnName = "s_id")
     private Supplier supplier;
 
