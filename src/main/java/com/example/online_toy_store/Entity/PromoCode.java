@@ -1,10 +1,9 @@
 package com.example.online_toy_store.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -20,6 +19,9 @@ import java.util.UUID;
 public class PromoCode {
 
     @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID",
+            strategy = "com.example.online_toy_store.generator.UuidTimeSequenceGenerator")
     @Column(name = "pc_id")
     private UUID pcId;
 
@@ -41,6 +43,8 @@ public class PromoCode {
     @Column(name = "unused_quantity")
     private int unusedQuantity;
 
+    @JsonBackReference
+    @OneToMany(mappedBy = "promoCode", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Order> promoOrders;
 
     @Override

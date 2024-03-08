@@ -1,11 +1,9 @@
 package com.example.online_toy_store.Entity;
 
 import com.example.online_toy_store.Entity.Enums.City;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Objects;
 import java.util.Set;
@@ -21,6 +19,9 @@ import java.util.UUID;
 public class UserInfo {
 
     @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID",
+            strategy = "com.example.online_toy_store.generator.UuidTimeSequenceGenerator")
     @Column(name = "ui_id")
     private UUID uID;
 
@@ -34,6 +35,7 @@ public class UserInfo {
     private String address;
 
     @Column(name = "city")
+    @Enumerated(EnumType.STRING)
     private City city;
 
     @Column(name = "postal_code")
@@ -45,6 +47,7 @@ public class UserInfo {
     @Column(name = "card_number")
     private String cardNumber;
 
+    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
     private Set<Role> roles;
 
     @Override

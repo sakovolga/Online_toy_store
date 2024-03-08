@@ -1,13 +1,14 @@
 package com.example.online_toy_store.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Objects;
 import java.util.UUID;
+
+import static jakarta.persistence.CascadeType.*;
+
 @Entity
 @Table(name = "order_details")
 @AllArgsConstructor
@@ -18,16 +19,24 @@ import java.util.UUID;
 public class OrderDetail {
 
     @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID",
+            strategy = "com.example.online_toy_store.generator.UuidTimeSequenceGenerator")
     @Column(name = "od_id")
     private UUID odId;
 
+    @ManyToOne(cascade = {MERGE, PERSIST, REFRESH}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", referencedColumnName = "o_id")
     private Order order;
 
+    @ManyToOne(cascade = {MERGE, PERSIST, REFRESH}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id", referencedColumnName = "p_id")
     private Product product;
 
     @Column(name = "quantity")
     private int quantity;
 
+    @Column(name = "order_comment")
     private String orderComment;
 
     @Override

@@ -1,10 +1,8 @@
 package com.example.online_toy_store.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Objects;
 import java.util.Set;
@@ -20,14 +18,19 @@ import java.util.UUID;
 public class Role {
 
     @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID",
+            strategy = "com.example.online_toy_store.generator.UuidTimeSequenceGenerator")
     @Column(name = "r_id")
     private UUID rId;
 
     @Column(name = "role_name")
     private String roleName;
 
-    private Set<User> users;
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+    private Set<UserInfo> users;
 
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
     private Set<Authority> authorities;
 
     @Override

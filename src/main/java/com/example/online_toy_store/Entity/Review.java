@@ -1,16 +1,17 @@
 package com.example.online_toy_store.Entity;
 
 import com.example.online_toy_store.Entity.Enums.Rating;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
+
+import static jakarta.persistence.CascadeType.*;
+
 @Entity
 @Table(name = "reviews")
 @AllArgsConstructor
@@ -21,11 +22,18 @@ import java.util.UUID;
 public class Review {
 
     @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID",
+            strategy = "com.example.online_toy_store.generator.UuidTimeSequenceGenerator")
     @Column(name = "rv_id")
     private UUID rvId;
 
+    @ManyToOne(cascade = {MERGE, PERSIST, REFRESH}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "u_id")
     private User user;
 
+    @ManyToOne(cascade = {MERGE, PERSIST, REFRESH}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id", referencedColumnName = "p_id")
     private Product product;
 
     @Column(name = "review_date")
