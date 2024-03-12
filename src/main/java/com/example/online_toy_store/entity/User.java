@@ -1,17 +1,13 @@
-package com.example.online_toy_store.Entity;
+package com.example.online_toy_store.entity;
 
-import com.example.online_toy_store.Entity.Enums.City;
-import com.example.online_toy_store.Entity.Enums.Country;
+import com.example.online_toy_store.entity.enums.Country;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDate;
-import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
-
-import static jakarta.persistence.CascadeType.*;
 
 @Entity
 @Table(name = "users")

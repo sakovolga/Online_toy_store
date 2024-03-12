@@ -1,4 +1,4 @@
-package com.example.online_toy_store.Entity;
+package com.example.online_toy_store.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;

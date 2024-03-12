@@ -1,4 +1,4 @@
-package com.example.online_toy_store.Entity;
+package com.example.online_toy_store.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -9,40 +9,37 @@ import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Table(name = "roles")
+@Table(name = "authorities")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-public class Role {
+public class Authority {
 
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID",
             strategy = "com.example.online_toy_store.generator.UuidTimeSequenceGenerator")
-    @Column(name = "r_id")
-    private UUID rId;
+    @Column(name = "a_id")
+    private UUID aId;
 
-    @Column(name = "role_name")
-    private String roleName;
+    @Column(name = "authority_name")
+    private String authorityName;
 
-    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
-    private Set<UserInfo> users;
-
-    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
-    private Set<Authority> authorities;
+    @ManyToMany(mappedBy = "authorities", fetch = FetchType.LAZY)
+    private Set<Role> roles;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Role role = (Role) o;
-        return Objects.equals(rId, role.rId) && Objects.equals(roleName, role.roleName);
+        Authority authority = (Authority) o;
+        return Objects.equals(aId, authority.aId) && Objects.equals(authorityName, authority.authorityName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(rId, roleName);
+        return Objects.hash(aId, authorityName);
     }
 }

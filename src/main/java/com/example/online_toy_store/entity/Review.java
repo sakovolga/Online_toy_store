@@ -1,54 +1,60 @@
-package com.example.online_toy_store.Entity;
+package com.example.online_toy_store.entity;
 
+import com.example.online_toy_store.entity.enums.Rating;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
 
-import static jakarta.persistence.CascadeType.*;
-
 @Entity
-@Table(name = "order_details")
+@Table(name = "reviews")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-public class OrderDetail {
+public class Review {
 
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID",
             strategy = "com.example.online_toy_store.generator.UuidTimeSequenceGenerator")
-    @Column(name = "od_id")
-    private UUID odId;
+    @Column(name = "rv_id")
+    private UUID rvId;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", referencedColumnName = "o_id")
-    private Order order;
+    @JoinColumn(name = "user_id", referencedColumnName = "u_id")
+    private User user;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", referencedColumnName = "p_id")
     private Product product;
 
-    @Column(name = "quantity")
-    private int quantity;
+    @Column(name = "review_date")
+    private LocalDate reviewDate;
 
-    @Column(name = "order_comment")
-    private String orderComment;
+    @Column(name = "review_title")
+    private String reviewTitle;
+
+    @Column(name = "content")
+    private String content;
+
+    @Column(name = "content")
+    private Rating rating;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OrderDetail that = (OrderDetail) o;
-        return quantity == that.quantity && Objects.equals(odId, that.odId) && Objects.equals(orderComment, that.orderComment);
+        Review review = (Review) o;
+        return Objects.equals(rvId, review.rvId) && Objects.equals(reviewDate, review.reviewDate) && Objects.equals(reviewTitle, review.reviewTitle);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(odId, quantity, orderComment);
+        return Objects.hash(rvId, reviewDate, reviewTitle);
     }
 }

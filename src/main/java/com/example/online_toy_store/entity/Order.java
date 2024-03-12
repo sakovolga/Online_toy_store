@@ -1,6 +1,6 @@
-package com.example.online_toy_store.Entity;
+package com.example.online_toy_store.entity;
 
-import com.example.online_toy_store.Entity.Enums.OrderStatus;
+import com.example.online_toy_store.entity.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -10,8 +10,6 @@ import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.Set;
-
-import static jakarta.persistence.CascadeType.*;
 
 @Entity
 @Table(name = "orders")

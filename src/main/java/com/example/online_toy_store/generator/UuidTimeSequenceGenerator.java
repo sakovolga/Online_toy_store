@@ -1,4 +1,4 @@
-package com.lab.rmtbanking.creditservice.generator;
+package com.example.online_toy_store.generator;
 
 import lombok.RequiredArgsConstructor;
 import org.hibernate.HibernateException;

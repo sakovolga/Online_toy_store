@@ -1,7 +1,7 @@
-package com.example.online_toy_store.Entity;
+package com.example.online_toy_store.entity;
 
-import com.example.online_toy_store.Entity.Enums.City;
-import com.example.online_toy_store.Entity.Enums.Country;
+import com.example.online_toy_store.entity.enums.City;
+import com.example.online_toy_store.entity.enums.Country;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
