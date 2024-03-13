@@ -26,7 +26,7 @@ public class Product {
     @Column(name = "p_id")
     private UUID pId;
 
-    @Column(name = "name")
+    @Column(name = "product_name")
     private String name;
 
     @Column(name = "description")

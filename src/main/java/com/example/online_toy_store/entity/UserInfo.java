@@ -50,7 +50,10 @@ public class UserInfo {
     @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
     private Set<Role> roles;
 
-    @Override
+//    @OneToOne(mappedBy = "userInfo")
+//    private User user;
+
+       @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
