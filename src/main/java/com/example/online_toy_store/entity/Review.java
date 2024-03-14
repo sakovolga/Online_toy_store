@@ -42,7 +42,7 @@ public class Review {
     @Column(name = "content")
     private String content;
 
-    @Column(name = "content")
+    @Column(name = "rating")
     private Rating rating;
 
     @Override

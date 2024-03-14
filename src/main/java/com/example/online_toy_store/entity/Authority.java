@@ -27,7 +27,13 @@ public class Authority {
     @Column(name = "authority_name")
     private String authorityName;
 
-    @ManyToMany(mappedBy = "authorities", fetch = FetchType.LAZY)
+//    @ManyToMany(mappedBy = "authorities", fetch = FetchType.LAZY)
+//    private Set<Role> roles;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "authorities_roles",
+            joinColumns = @JoinColumn(name = "a_id"),
+            inverseJoinColumns = @JoinColumn(name = "r_id"))
     private Set<Role> roles;
 
     @Override

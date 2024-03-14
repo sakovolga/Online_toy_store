@@ -47,7 +47,13 @@ public class UserInfo {
     @Column(name = "card_number")
     private String cardNumber;
 
-    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
+//    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
+//    private Set<Role> roles;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_info_roles",
+            joinColumns = @JoinColumn(name = "ui_id"),
+            inverseJoinColumns = @JoinColumn(name = "r_id"))
     private Set<Role> roles;
 
 //    @OneToOne(mappedBy = "userInfo")

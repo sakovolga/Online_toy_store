@@ -30,6 +30,9 @@ public class Role {
     @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
     private Set<UserInfo> users;
 
+//    @ManyToMany(mappedBy = "roles")
+//    private Set<User> users;
+
     @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
     private Set<Authority> authorities;
 
