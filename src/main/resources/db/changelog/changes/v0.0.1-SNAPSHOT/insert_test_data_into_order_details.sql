@@ -1,3 +1,7 @@
+--liquibase formatted sql
+
+--changeset liquibase:1
+
 insert into order_details (od_id, order_id, product_id, quantity, order_comment)
 values
     ('081ab92d-687e-4e24-bc4d-bd41f631dc21', '97bea184-3e06-4f63-9c94-ec65f00c823d',

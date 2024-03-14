@@ -1,3 +1,7 @@
+--liquibase formatted sql
+
+--changeset liquibase:1
+
 insert into reviews (rv_id, user_id, product_id, review_date, review_title, content, rating)
 values
     ('a1d891b2-d78d-4bb5-907b-ecf6437e40af', '184bc3b1-6806-4924-924d-6a66b6bf91df',

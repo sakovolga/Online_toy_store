@@ -1,3 +1,7 @@
+--liquibase formatted sql
+
+--changeset liquibase:1
+
 insert into users_info_roles (ui_id, r_id)
 values
     ('f8d79884-76d3-43d4-8f2b-880ff944e45b', '2057a26e-3d3e-4e8e-84bc-d3b9002de4f3'),

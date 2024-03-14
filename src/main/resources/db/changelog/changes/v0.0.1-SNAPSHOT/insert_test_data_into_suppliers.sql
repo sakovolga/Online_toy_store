@@ -1,3 +1,7 @@
+--liquibase formatted sql
+
+--changeset liquibase:1
+
 insert into suppliers (s_id, supplier_name, phone, email, address, city, postal_code, country)
 values
     ('e19a0275-f0dc-4d22-bb1c-79af21cb6473', 'ABC Wholesale Distributors', '+1 (212) 555-1234',

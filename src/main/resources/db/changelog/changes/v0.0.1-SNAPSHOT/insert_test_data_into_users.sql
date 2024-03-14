@@ -1,3 +1,7 @@
+--liquibase formatted sql
+
+--changeset liquibase:1
+
 insert into users (u_id, first_name, last_name, created_at, country, user_info)
 values
     ('b3cf89da-79d2-42f8-8f4d-fcb22aa43f96', 'Ivan', 'Ivanov', '2024-01-13 13:13:00',

@@ -1,3 +1,7 @@
+--liquibase formatted sql
+
+--changeset liquibase:1
+
 insert into authorities_roles (a_id, r_id)
 values
     ('b30fdaec-15f4-4df4-a2d4-cd4907f94a9a', 'e8e47c95-84bb-4262-819f-7eace92d5b7b'),

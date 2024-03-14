@@ -1,3 +1,7 @@
+--liquibase formatted sql
+
+--changeset liquibase:1
+
 insert into authorities (a_id, authority_name)
 values
     ('b30fdaec-15f4-4df4-a2d4-cd4907f94a9a', 'Create customer profile'),

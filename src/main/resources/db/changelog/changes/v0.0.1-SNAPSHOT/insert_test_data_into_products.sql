@@ -1,3 +1,7 @@
+--liquibase formatted sql
+
+--changeset liquibase:1
+
 insert into products (p_id, product_name, description, price, available_quantity, category, is_available, supplier_id)
 values
     ('ac5c8867-676f-4737-931f-052cbb9b4a94',

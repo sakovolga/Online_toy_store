@@ -1,3 +1,6 @@
+--liquibase formatted sql
+
+--changeset liquibase:1
 
 DROP TABLE IF EXISTS suppliers;
 DROP TABLE IF EXISTS products;

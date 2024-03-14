@@ -1,3 +1,7 @@
+--liquibase formatted sql
+
+--changeset liquibase:1
+
 insert into orders (o_id, user_id, order_date, promo_code_id, order_status)
 values
     ('b0e6d30d-0e4d-4694-b7f3-3d40c788b2b1', '184bc3b1-6806-4924-924d-6a66b6bf91df',

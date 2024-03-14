@@ -1,3 +1,7 @@
+--liquibase formatted sql
+
+--changeset liquibase:1
+
 insert into users_info (ui_id, user_name, password, address, city, postal_code, email, card_number)
 values
     ('f8d79884-76d3-43d4-8f2b-880ff944e45b', 'ivan_ivanov', 'ubwuyt!529', 'Musterstrabe 123',
