@@ -1,6 +1,4 @@
---liquibase formatted sql
 
---changeset liquibase:1
 DROP TABLE IF EXISTS suppliers;
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS promo_codes;
@@ -80,7 +78,7 @@ CREATE TABLE IF NOT EXISTS users_info (
     postal_code	varchar(128) NOT NULL,
     email	varchar(128) NOT NULL,
     card_number	varchar(128),
-    PRIMARY KEY (ui_id),
+    PRIMARY KEY (ui_id)
 );
 
 CREATE TABLE IF NOT EXISTS users_info_roles (
