@@ -1,6 +1,7 @@
 package com.example.online_toy_store.entity;
 
 import com.example.online_toy_store.entity.enums.Category;
+import com.example.online_toy_store.generator.UuidTimeSequenceGenerator;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -21,8 +22,7 @@ import java.util.UUID;
 public class Product {
     @Id
     @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID",
-            strategy = "com.example.online_toy_store.generator.UuidTimeSequenceGenerator")
+    @GenericGenerator(name = "UUID", type = UuidTimeSequenceGenerator.class)
     @Column(name = "p_id")
     private UUID pId;
 

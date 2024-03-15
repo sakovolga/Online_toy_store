@@ -103,12 +103,6 @@ CREATE TABLE IF NOT EXISTS users (
     FOREIGN KEY (user_info) REFERENCES users_info (ui_id)
 );
 
--- ALTER TABLE users_info
--- ADD user_id binary(16),
--- ADD CONSTRAINT fk_users_info_users
--- FOREIGN KEY (user_id)
--- REFERENCES users(u_id);
-
 CREATE TABLE IF NOT EXISTS orders (
     o_id	binary(16) NOT NULL,
     user_id	binary(16) NOT NULL,

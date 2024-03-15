@@ -1,6 +1,7 @@
 package com.example.online_toy_store.entity;
 
 import com.example.online_toy_store.entity.enums.City;
+import com.example.online_toy_store.generator.UuidTimeSequenceGenerator;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -20,8 +21,7 @@ public class UserInfo {
 
     @Id
     @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID",
-            strategy = "com.example.online_toy_store.generator.UuidTimeSequenceGenerator")
+    @GenericGenerator(name = "UUID", type = UuidTimeSequenceGenerator.class)
     @Column(name = "ui_id")
     private UUID uID;
 
@@ -47,17 +47,11 @@ public class UserInfo {
     @Column(name = "card_number")
     private String cardNumber;
 
-//    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
-//    private Set<Role> roles;
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "users_info_roles",
             joinColumns = @JoinColumn(name = "ui_id"),
             inverseJoinColumns = @JoinColumn(name = "r_id"))
     private Set<Role> roles;
-
-//    @OneToOne(mappedBy = "userInfo")
-//    private User user;
 
        @Override
     public boolean equals(Object o) {
