@@ -1,6 +1,7 @@
 package com.example.online_toy_store.entity;
 
 import com.example.online_toy_store.entity.enums.Country;
+import com.example.online_toy_store.generator.UuidTimeSequenceGenerator;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -20,8 +21,7 @@ public class User {
 
     @Id
     @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID",
-            strategy = "com.example.online_toy_store.generator.UuidTimeSequenceGenerator")
+    @GenericGenerator(name = "UUID", type = UuidTimeSequenceGenerator.class)
     @Column(name = "u_id")
     private UUID uID;
 

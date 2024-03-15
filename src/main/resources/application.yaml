@@ -1,15 +1,19 @@
 spring:
   main:
     banner-mode: off
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
 
   datasource:
     url: jdbc:mysql://localhost:3306/online_toy_store
-    name: root
+    username: root
     password: 23402
 
-  jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
+  liquibase:
+    change-log: classpath:db/changelog/changelog-master.xml
+
+
 
 

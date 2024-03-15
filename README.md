@@ -12,7 +12,7 @@
 | Column name        | Type         | Description                                   |
 |--------------------|--------------|-----------------------------------------------|
 | p_id               | binary(16)   | id key of row - unique, not null, primary key |
-| name               | varchar(256) | Product name                                  |
+| product_name       | varchar(256) | Product name                                  |
 | description        | text         | Product description                           |
 | price              | decimal      | Price                                         |
 | available_quantity | int          | Available quantity                            |

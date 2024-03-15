@@ -1,5 +1,6 @@
 package com.example.online_toy_store.entity;
 
+import com.example.online_toy_store.generator.UuidTimeSequenceGenerator;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -20,14 +21,17 @@ public class Authority {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID",
-            strategy = "com.example.online_toy_store.generator.UuidTimeSequenceGenerator")
+            type = UuidTimeSequenceGenerator.class)
     @Column(name = "a_id")
     private UUID aId;
 
     @Column(name = "authority_name")
     private String authorityName;
 
-    @ManyToMany(mappedBy = "authorities", fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "authorities_roles",
+            joinColumns = @JoinColumn(name = "a_id"),
+            inverseJoinColumns = @JoinColumn(name = "r_id"))
     private Set<Role> roles;
 
     @Override

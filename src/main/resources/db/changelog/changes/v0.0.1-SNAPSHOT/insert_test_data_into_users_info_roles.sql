@@ -1,0 +1,20 @@
+--liquibase formatted sql
+
+--changeset liquibase:13
+
+insert into users_info_roles (ui_id, r_id)
+values
+    (UNHEX('f8d7988476d343d48f2b880ff944e45b'), UNHEX('2057a26e3d3e4e8e84bcd3b9002de4f3')),
+    (UNHEX('f8d7988476d343d48f2b880ff944e45b'), UNHEX('ba26b7c508cb46c5bbf035203e269306')),
+    (UNHEX('f8d7988476d343d48f2b880ff944e45b'), UNHEX('1c7e315b38e14e899b5640c5098d3b8f')),
+    (UNHEX('f8d7988476d343d48f2b880ff944e45b'), UNHEX('e8e47c9584bb4262819f7eace92d5b7b')),
+    (UNHEX('ef6de8c01d7241cfae4a7498632c6929'), UNHEX('ba26b7c508cb46c5bbf035203e269306')),
+    (UNHEX('ef6de8c01d7241cfae4a7498632c6929'), UNHEX('1c7e315b38e14e899b5640c5098d3b8f')),
+    (UNHEX('ef6de8c01d7241cfae4a7498632c6929'), UNHEX('e8e47c9584bb4262819f7eace92d5b7b')),
+    (UNHEX('146c6e2e97904a1f9a67f50fdcc61dd5'), UNHEX('1c7e315b38e14e899b5640c5098d3b8f')),
+    (UNHEX('146c6e2e97904a1f9a67f50fdcc61dd5'), UNHEX('e8e47c9584bb4262819f7eace92d5b7b')),
+    (UNHEX('08ae72f74d3b4fb1bb0b1aaae6b4a8ed'), UNHEX('e8e47c9584bb4262819f7eace92d5b7b')),
+    (UNHEX('8da9be6181c6499d8a0f87416e3e5414'), UNHEX('e8e47c9584bb4262819f7eace92d5b7b')),
+    (UNHEX('a056a97b086343108e2570f46aa7aee7'), UNHEX('e8e47c9584bb4262819f7eace92d5b7b')),
+    (UNHEX('c9fb87a6b0ff457ba6466b4a2a107396'), UNHEX('e8e47c9584bb4262819f7eace92d5b7b')),
+    (UNHEX('1fcff618540544a2b79dd5ac86a4779e'), UNHEX('e8e47c9584bb4262819f7eace92d5b7b'))
