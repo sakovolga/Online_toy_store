@@ -4,6 +4,16 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+    open-in-view: false
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/online_toy_store
+    username: root
+    password: 23402
 
   liquibase:
-    change-log: classpath:db_____/changelog/changelog-master.xml
+    change-log: classpath:db/changelog/changelog-master.xml
+
+
+
+

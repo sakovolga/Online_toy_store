@@ -1,10 +1,10 @@
 --liquibase formatted sql
 
---changeset liquibase:1
+--changeset liquibase:9
 
 insert into roles (r_id, role_name)
 values
-    ('e8e47c95-84bb-4262-819f-7eace92d5b7b', 'customer'),
-    ('1c7e315b-38e1-4e89-9b56-40c5098d3b8f', 'manager'),
-    ('ba26b7c5-08cb-46c5-bbf0-35203e269306', 'super manager'),
-    ('2057a26e-3d3e-4e8e-84bc-d3b9002de4f3', 'admin')
+    (UNHEX('e8e47c9584bb4262819f7eace92d5b7b'), 'customer'),
+    (UNHEX('1c7e315b38e14e899b5640c5098d3b8f'), 'manager'),
+    (UNHEX('ba26b7c508cb46c5bbf035203e269306'), 'super manager'),
+    (UNHEX('2057a26e3d3e4e8e84bcd3b9002de4f3'), 'admin')
