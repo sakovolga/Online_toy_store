@@ -24,4 +24,5 @@ public class UserServicesImpl implements UserServices {
                 (UUID.fromString(id))
                 .orElseThrow(() -> new UserDoesNotExistException(ErrorMessage.USER_DOES_NOT_EXIST));
     }
+
 }

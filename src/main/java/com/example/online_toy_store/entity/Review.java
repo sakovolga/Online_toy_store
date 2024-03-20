@@ -43,6 +43,7 @@ public class Review {
     private String content;
 
     @Column(name = "rating")
+    @Enumerated(EnumType.STRING)
     private Rating rating;
 
     @Override
