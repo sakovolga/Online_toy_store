@@ -49,6 +49,6 @@ public class User {
     private Set<Order> userOrders;
 
     @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-
+    @JsonIgnore
     private Set<Review> userReviews;
  }
