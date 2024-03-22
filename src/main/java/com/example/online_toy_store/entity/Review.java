@@ -2,6 +2,7 @@ package com.example.online_toy_store.entity;
 
 import com.example.online_toy_store.entity.enums.Rating;
 import com.example.online_toy_store.generator.UuidTimeSequenceGenerator;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -25,11 +26,13 @@ public class Review {
     @Column(name = "rv_id")
     private UUID rvId;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "u_id")
     private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id", referencedColumnName = "p_id")
     private Product product;
 

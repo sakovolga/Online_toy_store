@@ -2,6 +2,7 @@ package com.example.online_toy_store.entity;
 
 import com.example.online_toy_store.entity.enums.Country;
 import com.example.online_toy_store.generator.UuidTimeSequenceGenerator;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -39,16 +40,19 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Country country;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_info", referencedColumnName = "ui_id")
-    @JsonIgnore
+//    @JsonIgnore
+//    @JsonBackReference
     private UserInfo userInfo;
 
-    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
+//    @JsonBackReference
     private Set<Order> userOrders;
 
     @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
+//    @JsonBackReference
     private Set<Review> userReviews;
  }

@@ -47,7 +47,7 @@ public class UserInfo {
     @Column(name = "card_number")
     private String cardNumber;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_info_roles",
             joinColumns = @JoinColumn(name = "ui_id"),
             inverseJoinColumns = @JoinColumn(name = "r_id"))

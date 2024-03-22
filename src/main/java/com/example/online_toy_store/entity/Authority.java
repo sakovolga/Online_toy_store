@@ -1,6 +1,7 @@
 package com.example.online_toy_store.entity;
 
 import com.example.online_toy_store.generator.UuidTimeSequenceGenerator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -28,6 +29,7 @@ public class Authority {
     @Column(name = "authority_name")
     private String authorityName;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "authorities_roles",
             joinColumns = @JoinColumn(name = "a_id"),
