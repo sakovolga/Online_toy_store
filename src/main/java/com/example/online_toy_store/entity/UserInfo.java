@@ -12,7 +12,6 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "users_info")
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter

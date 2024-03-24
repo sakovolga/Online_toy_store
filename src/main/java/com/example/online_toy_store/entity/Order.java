@@ -8,6 +8,7 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.Set;
@@ -26,21 +27,21 @@ public class Order {
     @Column(name = "o_id")
     private UUID oId;
 
+    @Column(name = "order_date")
+    private LocalDateTime orderDate;
+
+    @Column(name = "order_status")
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
+
     @JsonBackReference
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "u_id")
     private User user;
 
-    @Column(name = "order_date")
-    private LocalDate orderDate;
-
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "promo_code_id", referencedColumnName = "pc_id")
     private PromoCode promoCode;
-
-    @Column(name = "order_status")
-    @Enumerated(EnumType.STRING)
-    private OrderStatus orderStatus;
 
 //    @JsonBackReference
     @OneToMany(mappedBy = "order", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)

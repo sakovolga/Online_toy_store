@@ -7,6 +7,7 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -32,10 +33,10 @@ public class PromoCode {
     private double discountAmount;
 
     @Column(name = "start_promo_date")
-    private LocalDate startPromoDate;
+    private LocalDateTime startPromoDate;
 
     @Column(name = "end_promo_date")
-    private LocalDate endPromoDateDate;
+    private LocalDateTime endPromoDateDate;
 
     @Column(name = "amount_of_users")
     private int amountOfUsers;

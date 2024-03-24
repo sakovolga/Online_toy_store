@@ -8,6 +8,7 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -26,18 +27,8 @@ public class Review {
     @Column(name = "rv_id")
     private UUID rvId;
 
-    @JsonBackReference
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id", referencedColumnName = "u_id")
-    private User user;
-
-    @JsonBackReference
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "product_id", referencedColumnName = "p_id")
-    private Product product;
-
     @Column(name = "review_date")
-    private LocalDate reviewDate;
+    private LocalDateTime reviewDate;
 
     @Column(name = "review_title")
     private String reviewTitle;
@@ -48,6 +39,16 @@ public class Review {
     @Column(name = "rating")
     @Enumerated(EnumType.STRING)
     private Rating rating;
+
+    @JsonBackReference
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", referencedColumnName = "u_id")
+    private User user;
+
+    @JsonBackReference
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id", referencedColumnName = "p_id")
+    private Product product;
 
     @Override
     public boolean equals(Object o) {
