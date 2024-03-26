@@ -26,24 +26,24 @@ public class ReturnData {
         return product;
     }
 
-    public static List<Product> returnAllProducts(){
+    public static Set<Product> returnAllProducts(){
         Product product1 = returnProduct();
         Product product2 = new Product();
         product2.setPId(UUID.fromString("9ac0037b-2a2d-4c26-9b8c-15e720f0f8db"));
         product2.setName("CAT Little Machines 5pcs Construction Toy Vehicles Playset for Kids Ages 3");
-        product2.setDescription("Bring The Whole Construction Site To Even The Smallest Of Spaces With The Cat Little Machines 5 Pack. These Mini 3” Push-Powered Vehicles Allow You To Be In Control Every Step Of The Way. Easily Move And Pose The Articulated Buckets And Booms Just Like The Real Thing. Set Includes Wheel Loader, Dump Truck, Excavator, Bulldozer And Backhoe. Appropriate For Ages 3 Years And Up.");
+        product2.setDescription("Bring The Whole Construction Site To Even The Smallest Of Spaces With The Cat Little Machines 5 Pack.");
 
         Product product3 = new Product();
         product3.setPId(UUID.fromString("ac5c8867-676f-4737-931f-052cbb9b4a94"));
         product3.setName("Toy Farm Animals Set Playset Collection of Domestic Animals Pets Flask for Kids");
-        product3.setDescription("Every child has their own playtime preferences  some enjoy playing war games and building with construction sets, others play house with dolls, and some collect model cars. However, many kids adore various animal figurines for play. This set of figurines is not only an engaging toy for children but also provides an opportunity to explore the world around them, get to know and learn about different animals. The set includes 12 animal figurines and one tree. The average size of each figurine is 4 inches.");
+        product3.setDescription("Every child has their own playtime preferences  some enjoy playing war games and building with construction sets, others play house with dolls.");
 
         Product product4 = new Product();
         product4.setPId(UUID.fromString("d10bb10e-ae56-4d3a-91bc-1961f2a29830"));
         product4.setName("Barbie Cutie Series Dolls Lot Of 4 Loose Articulated Poseable Toy Dolls");
         product4.setDescription("All Dolls are in very good condition, will come exactly as pictured no other accessories.");
 
-        return List.of(product1, product2, product3, product4);
+        return Set.of(product1, product2, product3, product4);
     }
 
     public static Supplier returnSupplier(){

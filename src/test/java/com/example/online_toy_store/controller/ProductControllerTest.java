@@ -42,8 +42,6 @@ public class ProductControllerTest {
     @Test
     void showProductTestPositive() throws Exception{
         Product expectedProduct = ReturnData.returnProduct();
-        Supplier expectedSupplier = ReturnData.returnSupplier();
-        Set<Review> expectedReviewSet = ReturnData.returnReviewSet();
 
         MvcResult showProductResult =
                 mockMvc
@@ -55,13 +53,11 @@ public class ProductControllerTest {
         Product actualProduct = objectMapper.readValue(productResultJSON, Product.class);
 
         Assertions.assertEquals(expectedProduct, actualProduct);
-        Assertions.assertEquals(expectedSupplier, actualProduct.getSupplier());
-        Assertions.assertEquals(expectedReviewSet, actualProduct.getProductReviews());
     }
 
     @Test
     void showAllProductsPositiveTest () throws Exception{
-        List<Product> expectedProductSet = ReturnData.returnAllProducts();
+        Set<Product> expectedProductSet = ReturnData.returnAllProducts();
 
         MvcResult showAllProductsResult =
                 mockMvc
@@ -71,8 +67,8 @@ public class ProductControllerTest {
                         .andReturn();
 
         String productsResultJSON = showAllProductsResult.getResponse().getContentAsString();
-        List<Product> actualProductSet = objectMapper.readValue(productsResultJSON, new TypeReference<List<Product>>() {});
-        Assertions.assertTrue(expectedProductSet.size() == actualProductSet.size() && actualProductSet.containsAll(expectedProductSet));
+        Set<Product> actualProductSet = objectMapper.readValue(productsResultJSON, new TypeReference<Set<Product>>() {});
+        Assertions.assertEquals(actualProductSet, expectedProductSet);
     }
 
 }

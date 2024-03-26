@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -18,7 +19,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -103,38 +104,14 @@ public class UserControllerTest {
             allAuthoritiesResult.addAll(role.getAuthorities());
         }
         Assertions.assertEquals(allAuthorities, allAuthoritiesResult);
-
-
-
     }
 
     @Test
     void showUserTestNegative() throws Exception {
-        assertThrows(UserDoesNotExistException.class, () -> {
-            mockMvc
-                    .perform(MockMvcRequestBuilders.get("/user/showUser/1b4a432d-1ec9-4141-ace1-1d6ed2e3de00"))
-                    .andExpect(status().isOk())
-                    .andReturn();
-        });
-
-
-
+        mockMvc.perform(MockMvcRequestBuilders.get("/user/showUser/1b4a432d-1ec9-4141-ace1-1d6ed2e3de00"))
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().string("User does not exist"))
+                .andReturn();
     }
-
-//    @Test
-//    void showUserWithInvalidIdShouldThrowException() {
-//        // Подготовка
-//        String invalidId = "1b4a432d-1ec9-4141-ace1-1d6ed2e3de00";
-//
-//        // Устанавливаем поведение mock объекта userRepository.findById
-//
-//        when(userRepository.findById(UUID.fromString(invalidId))).thenReturn(Optional.empty());
-//
-//        // Проверка и проверка исключения UserDoesNotExistException
-//
-//        assertThrows(UserDoesNotExistException.class, () -> userServices.showUser(invalidId));
-//    }
-
-
-
 }
