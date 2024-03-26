@@ -1,0 +1,12 @@
+DROP TABLE IF EXISTS reviews;
+DROP TABLE IF EXISTS order_details;
+DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS users_info_roles;
+DROP TABLE IF EXISTS users_info;
+DROP TABLE IF EXISTS authorities_roles;
+DROP TABLE IF EXISTS roles;
+DROP TABLE IF EXISTS authorities;
+DROP TABLE IF EXISTS promo_codes;
+DROP TABLE IF EXISTS products;
+DROP TABLE IF EXISTS suppliers;

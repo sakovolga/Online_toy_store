@@ -1,6 +1,7 @@
 package com.example.online_toy_store.service.impl;
 
 import com.example.online_toy_store.entity.Product;
+import com.example.online_toy_store.exception.NoProductsFoundException;
 import com.example.online_toy_store.exception.ProductDoesNotExistException;
 import com.example.online_toy_store.exception.UserDoesNotExistException;
 import com.example.online_toy_store.exception.errorMessage.ErrorMessage;
@@ -30,6 +31,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional
     public List<Product> showProducts() {
-        return productRepository.findAll();
+        List<Product> productList = productRepository.findAll();
+        if (productList.isEmpty()) {
+            throw new NoProductsFoundException(ErrorMessage.NO_PRODUCTS_FOUND);
+        }
+        return productList;
     }
+
 }

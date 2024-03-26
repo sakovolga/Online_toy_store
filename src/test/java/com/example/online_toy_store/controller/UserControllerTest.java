@@ -3,32 +3,28 @@ package com.example.online_toy_store.controller;
 import com.example.online_toy_store.entity.*;
 import com.example.online_toy_store.entity.enums.City;
 import com.example.online_toy_store.entity.enums.Country;
+import com.example.online_toy_store.exception.UserDoesNotExistException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-
+import java.util.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @Sql("/create-tables.sql")
 @Sql("/insert_test_data.sql")
+@Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD, scripts = "classpath:drop-tables.sql")
 public class UserControllerTest {
 
     @Autowired
@@ -38,7 +34,7 @@ public class UserControllerTest {
     private ObjectMapper objectMapper;
 
     @Test
-    void createUserTestPositive() throws Exception {
+    void showUserTestPositive() throws Exception {
 
         User user = new User();
         user.setUID(UUID.fromString("1b4a432d-1ec9-4141-ace1-1d6ed2e3de0f"));
@@ -85,13 +81,13 @@ public class UserControllerTest {
         Set<Authority> authoritySet = Set.of(authority1, authority2, authority3, authority4);
         role1.setAuthorities(authoritySet);
 
-        MvcResult createUserResult =
+        MvcResult showUserResult =
                 mockMvc
                         .perform(MockMvcRequestBuilders.get("/user/showUser/1b4a432d-1ec9-4141-ace1-1d6ed2e3de0f"))
                         .andExpect(status().isOk())
                         .andReturn();
 
-        String userResultJSON = createUserResult.getResponse().getContentAsString();
+        String userResultJSON = showUserResult.getResponse().getContentAsString();
         User userResult = objectMapper.readValue(userResultJSON, User.class);
 
         Assertions.assertEquals(user, userResult);
@@ -107,5 +103,38 @@ public class UserControllerTest {
             allAuthoritiesResult.addAll(role.getAuthorities());
         }
         Assertions.assertEquals(allAuthorities, allAuthoritiesResult);
+
+
+
     }
+
+    @Test
+    void showUserTestNegative() throws Exception {
+        assertThrows(UserDoesNotExistException.class, () -> {
+            mockMvc
+                    .perform(MockMvcRequestBuilders.get("/user/showUser/1b4a432d-1ec9-4141-ace1-1d6ed2e3de00"))
+                    .andExpect(status().isOk())
+                    .andReturn();
+        });
+
+
+
+    }
+
+//    @Test
+//    void showUserWithInvalidIdShouldThrowException() {
+//        // Подготовка
+//        String invalidId = "1b4a432d-1ec9-4141-ace1-1d6ed2e3de00";
+//
+//        // Устанавливаем поведение mock объекта userRepository.findById
+//
+//        when(userRepository.findById(UUID.fromString(invalidId))).thenReturn(Optional.empty());
+//
+//        // Проверка и проверка исключения UserDoesNotExistException
+//
+//        assertThrows(UserDoesNotExistException.class, () -> userServices.showUser(invalidId));
+//    }
+
+
+
 }

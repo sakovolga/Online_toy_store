@@ -4,6 +4,7 @@ import com.example.online_toy_store.entity.enums.City;
 import com.example.online_toy_store.entity.enums.Country;
 import com.example.online_toy_store.generator.UuidTimeSequenceGenerator;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -49,7 +50,7 @@ public class Supplier {
     @Enumerated(EnumType.STRING)
     private Country country;
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "supplier", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Product> products;
 

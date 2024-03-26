@@ -19,7 +19,7 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping("/showProduct/{id}")
-    public Product showUserById(@PathVariable(name = "id") String id){
+    public Product showProductById(@PathVariable(name = "id") String id){
         return productService.showProduct(id);
     }
 
