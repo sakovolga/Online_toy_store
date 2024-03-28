@@ -86,8 +86,8 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 CREATE TABLE IF NOT EXISTS orders (
-    o_id	binary(16) NOT NULL,
-    user_id	binary(16) NOT NULL,
+    o_id	binary(16),
+    user_id	binary(16),
     order_date	timestamp NOT NULL,
     promo_code_id	binary(16),
     order_status	varchar(128) NOT NULL,

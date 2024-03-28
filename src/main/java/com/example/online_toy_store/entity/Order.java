@@ -23,7 +23,7 @@ import java.util.Set;
 public class Order {
     @Id
     @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", type = UuidTimeSequenceGenerator.class)
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "o_id")
     private UUID oId;
 
@@ -35,16 +35,16 @@ public class Order {
     private OrderStatus orderStatus;
 
     @JsonBackReference
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "u_id")
     private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "promo_code_id", referencedColumnName = "pc_id")
     private PromoCode promoCode;
 
 //    @JsonBackReference
-    @OneToMany(mappedBy = "order", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "order", orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<OrderDetail> orderDetails;
 
     @Override

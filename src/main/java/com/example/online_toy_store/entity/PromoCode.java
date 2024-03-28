@@ -45,7 +45,7 @@ public class PromoCode {
     private int unusedQuantity;
 
     @JsonBackReference
-    @OneToMany(mappedBy = "promoCode", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "promoCode", orphanRemoval = false, fetch = FetchType.LAZY)
     private Set<Order> promoOrders;
 
     @Override

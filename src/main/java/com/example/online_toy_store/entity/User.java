@@ -49,7 +49,7 @@ public class User {
 //    @JsonBackReference
     private UserInfo userInfo;
 
-    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", orphanRemoval = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
 //    @JsonBackReference
     private Set<Order> userOrders;
@@ -58,6 +58,10 @@ public class User {
     @JsonIgnore
 //    @JsonBackReference
     private Set<Review> userReviews;
+
+    public User(String uId) {
+        this.uID = UUID.fromString(uId);
+    }
 
     @Override
     public boolean equals(Object o) {

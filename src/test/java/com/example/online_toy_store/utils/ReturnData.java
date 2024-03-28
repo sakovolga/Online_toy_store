@@ -1,5 +1,6 @@
 package com.example.online_toy_store.utils;
 
+import com.example.online_toy_store.entity.Order;
 import com.example.online_toy_store.entity.Product;
 import com.example.online_toy_store.entity.Review;
 import com.example.online_toy_store.entity.Supplier;
@@ -67,5 +68,35 @@ public class ReturnData {
         LocalDateTime dateTime = LocalDateTime.parse("2024-02-05 13:11:34", formatter);
         review.setReviewDate(dateTime);
         return Set.of(review);
+    }
+
+    public static Set<Order> returnAllOrders(){
+        Order order1 = new Order();
+        order1.setOId(UUID.fromString("4eab43a7-0385-48f3-bfd3-4529a2bcfd51"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.parse("2024-02-26 07:11:49", formatter);
+        order1.setOrderDate(dateTime);
+
+        Order order2 = new Order();
+        order2.setOId(UUID.fromString("6b4e8a7c-0f64-4fd8-a37f-5c0a072d14a2"));
+        LocalDateTime dateTime2 = LocalDateTime.parse("2024-02-10 17:11:49", formatter);
+        order2.setOrderDate(dateTime2);
+
+        Order order3 = new Order();
+        order3.setOId(UUID.fromString("97bea184-3e06-4f63-9c94-ec65f00c823d"));
+        LocalDateTime dateTime3 = LocalDateTime.parse("2024-02-02 16:10:49", formatter);
+        order3.setOrderDate(dateTime3);
+
+        Order order4 = new Order();
+        order4.setOId(UUID.fromString("b0e6d30d-0e4d-4694-b7f3-3d40c788b2b1"));
+        LocalDateTime dateTime4 = LocalDateTime.parse("2023-11-21 13:20:49", formatter);
+        order4.setOrderDate(dateTime4);
+
+        Order order5 = new Order();
+        order5.setOId(UUID.fromString("ed0285f4-4524-40f8-bcf5-6cb23b7f81dc"));
+        LocalDateTime dateTime5 = LocalDateTime.parse("2024-03-05 07:11:49", formatter);
+        order5.setOrderDate(dateTime5);
+
+        return Set.of(order1, order2, order3, order4, order5);
     }
 }

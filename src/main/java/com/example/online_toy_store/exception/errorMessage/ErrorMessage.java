@@ -6,4 +6,5 @@ public class ErrorMessage {
     public static final String ORDER_DOES_NOT_EXIST = "Order does not exist";
     public static final String PRODUCT_DOES_NOT_EXIST = "Product does not exist";
     public static final String NO_PRODUCTS_FOUND = "No products found";
+    public static final String THE_ORDER_ALREADY_EXISTS = "The order already exists";
 }
