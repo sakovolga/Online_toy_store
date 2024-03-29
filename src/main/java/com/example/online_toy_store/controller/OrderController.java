@@ -26,17 +26,9 @@ public class OrderController {
         return orderService.showAllOrders();
     }
 
-
-
     @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
-//    @ResponseStatus(HttpStatus.CREATED)
     public Order createOrder(@RequestBody Order order) {
-//        try {
-//            return orderService.createOrder(order);
-//        } catch (TheOrderAlreadyExistsException e) {
-//            throw new RuntimeException(e);
-//        }
         return orderService.createOrder(order);
     }
     @DeleteMapping("/delete/{id}")
