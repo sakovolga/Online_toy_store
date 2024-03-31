@@ -1,13 +1,9 @@
 package com.example.online_toy_store.controller;
 
 import com.example.online_toy_store.entity.Product;
-import com.example.online_toy_store.entity.Review;
-import com.example.online_toy_store.entity.Supplier;
-import com.example.online_toy_store.entity.User;
-import com.example.online_toy_store.utils.ReturnData;
+import com.example.online_toy_store.utils.ExpectedData;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.JSONObject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +15,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -42,11 +36,12 @@ public class ProductControllerTest {
 
     @Test
     void showProductTestPositive() throws Exception{
-        Product expectedProduct = ReturnData.returnProduct();
+        Product expectedProduct = ExpectedData.returnProduct();
 
         MvcResult showProductResult =
                 mockMvc
-                        .perform(MockMvcRequestBuilders.get("/product/showProduct/3b287f30-6c1c-4e71-b7bf-881e2d7b3cb4"))
+                        .perform(MockMvcRequestBuilders
+                                .get("/product/showProduct/3b287f30-6c1c-4e71-b7bf-881e2d7b3cb4"))
                         .andExpect(status().isOk())
                         .andReturn();
 
@@ -58,7 +53,7 @@ public class ProductControllerTest {
 
     @Test
     void showAllProductsPositiveTest () throws Exception{
-        Set<Product> expectedProductSet = ReturnData.returnAllProducts();
+        Set<Product> expectedProductSet = ExpectedData.returnAllProducts();
 
         MvcResult showAllProductsResult =
                 mockMvc

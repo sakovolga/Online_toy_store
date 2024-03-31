@@ -6,18 +6,13 @@ import com.example.online_toy_store.entity.Review;
 import com.example.online_toy_store.entity.Supplier;
 import com.example.online_toy_store.entity.enums.City;
 import com.example.online_toy_store.entity.enums.Country;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.Assertions;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-public class ReturnData {
+public class ExpectedData {
 
     public static Product returnProduct(){
         Product product = new Product();
@@ -70,14 +65,20 @@ public class ReturnData {
         return Set.of(review);
     }
 
-    public static Set<Order> returnAllOrders(){
-        Order order1 = new Order();
-        order1.setOId(UUID.fromString("4eab43a7-0385-48f3-bfd3-4529a2bcfd51"));
+    public static Order returnOrder(){
+        Order order = new Order();
+        order.setOId(UUID.fromString("4eab43a7-0385-48f3-bfd3-4529a2bcfd51"));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.parse("2024-02-26 07:11:49", formatter);
-        order1.setOrderDate(dateTime);
+        order.setOrderDate(dateTime);
+        return order;
+    }
+
+    public static Set<Order> returnAllOrders(){
+        Order order1 = returnOrder();
 
         Order order2 = new Order();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         order2.setOId(UUID.fromString("6b4e8a7c-0f64-4fd8-a37f-5c0a072d14a2"));
         LocalDateTime dateTime2 = LocalDateTime.parse("2024-02-10 17:11:49", formatter);
         order2.setOrderDate(dateTime2);

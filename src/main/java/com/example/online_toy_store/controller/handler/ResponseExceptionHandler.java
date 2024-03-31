@@ -1,5 +1,6 @@
 package com.example.online_toy_store.controller.handler;
 
+import com.example.online_toy_store.exception.OrderDoesNotExistException;
 import com.example.online_toy_store.exception.UserDoesNotExistException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -29,7 +30,17 @@ public class ResponseExceptionHandler {
 //    }
 
     @ExceptionHandler(UserDoesNotExistException.class)
-    public ResponseEntity<String> handleAuthorNotFoundException(UserDoesNotExistException ex) {
+    public ResponseEntity<String> handleUserNotFoundException(UserDoesNotExistException ex) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .headers(headers)
+                .body(ex.getMessage());
+    }
+
+    @ExceptionHandler(OrderDoesNotExistException.class)
+    public ResponseEntity<String> handleUserNotFoundException(OrderDoesNotExistException ex) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         return ResponseEntity

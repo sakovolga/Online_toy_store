@@ -59,10 +59,6 @@ public class User {
 //    @JsonBackReference
     private Set<Review> userReviews;
 
-    public User(String uId) {
-        this.uID = UUID.fromString(uId);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

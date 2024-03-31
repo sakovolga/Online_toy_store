@@ -1,7 +1,6 @@
 package com.example.online_toy_store.controller;
 
 import com.example.online_toy_store.entity.Order;
-import com.example.online_toy_store.exception.TheOrderAlreadyExistsException;
 import com.example.online_toy_store.service.interf.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

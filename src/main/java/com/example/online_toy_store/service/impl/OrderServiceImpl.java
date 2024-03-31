@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -28,20 +29,15 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public Order createOrder(Order order){
-//        Optional<Order> optionalOrder = orderRepository.findById(order.getOId());
-//        if (optionalOrder.isPresent()){
-//            throw new TheOrderAlreadyExistsException(ErrorMessage.THE_ORDER_ALREADY_EXISTS);
-//        }
-//        else{
-//            return orderRepository.saveAndFlush(order);
-//        }
         return orderRepository.saveAndFlush(order);
     }
 
     @Override
     @Transactional
     public void deleteOrder(String id) {
-        orderRepository.deleteById(UUID.fromString(id));
+        Optional<Order> optionalOrder = orderRepository.findById(UUID.fromString(id));
+        if (optionalOrder.isEmpty()) throw new OrderDoesNotExistException(ErrorMessage.ORDER_DOES_NOT_EXIST);
+        else orderRepository.deleteById(UUID.fromString(id));
     }
 
     @Override

@@ -12,7 +12,6 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "authorities")
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
@@ -21,8 +20,7 @@ public class Authority {
 
     @Id
     @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID",
-            type = UuidTimeSequenceGenerator.class)
+    @GenericGenerator(name = "UUID", type = UuidTimeSequenceGenerator.class)
     @Column(name = "a_id")
     private UUID aId;
 

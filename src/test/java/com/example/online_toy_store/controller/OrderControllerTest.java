@@ -1,9 +1,8 @@
 package com.example.online_toy_store.controller;
 
 import com.example.online_toy_store.entity.Order;
-import com.example.online_toy_store.entity.Product;
 import com.example.online_toy_store.entity.enums.OrderStatus;
-import com.example.online_toy_store.utils.ReturnData;
+import com.example.online_toy_store.utils.ExpectedData;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
@@ -19,11 +18,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -41,9 +37,28 @@ class OrderControllerTest {
     private ObjectMapper objectMapper;
 
     @Test
-    void showAllOrdersTest () throws Exception{
+    void showOrderByIdPositiveTest() throws Exception {
 
-        Set<Order> expectedOrderSet = ReturnData.returnAllOrders();
+        Order expectedOrder = ExpectedData.returnOrder();
+
+        MvcResult mvcResult =
+                mockMvc.perform(MockMvcRequestBuilders
+                                .get("/order/showOrder/4eab43a7-0385-48f3-bfd3-4529a2bcfd51"))
+                        .andExpect(status().isOk())
+                        .andReturn();
+
+        String actualOrderJSON = mvcResult.getResponse().getContentAsString();
+
+        Order actualOrder = objectMapper.readValue(actualOrderJSON, Order.class);
+
+        Assertions.assertEquals(expectedOrder, actualOrder);
+    }
+
+
+    @Test
+    void showAllOrdersTest() throws Exception {
+
+        Set<Order> expectedOrderSet = ExpectedData.returnAllOrders();
 
         Set<Order> actualOrderSet = showAll();
         Assertions.assertEquals(expectedOrderSet, actualOrderSet);
@@ -86,15 +101,28 @@ class OrderControllerTest {
 
     }
 
+    @Test
+    void deleteOrderTestWithException() throws Exception {
+
+        mockMvc.perform(MockMvcRequestBuilders.delete("/order/delete/6b4e8a7c-0f64-4fd8-a37f-5c0a072d14a3"))
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().string("Order does not exist"))
+                .andReturn();
+    }
+
     Set<Order> showAll() throws Exception {
-        MvcResult showAllOrdersBefore =
+        MvcResult showAllOrders =
                 mockMvc
                         .perform(MockMvcRequestBuilders.get("/order/showAllOrders"))
                         .andExpect(status().isOk())
                         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                         .andReturn();
 
-        String ordersResultJSON = showAllOrdersBefore.getResponse().getContentAsString();
-        return objectMapper.readValue(ordersResultJSON, new TypeReference<Set<Order>>() {});
+        String ordersResultJSON = showAllOrders.getResponse().getContentAsString();
+        return objectMapper.readValue(ordersResultJSON, new TypeReference<Set<Order>>() {
+        });
     }
+
+
 }

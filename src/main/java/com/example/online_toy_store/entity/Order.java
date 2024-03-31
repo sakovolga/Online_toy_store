@@ -15,7 +15,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "orders")
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
@@ -23,7 +22,7 @@ import java.util.Set;
 public class Order {
     @Id
     @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @GenericGenerator(name = "UUID", type = UuidTimeSequenceGenerator.class)
     @Column(name = "o_id")
     private UUID oId;
 
