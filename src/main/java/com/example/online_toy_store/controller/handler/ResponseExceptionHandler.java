@@ -1,9 +1,6 @@
 package com.example.online_toy_store.controller.handler;
 
-import com.example.online_toy_store.exception.ASupplierWithTheSameNameAlreadyExistsException;
-import com.example.online_toy_store.exception.OrderDoesNotExistException;
-import com.example.online_toy_store.exception.SupplierDoesNotExistException;
-import com.example.online_toy_store.exception.UserDoesNotExistException;
+import com.example.online_toy_store.exception.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -26,7 +23,7 @@ public class ResponseExceptionHandler {
     }
 
     @ExceptionHandler(OrderDoesNotExistException.class)
-    public ResponseEntity<String> handleUserNotFoundException(OrderDoesNotExistException ex) {
+    public ResponseEntity<String> handleOrderNotFoundException(OrderDoesNotExistException ex) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         return ResponseEntity
@@ -36,7 +33,7 @@ public class ResponseExceptionHandler {
     }
 
     @ExceptionHandler(SupplierDoesNotExistException.class)
-    public ResponseEntity<String> handleUserNotFoundException(SupplierDoesNotExistException ex) {
+    public ResponseEntity<String> handleSupplierNotFoundException(SupplierDoesNotExistException ex) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         return ResponseEntity
@@ -46,7 +43,7 @@ public class ResponseExceptionHandler {
     }
 
     @ExceptionHandler(ASupplierWithTheSameNameAlreadyExistsException.class)
-    public ResponseEntity<String> handleUserNotFoundException(ASupplierWithTheSameNameAlreadyExistsException ex) {
+    public ResponseEntity<String> handleSupplierAlreadyExistException(ASupplierWithTheSameNameAlreadyExistsException ex) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         return ResponseEntity
@@ -55,6 +52,14 @@ public class ResponseExceptionHandler {
                 .body(ex.getMessage());
     }
 
-
+    @ExceptionHandler(ProductDoesNotExistException.class)
+    public ResponseEntity<String> handleProductDoesNotExistException(ProductDoesNotExistException ex) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .headers(headers)
+                .body(ex.getMessage());
+    }
 
 }

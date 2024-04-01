@@ -25,7 +25,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Sql("/drop-tables.sql")
 @Sql("/create-tables.sql")
 @Sql("/insert_test_data.sql")
-//@Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD, scripts = "classpath:drop-tables.sql")
 public class ProductControllerTest {
 
     @Autowired
@@ -52,7 +51,18 @@ public class ProductControllerTest {
     }
 
     @Test
-    void showAllProductsPositiveTest () throws Exception{
+    void showProductWithExceptionTest() throws Exception{
+        String nonExistentID = "4eab43a7-0385-48f3-bfd3-4529a2bcfd52";
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/product/showProduct/{id}", nonExistentID))
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().string("Product does not exist"));
+    }
+
+    @Test
+    void showAllProductsTest () throws Exception{
         Set<Product> expectedProductSet = ExpectedData.returnAllProducts();
 
         MvcResult showAllProductsResult =
@@ -66,5 +76,4 @@ public class ProductControllerTest {
         Set<Product> actualProductSet = objectMapper.readValue(productsResultJSON, new TypeReference<Set<Product>>() {});
         Assertions.assertEquals(actualProductSet, expectedProductSet);
     }
-
 }
