@@ -146,4 +146,14 @@ public class ExpectedData {
 
         return user;
     }
+
+    public static PromoCode returnPromo(){
+        PromoCode promoCode = new PromoCode();
+        promoCode.setPcId(UUID.fromString("62ae2a48-8c85-4f2e-b7d8-91b374c94585"));
+        promoCode.setPromoName("Spring Surprise");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        promoCode.setStartPromoDate(LocalDateTime.parse("2023-03-01 00:00:00", formatter));
+        promoCode.setEndPromoDate(LocalDateTime.parse("2023-03-31 23:59:59", formatter));
+        return promoCode;
+    }
 }

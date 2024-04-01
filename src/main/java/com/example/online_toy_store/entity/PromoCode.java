@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
@@ -35,7 +34,7 @@ public class PromoCode {
     private LocalDateTime startPromoDate;
 
     @Column(name = "end_promo_date")
-    private LocalDateTime endPromoDateDate;
+    private LocalDateTime endPromoDate;
 
     @Column(name = "amount_of_users")
     private int amountOfUsers;
@@ -52,11 +51,11 @@ public class PromoCode {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PromoCode promoCode = (PromoCode) o;
-        return Objects.equals(pcId, promoCode.pcId) && Objects.equals(promoName, promoCode.promoName) && Objects.equals(startPromoDate, promoCode.startPromoDate) && Objects.equals(endPromoDateDate, promoCode.endPromoDateDate);
+        return Objects.equals(pcId, promoCode.pcId) && Objects.equals(promoName, promoCode.promoName) && Objects.equals(startPromoDate, promoCode.startPromoDate) && Objects.equals(endPromoDate, promoCode.endPromoDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(pcId, promoName, startPromoDate, endPromoDateDate);
+        return Objects.hash(pcId, promoName, startPromoDate, endPromoDate);
     }
 }

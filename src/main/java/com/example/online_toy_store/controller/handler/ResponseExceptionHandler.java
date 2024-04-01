@@ -62,4 +62,14 @@ public class ResponseExceptionHandler {
                 .body(ex.getMessage());
     }
 
+    @ExceptionHandler(PromoCodeDoesNotExistException.class)
+    public ResponseEntity<String> handlePromoCodeDoesNotExistException(PromoCodeDoesNotExistException ex) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .headers(headers)
+                .body(ex.getMessage());
+    }
+
 }

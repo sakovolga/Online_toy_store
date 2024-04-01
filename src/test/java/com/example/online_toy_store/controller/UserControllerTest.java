@@ -27,7 +27,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Sql("/drop-tables.sql")
 @Sql("/create-tables.sql")
 @Sql("/insert_test_data.sql")
-//@Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD, scripts = "classpath:drop-tables.sql")
 public class UserControllerTest {
 
     @Autowired
