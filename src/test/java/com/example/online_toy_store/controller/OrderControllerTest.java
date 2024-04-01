@@ -54,6 +54,17 @@ class OrderControllerTest {
         Assertions.assertEquals(expectedOrder, actualOrder);
     }
 
+    @Test
+    void showOrderByIdTestWithException() throws Exception {
+
+        String nonExistentID = "4eab43a7-0385-48f3-bfd3-4529a2bcfd52";
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/order/showOrder/{orderId}", nonExistentID))
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().string("Order does not exist"));
+    }
 
     @Test
     void showAllOrdersTest() throws Exception {
@@ -123,6 +134,4 @@ class OrderControllerTest {
         return objectMapper.readValue(ordersResultJSON, new TypeReference<Set<Order>>() {
         });
     }
-
-
 }
