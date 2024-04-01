@@ -6,4 +6,6 @@ import org.springframework.stereotype.Service;
 public interface SupplierService {
 
     Supplier createSupplier(Supplier supplier);
+
+    Supplier showByName(String name);
 }

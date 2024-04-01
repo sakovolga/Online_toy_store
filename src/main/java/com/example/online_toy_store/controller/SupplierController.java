@@ -19,4 +19,9 @@ public class SupplierController {
        return supplierService.createSupplier(supplier);
     }
 
+    @GetMapping("/showByName/{name}")
+    public Supplier showSupplierByName(@PathVariable(name = "name") String name){
+        return supplierService.showByName(name);
+    }
+
 }
