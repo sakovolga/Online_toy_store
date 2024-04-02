@@ -6,6 +6,7 @@ import com.example.online_toy_store.entity.enums.Country;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -155,5 +156,16 @@ public class ExpectedData {
         promoCode.setStartPromoDate(LocalDateTime.parse("2023-03-01 00:00:00", formatter));
         promoCode.setEndPromoDate(LocalDateTime.parse("2023-03-31 23:59:59", formatter));
         return promoCode;
+    }
+
+    public static List<PromoCode> returnAllPromoCodes(){
+        PromoCode promoCode1 = returnPromo();
+        PromoCode promoCode2 = new PromoCode();
+        promoCode2.setPcId(UUID.fromString("f83d13cc-4203-4a08-a03d-30a971d87e19"));
+        promoCode2.setPromoName("Black Friday");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        promoCode2.setStartPromoDate(LocalDateTime.parse("2023-11-15 00:00:00", formatter));
+        promoCode2.setEndPromoDate(LocalDateTime.parse("2023-11-30 23:59:59", formatter));
+        return List.of(promoCode1, promoCode2);
     }
 }

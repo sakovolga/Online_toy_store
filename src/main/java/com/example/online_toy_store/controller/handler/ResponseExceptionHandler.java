@@ -7,7 +7,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.context.request.WebRequest;
 
 @RestControllerAdvice
 public class ResponseExceptionHandler {
@@ -72,4 +71,23 @@ public class ResponseExceptionHandler {
                 .body(ex.getMessage());
     }
 
+    @ExceptionHandler(ThePromoCodeAlreadyExistsException.class)
+    public ResponseEntity<String> handleThePromoCodeAlreadyExistsException(ThePromoCodeAlreadyExistsException ex) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .headers(headers)
+                .body(ex.getMessage());
+    }
+
+    @ExceptionHandler(TheListOfPromoCodesIsEmptyException.class)
+    public ResponseEntity<String> handleTheListOfPromoCodesIsEmptyException(TheListOfPromoCodesIsEmptyException ex) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .headers(headers)
+                .body(ex.getMessage());
+    }
 }
