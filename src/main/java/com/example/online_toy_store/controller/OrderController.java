@@ -4,6 +4,7 @@ import com.example.online_toy_store.entity.Order;
 import com.example.online_toy_store.service.interf.OrderService;
 import com.example.online_toy_store.validation.UuidChecker;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +35,7 @@ public class OrderController {
     }
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.OK)
-    private void deleteOrder(@PathVariable(name = "id") String id){
+    public void deleteOrder(@PathVariable(name = "id") String id){
         orderService.deleteOrder(id);
     }
 

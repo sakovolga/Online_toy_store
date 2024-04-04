@@ -1,6 +1,8 @@
 package com.example.online_toy_store.exception;
 
-public class ProductDoesNotExistException extends RuntimeException {
+import jakarta.persistence.NoResultException;
+
+public class ProductDoesNotExistException extends TheObjectDoesNotExistException {
     public ProductDoesNotExistException(String message) {
         super(message);
     }
