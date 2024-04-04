@@ -1,6 +1,5 @@
 package com.example.online_toy_store.controller;
 
-import com.example.online_toy_store.entity.Product;
 import com.example.online_toy_store.entity.PromoCode;
 import com.example.online_toy_store.utils.ExpectedData;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -17,9 +16,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.List;
-import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 

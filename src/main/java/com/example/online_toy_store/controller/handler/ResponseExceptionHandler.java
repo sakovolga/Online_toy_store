@@ -1,6 +1,9 @@
 package com.example.online_toy_store.controller.handler;
 
+import com.example.online_toy_store.dto.ErrorExtension;
 import com.example.online_toy_store.exception.*;
+import jakarta.validation.ConstraintViolationException;
+import jdk.jshell.Snippet;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -90,4 +93,15 @@ public class ResponseExceptionHandler {
                 .headers(headers)
                 .body(ex.getMessage());
     }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<String> handleConstraintViolationException(ConstraintViolationException ex) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .headers(headers)
+                .body(ex.getMessage());
+    }
+
 }

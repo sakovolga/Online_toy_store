@@ -2,12 +2,14 @@ package com.example.online_toy_store.controller;
 
 import com.example.online_toy_store.entity.Order;
 import com.example.online_toy_store.service.interf.OrderService;
+import com.example.online_toy_store.validation.UuidChecker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@Validated
 @RestController
 @RequestMapping("/order")
 @RequiredArgsConstructor
@@ -16,7 +18,7 @@ public class OrderController {
     private final OrderService orderService;
 
     @GetMapping("/showOrder/{id}")
-    public Order showOrderById(@PathVariable(name = "id") String id){
+    public Order showOrderById(@PathVariable(name = "id") @UuidChecker String id){
         return orderService.showOrder(id);
     }
 

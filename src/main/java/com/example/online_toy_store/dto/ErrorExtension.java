@@ -7,4 +7,6 @@ public class ErrorExtension {
 
     String message;
     String errorCode;
+
+
 }

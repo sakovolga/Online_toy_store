@@ -67,6 +67,15 @@ class OrderControllerTest {
     }
 
     @Test
+    void showOrderByIdTestWithFailedValidation() throws Exception{
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/order/showOrder/invalidID"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().string("showOrderById.id: !!! IT IS NOT [UUID] FORMAT"));
+    }
+
+    @Test
     void showAllOrdersTest() throws Exception {
 
         Set<Order> expectedOrderSet = ExpectedData.returnAllOrders();
