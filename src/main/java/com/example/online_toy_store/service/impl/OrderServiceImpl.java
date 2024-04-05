@@ -34,10 +34,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public void deleteOrder(String id) {
+    public String deleteOrder(String id) {
         Optional<Order> optionalOrder = orderRepository.findById(UUID.fromString(id));
         if (optionalOrder.isEmpty()) throw new OrderDoesNotExistException(ErrorMessage.ORDER_DOES_NOT_EXIST);
         else orderRepository.deleteById(UUID.fromString(id));
+        return "Order with this UUID was deleted SUCCESSFULLY";
     }
 
     @Override

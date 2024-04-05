@@ -3,6 +3,7 @@ package com.example.online_toy_store.controller.handler;
 import com.example.online_toy_store.exception.*;
 import com.example.online_toy_store.exception.TheObjectDoesNotExistException;
 import jakarta.validation.ConstraintViolationException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -43,6 +44,37 @@ public class ResponseExceptionHandler {
                 .body(ex.getMessage());
     }
 
+    //Отлавливание невалидного UUID с помощью ConstraintViolationException.class
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<String> handleConstraintViolationException(ConstraintViolationException ex) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .headers(headers)
+                .body(ex.getMessage());
+    }
+
+    //Отлавливание невалидного UUID с помощью Spring
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException ex) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .headers(headers)
+                .body(ex.getMessage());
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<String> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .headers(headers)
+                .body(ex.getMessage());
+    }
 //    @ExceptionHandler(UserDoesNotExistException.class)
 //    public ResponseEntity<String> handleUserNotFoundException(UserDoesNotExistException ex) {
 //        HttpHeaders headers = new HttpHeaders();
@@ -123,14 +155,6 @@ public class ResponseExceptionHandler {
 //                .body(ex.getMessage());
 //    }
 
-    @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<String> handleConstraintViolationException(ConstraintViolationException ex) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .headers(headers)
-                .body(ex.getMessage());
-    }
+
 
 }

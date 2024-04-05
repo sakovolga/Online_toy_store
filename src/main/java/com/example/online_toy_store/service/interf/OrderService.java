@@ -11,7 +11,7 @@ public interface OrderService {
 
     Order createOrder(Order order);
 
-    void deleteOrder(String id);
+    String deleteOrder(String id);
 
     List<Order> showAllOrders();
 }

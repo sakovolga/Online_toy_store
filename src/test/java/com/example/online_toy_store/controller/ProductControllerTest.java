@@ -62,6 +62,17 @@ public class ProductControllerTest {
     }
 
     @Test
+    void showProductWithNotValidUUIDTest() throws Exception{
+        String invalidUUID = "invalidUUID";
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/product/showProduct/{id}", invalidUUID))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().string("Invalid UUID string: invalidUUID"));
+    }
+
+    @Test
     void showAllProductsTest () throws Exception{
         Set<Product> expectedProductSet = ExpectedData.returnAllProducts();
 
