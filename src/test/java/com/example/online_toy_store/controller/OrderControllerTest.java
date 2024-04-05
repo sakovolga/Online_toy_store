@@ -64,7 +64,7 @@ class OrderControllerTest {
                         .get("/order/showOrder/{orderId}", nonExistentID))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().string("Order does not exist"));
+                .andExpect(content().string("UNSUCCESSFULLY: order does not exist"));
     }
 
     @Test
@@ -128,7 +128,7 @@ class OrderControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.delete("/order/delete/6b4e8a7c-0f64-4fd8-a37f-5c0a072d14a3"))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().string("Order does not exist"))
+                .andExpect(content().string("UNSUCCESSFULLY: order does not exist"))
                 .andReturn();
     }
 

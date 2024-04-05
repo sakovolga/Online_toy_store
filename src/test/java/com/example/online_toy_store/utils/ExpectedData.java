@@ -168,4 +168,13 @@ public class ExpectedData {
         promoCode2.setEndPromoDate(LocalDateTime.parse("2023-11-30 23:59:59", formatter));
         return List.of(promoCode1, promoCode2);
     }
+
+    public static Review returnReview(){
+        Review review = new Review();
+        review.setRvId(UUID.fromString("a1d891b2-d78d-4bb5-907b-ecf6437e40af"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        review.setReviewDate(LocalDateTime.parse("2023-11-25 17:11:49", formatter));
+        review.setReviewTitle("Good choice for a child");
+        return review;
+    }
 }
