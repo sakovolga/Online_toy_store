@@ -5,7 +5,6 @@ import com.example.online_toy_store.entity.enums.OrderStatus;
 import com.example.online_toy_store.utils.ExpectedData;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.swagger.v3.oas.annotations.Operation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +15,9 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Set;
-
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -98,8 +95,7 @@ class OrderControllerTest {
 
         Set<Order> orderSetBefore = showAll();
 
-        MvcResult createAuthorResult = mockMvc
-                .perform(MockMvcRequestBuilders.post("/order/new")
+        mockMvc.perform(MockMvcRequestBuilders.post("/order/new")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json))
                 .andReturn();

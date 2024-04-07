@@ -18,7 +18,6 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 public class Order {
     @Id
     @GeneratedValue(generator = "UUID")
@@ -57,5 +56,13 @@ public class Order {
     @Override
     public int hashCode() {
         return Objects.hash(oId, orderDate);
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "oId=" + oId +
+                ", orderDate=" + orderDate +
+                '}';
     }
 }

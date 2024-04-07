@@ -14,12 +14,10 @@ import java.util.UUID;
 public interface OrderRepository extends JpaRepository<Order, UUID> {
 
     @Nonnull
-    Optional<Order> findById(UUID id);
+    Optional<Order> findById(@Nonnull UUID id);
 
     @Nonnull
     Order saveAndFlush(@Nonnull Order order);
 
     void deleteById(@Nonnull UUID id);
-
-//    List<Order> showAllOrders();
 }

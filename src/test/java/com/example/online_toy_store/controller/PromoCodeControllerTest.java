@@ -14,9 +14,8 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
 import java.util.List;
-
+import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -139,6 +138,8 @@ class PromoCodeControllerTest {
         Assertions.assertEquals(promoCodeListBefore.size() - 1, promoCodeListAfter.size());
     }
 
+
+    //Нельзя удалить, потому что не существует
     @Test
     void deletePromoCodeByNameTestWithException() throws Exception{
 
@@ -146,6 +147,16 @@ class PromoCodeControllerTest {
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().string("Non-existing promo code name promo code not found"));
+    }
+
+    //Нельзя удалить, потому что на него ссылается другой обект
+    @Test
+    void deletePromoCodeByNameTestWithDataIntegrityViolationException() throws Exception{
+
+        mockMvc.perform(MockMvcRequestBuilders.delete("/promo/delete/Spring Surprise"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().string(containsString("CONSTRAINT_8B7: PUBLIC.ORDERS FOREIGN KEY(PROMO_CODE_ID) REFERENCES")));
     }
 
     @Test

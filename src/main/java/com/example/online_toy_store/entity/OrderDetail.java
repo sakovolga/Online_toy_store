@@ -14,7 +14,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 public class OrderDetail {
 
     @Id
@@ -49,5 +48,14 @@ public class OrderDetail {
     @Override
     public int hashCode() {
         return Objects.hash(odId, quantity, orderComment);
+    }
+
+    @Override
+    public String toString() {
+        return "OrderDetail{" +
+                "odId=" + odId +
+                ", quantity=" + quantity +
+                ", orderComment='" + orderComment + '\'' +
+                '}';
     }
 }

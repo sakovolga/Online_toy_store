@@ -16,7 +16,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 public class Role {
 
     @Id
@@ -48,5 +47,13 @@ public class Role {
     @Override
     public int hashCode() {
         return Objects.hash(rId, roleName);
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "rId=" + rId +
+                ", roleName='" + roleName + '\'' +
+                '}';
     }
 }

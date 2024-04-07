@@ -15,7 +15,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 public class Authority {
 
     @Id
@@ -45,5 +44,13 @@ public class Authority {
     @Override
     public int hashCode() {
         return Objects.hash(aId, authorityName);
+    }
+
+    @Override
+    public String toString() {
+        return "Authority{" +
+                "aId=" + aId +
+                ", authorityName='" + authorityName + '\'' +
+                '}';
     }
 }

@@ -4,7 +4,6 @@ import com.example.online_toy_store.entity.Supplier;
 import com.example.online_toy_store.entity.enums.City;
 import com.example.online_toy_store.entity.enums.Country;
 import com.example.online_toy_store.utils.ExpectedData;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -17,7 +16,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -66,12 +64,6 @@ class SupplierControllerTest {
     void createSupplierTestWithException() throws Exception {
         Supplier newSupplier = new Supplier();
         newSupplier.setSupplierName("Johnson Enterprises Ltd.");
-        newSupplier.setPhone("+90897867565");
-        newSupplier.setEmail("big@toyfactoyr.com");
-        newSupplier.setCountry(Country.GERMANY);
-        newSupplier.setCity(City.BREMEN);
-        newSupplier.setAddress("Schnoorviertel, 32");
-        newSupplier.setPostalCode("67543");
 
         String newSupplierJSON = objectMapper.writeValueAsString(newSupplier);
 
@@ -100,7 +92,7 @@ class SupplierControllerTest {
     }
 
     @Test
-    void showSupplierByNameTestWithException() throws Exception{
+    void showSupplierByNameTestWithException() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/supplier/showByName/Non-existent name"))
                 .andExpect(status().isNotFound())

@@ -42,21 +42,16 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Country country;
 
-//    @Fetch(S)
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_info", referencedColumnName = "ui_id")
-//    @JsonIgnore
-//    @JsonBackReference
     private UserInfo userInfo;
 
     @OneToMany(mappedBy = "user", orphanRemoval = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
-//    @JsonBackReference
     private Set<Order> userOrders;
 
     @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
-//    @JsonBackReference
     private Set<Review> userReviews;
 
     @Override

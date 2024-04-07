@@ -18,7 +18,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 public class Product {
     @Id
     @GeneratedValue(generator = "UUID")
@@ -69,5 +68,14 @@ public class Product {
     @Override
     public int hashCode() {
         return Objects.hash(pId, name, description);
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "pId=" + pId +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

@@ -15,7 +15,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 public class PromoCode {
 
     @Id
@@ -57,5 +56,15 @@ public class PromoCode {
     @Override
     public int hashCode() {
         return Objects.hash(pcId, promoName, startPromoDate, endPromoDate);
+    }
+
+    @Override
+    public String toString() {
+        return "PromoCode{" +
+                "pcId=" + pcId +
+                ", promoName='" + promoName + '\'' +
+                ", startPromoDate=" + startPromoDate +
+                ", endPromoDate=" + endPromoDate +
+                '}';
     }
 }

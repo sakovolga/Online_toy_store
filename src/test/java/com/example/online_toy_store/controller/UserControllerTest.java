@@ -1,9 +1,8 @@
 package com.example.online_toy_store.controller;
 
-import com.example.online_toy_store.entity.*;
-import com.example.online_toy_store.entity.enums.City;
-import com.example.online_toy_store.entity.enums.Country;
-import com.example.online_toy_store.exception.UserDoesNotExistException;
+import com.example.online_toy_store.entity.Authority;
+import com.example.online_toy_store.entity.Role;
+import com.example.online_toy_store.entity.User;
 import com.example.online_toy_store.utils.ExpectedData;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
@@ -16,11 +15,12 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc

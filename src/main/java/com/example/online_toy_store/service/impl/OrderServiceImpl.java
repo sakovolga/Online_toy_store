@@ -18,6 +18,7 @@ import java.util.UUID;
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
+
     @Override
     @Transactional
     public Order showOrder(String id) {
@@ -28,7 +29,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public Order createOrder(Order order){
+    public Order createOrder(Order order) {
         return orderRepository.saveAndFlush(order);
     }
 
