@@ -1,4 +1,4 @@
-# Online shop Project [Backend]
+# Online toy store Project [Backend]
 
  There is a prototype of the BackEnd Online Shop's Core Services data.
  
@@ -21,7 +21,7 @@
 | supplier_id        | binary(16)   | Supplier                                      |
 
 
-### Table orders ( Сompleted orders )
+### Table orders ( Completed orders )
 
 | Column name   | Type         | Description                                   |
 |---------------|--------------|-----------------------------------------------|
