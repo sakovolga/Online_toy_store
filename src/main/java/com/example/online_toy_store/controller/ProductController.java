@@ -23,12 +23,11 @@ public class ProductController {
 
     private final ProductService productService;
 
-
     @CustomGetProduct(path = "/showProduct/{id}")
     public Product showProductById(@PathVariable(name = "id") String id){
         return productService.showProduct(id);
+//        hello
     }
-
 
     @Operation(
             summary = "Show all products",
