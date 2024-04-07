@@ -2,21 +2,22 @@ package com.example.online_toy_store.entity;
 
 import com.example.online_toy_store.entity.enums.Rating;
 import com.example.online_toy_store.generator.UuidTimeSequenceGenerator;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
 @Entity
 @Table(name = "reviews")
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 public class Review {
 
     @Id
@@ -25,16 +26,8 @@ public class Review {
     @Column(name = "rv_id")
     private UUID rvId;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "u_id")
-    private User user;
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", referencedColumnName = "p_id")
-    private Product product;
-
     @Column(name = "review_date")
-    private LocalDate reviewDate;
+    private LocalDateTime reviewDate;
 
     @Column(name = "review_title")
     private String reviewTitle;
@@ -43,7 +36,18 @@ public class Review {
     private String content;
 
     @Column(name = "rating")
+    @Enumerated(EnumType.STRING)
     private Rating rating;
+
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", referencedColumnName = "u_id")
+    private User user;
+
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id", referencedColumnName = "p_id")
+    private Product product;
 
     @Override
     public boolean equals(Object o) {
@@ -56,5 +60,14 @@ public class Review {
     @Override
     public int hashCode() {
         return Objects.hash(rvId, reviewDate, reviewTitle);
+    }
+
+    @Override
+    public String toString() {
+        return "Review{" +
+                "rvId=" + rvId +
+                ", reviewDate=" + reviewDate +
+                ", reviewTitle='" + reviewTitle + '\'' +
+                '}';
     }
 }

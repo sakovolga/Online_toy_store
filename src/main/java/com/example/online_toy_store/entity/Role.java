@@ -1,6 +1,8 @@
 package com.example.online_toy_store.entity;
 
 import com.example.online_toy_store.generator.UuidTimeSequenceGenerator;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -11,11 +13,9 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "roles")
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 public class Role {
 
     @Id
@@ -27,10 +27,13 @@ public class Role {
     @Column(name = "role_name")
     private String roleName;
 
+//    @JsonBackReference
+    @JsonIgnore
     @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
     private Set<UserInfo> users;
 
-    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+//    @JsonBackReference
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
     private Set<Authority> authorities;
 
     @Override
@@ -44,5 +47,13 @@ public class Role {
     @Override
     public int hashCode() {
         return Objects.hash(rId, roleName);
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "rId=" + rId +
+                ", roleName='" + roleName + '\'' +
+                '}';
     }
 }

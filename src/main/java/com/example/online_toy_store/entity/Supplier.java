@@ -4,6 +4,7 @@ import com.example.online_toy_store.entity.enums.City;
 import com.example.online_toy_store.entity.enums.Country;
 import com.example.online_toy_store.generator.UuidTimeSequenceGenerator;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -13,11 +14,9 @@ import java.util.Set;
 import java.util.UUID;
 @Entity
 @Table(name = "suppliers")
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 public class Supplier {
 
     @Id
@@ -49,7 +48,7 @@ public class Supplier {
     @Enumerated(EnumType.STRING)
     private Country country;
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "supplier", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Product> products;
 
@@ -64,5 +63,14 @@ public class Supplier {
     @Override
     public int hashCode() {
         return Objects.hash(sId, supplierName, phone);
+    }
+
+    @Override
+    public String toString() {
+        return "Supplier{" +
+                "sId=" + sId +
+                ", supplierName='" + supplierName + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
     }
 }

@@ -8,17 +8,16 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.Set;
 
 @Entity
 @Table(name = "orders")
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 public class Order {
     @Id
     @GeneratedValue(generator = "UUID")
@@ -26,23 +25,24 @@ public class Order {
     @Column(name = "o_id")
     private UUID oId;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "u_id")
-    private User user;
-
     @Column(name = "order_date")
-    private LocalDate orderDate;
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "promo_code_id", referencedColumnName = "pc_id")
-    private PromoCode promoCode;
+    private LocalDateTime orderDate;
 
     @Column(name = "order_status")
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
     @JsonBackReference
-    @OneToMany(mappedBy = "order", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "u_id")
+    private User user;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "promo_code_id", referencedColumnName = "pc_id")
+    private PromoCode promoCode;
+
+//    @JsonBackReference
+    @OneToMany(mappedBy = "order", orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<OrderDetail> orderDetails;
 
     @Override
@@ -56,5 +56,13 @@ public class Order {
     @Override
     public int hashCode() {
         return Objects.hash(oId, orderDate);
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "oId=" + oId +
+                ", orderDate=" + orderDate +
+                '}';
     }
 }

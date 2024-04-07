@@ -5,15 +5,20 @@ spring:
     hibernate:
       ddl-auto: none
     open-in-view: false
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
 
   datasource:
-    url: jdbc:mysql://localhost:3306/online_toy_store
-    username: root
-    password: 23402
+    url: ${DATASOURCE.URL}
+    username: ${DATASOURCE.USERNAME}
+    password: ${DATASOURCE.PASSWORD}
 
   liquibase:
     change-log: classpath:db/changelog/changelog-master.xml
 
+server:
+  port: 8080
 
 
 

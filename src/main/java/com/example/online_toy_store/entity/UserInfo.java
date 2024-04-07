@@ -12,11 +12,9 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "users_info")
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 public class UserInfo {
 
     @Id
@@ -47,22 +45,31 @@ public class UserInfo {
     @Column(name = "card_number")
     private String cardNumber;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_info_roles",
             joinColumns = @JoinColumn(name = "ui_id"),
             inverseJoinColumns = @JoinColumn(name = "r_id"))
     private Set<Role> roles;
 
-       @Override
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserInfo userInfo = (UserInfo) o;
-        return Objects.equals(uID, userInfo.uID) && Objects.equals(userName, userInfo.userName) && Objects.equals(password, userInfo.password) && Objects.equals(postalCode, userInfo.postalCode);
+        return Objects.equals(uID, userInfo.uID) && Objects.equals(userName, userInfo.userName) && Objects.equals(email, userInfo.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(uID, userName, password, postalCode);
+        return Objects.hash(uID, userName, email);
+    }
+
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "uID=" + uID +
+                ", userName='" + userName + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

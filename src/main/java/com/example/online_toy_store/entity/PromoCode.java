@@ -6,17 +6,15 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 @Entity
 @Table(name = "promo_codes")
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 public class PromoCode {
 
     @Id
@@ -32,10 +30,10 @@ public class PromoCode {
     private double discountAmount;
 
     @Column(name = "start_promo_date")
-    private LocalDate startPromoDate;
+    private LocalDateTime startPromoDate;
 
     @Column(name = "end_promo_date")
-    private LocalDate endPromoDateDate;
+    private LocalDateTime endPromoDate;
 
     @Column(name = "amount_of_users")
     private int amountOfUsers;
@@ -44,7 +42,7 @@ public class PromoCode {
     private int unusedQuantity;
 
     @JsonBackReference
-    @OneToMany(mappedBy = "promoCode", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "promoCode", orphanRemoval = false, fetch = FetchType.LAZY)
     private Set<Order> promoOrders;
 
     @Override
@@ -52,11 +50,21 @@ public class PromoCode {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PromoCode promoCode = (PromoCode) o;
-        return Objects.equals(pcId, promoCode.pcId) && Objects.equals(promoName, promoCode.promoName) && Objects.equals(startPromoDate, promoCode.startPromoDate) && Objects.equals(endPromoDateDate, promoCode.endPromoDateDate);
+        return Objects.equals(pcId, promoCode.pcId) && Objects.equals(promoName, promoCode.promoName) && Objects.equals(startPromoDate, promoCode.startPromoDate) && Objects.equals(endPromoDate, promoCode.endPromoDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(pcId, promoName, startPromoDate, endPromoDateDate);
+        return Objects.hash(pcId, promoName, startPromoDate, endPromoDate);
+    }
+
+    @Override
+    public String toString() {
+        return "PromoCode{" +
+                "pcId=" + pcId +
+                ", promoName='" + promoName + '\'' +
+                ", startPromoDate=" + startPromoDate +
+                ", endPromoDate=" + endPromoDate +
+                '}';
     }
 }

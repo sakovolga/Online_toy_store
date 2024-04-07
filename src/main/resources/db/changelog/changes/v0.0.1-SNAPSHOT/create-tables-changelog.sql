@@ -18,7 +18,7 @@ DROP TABLE IF EXISTS reviews;
 
 CREATE TABLE IF NOT EXISTS suppliers (
     s_id          binary(16) NOT NULL,
-    supplier_name varchar(128) NOT NULL,
+    supplier_name varchar(128) NOT NULL unique ,
     phone         varchar(128) NOT NULL,
     email         varchar(128) NOT NULL,
     address       varchar(128) NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS products (
     p_id	binary(16),
     product_name varchar(256) NOT NULL,
     description	text NOT NULL,
-    price	decimal NOT NULL,
+    price	double NOT NULL,
     available_quantity int NOT NULL,
     category varchar(256) NOT NULL,
     is_available boolean NOT NULL,
@@ -105,8 +105,8 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE TABLE IF NOT EXISTS orders (
     o_id	binary(16) NOT NULL,
-    user_id	binary(16) NOT NULL,
-    order_date	timestamp NOT NULL,
+    user_id	binary(16),
+    order_date	timestamp,
     promo_code_id	binary(16),
     order_status	varchar(128) NOT NULL,
     PRIMARY KEY (o_id),
