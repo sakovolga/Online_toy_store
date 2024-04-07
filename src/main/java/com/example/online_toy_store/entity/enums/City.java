@@ -10,5 +10,4 @@ public enum City {
     NEW_YORK,
     PARIS,
     LYON
-
-    }
+}

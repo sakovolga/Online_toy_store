@@ -3,6 +3,7 @@ package com.example.online_toy_store.controller.handler;
 import com.example.online_toy_store.exception.*;
 import com.example.online_toy_store.exception.TheObjectDoesNotExistException;
 import jakarta.validation.ConstraintViolationException;
+import org.springframework.context.annotation.Description;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -55,7 +56,7 @@ public class ResponseExceptionHandler {
                 .body(ex.getMessage());
     }
 
-    //Отлавливание невалидного UUID с помощью Spring
+    @Description(value = "Отлавливание невалидного UUID с помощью Spring")
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException ex) {
         HttpHeaders headers = new HttpHeaders();
