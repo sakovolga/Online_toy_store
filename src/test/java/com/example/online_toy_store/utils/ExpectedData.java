@@ -113,7 +113,7 @@ public class ExpectedData {
         userInfo.setUID(UUID.fromString("c9fb87a6-b0ff-457b-a646-6b4a2a107396"));
         userInfo.setUserName("julija_klimenko");
         userInfo.setAddress("Rosenweg 7");
-        userInfo.setCity(City.DREZDEN);
+        userInfo.setCity(City.DRESDEN);
         userInfo.setPostalCode("32546");
         userInfo.setEmail("klim@gmail.com");
         userInfo.setPassword("765000!fdbvytr");

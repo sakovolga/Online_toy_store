@@ -1,5 +1,6 @@
 package com.example.online_toy_store.controller;
 
+import com.example.online_toy_store.annotation.CustomGetAllProducts;
 import com.example.online_toy_store.annotation.CustomGetProduct;
 import com.example.online_toy_store.entity.Product;
 import com.example.online_toy_store.service.interf.ProductService;
@@ -26,32 +27,10 @@ public class ProductController {
     @CustomGetProduct(path = "/showProduct/{id}")
     public Product showProductById(@PathVariable(name = "id") String id){
         return productService.showProduct(id);
-//        hello
+
     }
 
-    @Operation(
-            summary = "Show all products",
-            description = "Get a list of all existing products in all statuses",
-            tags = {"PRODUCT"},
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "All products received",
-                            content = @Content(
-                                    mediaType = "application/json",
-                                    schema = @Schema(implementation = Product.class)
-                            )
-                    ),
-                    @ApiResponse(
-                            responseCode = "204",
-                            description = "No products found"
-                    )
-            },
-            security = {
-                    @SecurityRequirement(name = "safety requirements")
-            }
-    )
-    @GetMapping("/showAllProducts")
+    @CustomGetAllProducts(path = "/showAllProducts")
     public List<Product> showAllProducts(){
         return productService.showProducts();
     }

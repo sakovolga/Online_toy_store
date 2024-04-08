@@ -5,7 +5,7 @@
 insert into users_info (ui_id, user_name, password, address, city, postal_code, email, card_number)
 values
     (UNHEX('f8d7988476d343d48f2b880ff944e45b'), 'ivan_ivanov', 'ubwuyt!529', 'Musterstrabe 123',
-     'DREZDEN', '32415', 'ivanov@gmail.com', '1234 5678 9012 3452'),
+     'DRESDEN', '32415', 'ivanov@gmail.com', '1234 5678 9012 3452'),
     (UNHEX('ef6de8c01d7241cfae4a7498632c6929'), 'petr_petrov', 'ybvmkgf&54091',
      '17 Rue de la Republique', 'PARIS', '76539', 'petrov@gmail.com', '4556 1148 0236 8949'),
     (UNHEX('146c6e2e97904a1f9a67f50fdcc61dd5'), 'anna_belova', '6dj4kz3!jevh', '123 Main Street',
@@ -17,6 +17,6 @@ values
     (UNHEX('a056a97b086343108e2570f46aa7aee7'), 'grigorii_chernookov', '4321566&yfcvbhhgfc', 'Hauptstrabe 34',
     'BREMEN', '65437', 'chern@gmail.com', '4916 8497 2085 6137'),
     (UNHEX('c9fb87a6b0ff457ba6466b4a2a107396'), 'julija_klimenko', '765000!fdbvytr', 'Rosenweg 7',
-     'DREZDEN', '32546', 'klim@gmail.com', '3463 8895 2271 479'),
+     'DRESDEN', '32546', 'klim@gmail.com', '3463 8895 2271 479'),
     (UNHEX('1fcff618540544a2b79dd5ac86a4779e'), 'tatiana_kurilenko', '65487698*gfdsa', '25 Rue de la Republique',
      'LYON', '63579', 'kurila@gmail.com', '3749 6097 8113 254')
