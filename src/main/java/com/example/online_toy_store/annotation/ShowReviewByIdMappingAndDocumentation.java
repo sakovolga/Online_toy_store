@@ -1,6 +1,6 @@
 package com.example.online_toy_store.annotation;
 
-import com.example.online_toy_store.entity.User;
+import com.example.online_toy_store.entity.Review;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -21,13 +21,13 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @RequestMapping(method = RequestMethod.GET)
 @Operation(
-        summary = "Show user by ID",
-        description = "Retrieve an user by its unique identifier",
-        tags = {"USER"},
+        summary = "Show review by ID",
+        description = "Retrieve an review by its unique identifier",
+        tags = {"REVIEW"},
         parameters = {
                 @Parameter(
                         name = "id",
-                        description = "The unique identifier of the user",
+                        description = "The unique identifier of the review",
                         required = true,
                         in = ParameterIn.PATH,
                         schema = @Schema(type = "string", format = "uuid")
@@ -36,19 +36,19 @@ import java.lang.annotation.Target;
         responses = {
                 @ApiResponse(
                         responseCode = "200",
-                        description = "User found and returned",
+                        description = "Review found and returned",
                         content = @Content(
                                 mediaType = "application/json",
-                                schema = @Schema(implementation = User.class)
+                                schema = @Schema(implementation = Review.class)
                         )
                 ),
                 @ApiResponse(
                         responseCode = "404",
-                        description = "User not found"
+                        description = "Review not found"
                 ),
                 @ApiResponse(
                         responseCode = "400",
-                        description = "Invalid ID"
+                        description = "Invalid ID" //Спросить почему не показывает в браузере
                 )
         },
         security = {
@@ -56,7 +56,7 @@ import java.lang.annotation.Target;
         },
         hidden = false
 )
-public @interface CustomShowUserById {
+public @interface ShowReviewByIdMappingAndDocumentation {
     @AliasFor(annotation = RequestMapping.class, attribute = "path")
     String[] path() default {};
 }

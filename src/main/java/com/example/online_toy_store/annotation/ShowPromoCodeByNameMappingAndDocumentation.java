@@ -56,7 +56,7 @@ import java.lang.annotation.Target;
         },
         hidden = false
 )
-public @interface CustomShowPromoCodeByName {
+public @interface ShowPromoCodeByNameMappingAndDocumentation {
     @AliasFor(annotation = RequestMapping.class, attribute = "path")
     String[] path() default {};
 }

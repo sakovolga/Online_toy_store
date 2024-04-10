@@ -1,6 +1,6 @@
 package com.example.online_toy_store.annotation;
 
-import com.example.online_toy_store.entity.Supplier;
+import com.example.online_toy_store.entity.User;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -21,34 +21,34 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @RequestMapping(method = RequestMethod.GET)
 @Operation(
-        summary = "Show supplier by name",
-        description = "Retrieve a supplier by its unique name",
-        tags = {"SUPPLIER"},
+        summary = "Show user by ID",
+        description = "Retrieve an user by its unique identifier",
+        tags = {"USER"},
         parameters = {
                 @Parameter(
-                        name = "name",
-                        description = "The supplier name",
+                        name = "id",
+                        description = "The unique identifier of the user",
                         required = true,
                         in = ParameterIn.PATH,
-                        schema = @Schema(type = "string", format = "String")
+                        schema = @Schema(type = "string", format = "uuid")
                 )
         },
         responses = {
                 @ApiResponse(
                         responseCode = "200",
-                        description = "Supplier found and returned",
+                        description = "User found and returned",
                         content = @Content(
                                 mediaType = "application/json",
-                                schema = @Schema(implementation = Supplier.class)
+                                schema = @Schema(implementation = User.class)
                         )
                 ),
                 @ApiResponse(
                         responseCode = "404",
-                        description = "Supplier not found"
+                        description = "User not found"
                 ),
                 @ApiResponse(
                         responseCode = "400",
-                        description = "Invalid ID" //Спросить почему не показывает в браузере
+                        description = "Invalid ID"
                 )
         },
         security = {
@@ -56,7 +56,7 @@ import java.lang.annotation.Target;
         },
         hidden = false
 )
-public @interface CustomShowSupplierByName {
+public @interface ShowUserByIdMappingAndDocumentation {
     @AliasFor(annotation = RequestMapping.class, attribute = "path")
     String[] path() default {};
 }

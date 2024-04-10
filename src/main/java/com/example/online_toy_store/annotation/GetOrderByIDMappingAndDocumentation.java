@@ -1,8 +1,10 @@
 package com.example.online_toy_store.annotation;
 
+import com.example.online_toy_store.entity.Order;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -17,39 +19,44 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-@RequestMapping(method = RequestMethod.DELETE)
+@RequestMapping(method = RequestMethod.GET)
 @Operation(
-        summary = "Delete promo code by name",
-        description = "Delete an existing order by its unique name",
-        tags = {"PROMO_CODE"},
+        summary = "Show order by ID",
+        description = "Retrieve an order by its unique identifier",
+        tags = {"ORDER"},
         parameters = {
                 @Parameter(
-                        name = "name",
-                        description = "The unique promo code name",
+                        name = "id",
+                        description = "The unique identifier of the order",
                         required = true,
                         in = ParameterIn.PATH,
-                        schema = @Schema(type = "string", format = "String")
+                        schema = @Schema(type = "string", format = "uuid")
                 )
         },
         responses = {
                 @ApiResponse(
                         responseCode = "200",
-                        description = "The promo code deleted"
+                        description = "Order found and returned",
+                        content = @Content(
+                                mediaType = "application/json",
+                                schema = @Schema(implementation = Order.class)
+                        )
                 ),
                 @ApiResponse(
                         responseCode = "404",
-                        description = "The promo code does not exist"
+                        description = "Order not found"
                 ),
                 @ApiResponse(
                         responseCode = "400",
-                        description = "The promo code cannot be deleted because other objects reference it"
-                ),
+                        description = "Invalid ID"
+                )
         },
         security = {
                 @SecurityRequirement(name = "safety requirements")
-        }
+        },
+        hidden = false
 )
-public @interface CustomDeletePromoCodeByName {
+public @interface GetOrderByIDMappingAndDocumentation {
     @AliasFor(annotation = RequestMapping.class, attribute = "path")
     String[] path() default {};
 }

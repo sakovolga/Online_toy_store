@@ -1,8 +1,8 @@
 package com.example.online_toy_store.annotation;
 
-import com.example.online_toy_store.entity.Order;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -17,30 +17,35 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-@RequestMapping(method = RequestMethod.GET)
+@RequestMapping(method = RequestMethod.DELETE)
 @Operation(
-        summary = "Show all orders",
-        description = "Get a list of all existing orders in all statuses",
+        summary = "Delete order by ID",
+        description = "Delete an existing order by its unique identifier",
         tags = {"ORDER"},
+        parameters = {
+                @Parameter(
+                        name = "id",
+                        description = "The unique identifier of the order",
+                        required = true,
+                        in = ParameterIn.PATH,
+                        schema = @Schema(type = "string", format = "uuid")
+                )
+        },
         responses = {
                 @ApiResponse(
                         responseCode = "200",
-                        description = "All orders received",
-                        content = @Content(
-                                mediaType = "application/json",
-                                schema = @Schema(implementation = Order.class)
-                        )
+                        description = "The order deleted"
                 ),
                 @ApiResponse(
-                        responseCode = "204",
-                        description = "No orders found"
+                        responseCode = "404",
+                        description = "The order does not exist"
                 )
         },
         security = {
                 @SecurityRequirement(name = "safety requirements")
         }
 )
-public @interface CustomGetAllOrders {
+public @interface DeleteOrderMappingAndDocumentation {
     @AliasFor(annotation = RequestMapping.class, attribute = "path")
     String[] path() default {};
 }

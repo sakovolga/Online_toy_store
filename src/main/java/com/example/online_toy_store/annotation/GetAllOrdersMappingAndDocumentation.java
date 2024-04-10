@@ -1,6 +1,6 @@
 package com.example.online_toy_store.annotation;
 
-import com.example.online_toy_store.entity.PromoCode;
+import com.example.online_toy_store.entity.Order;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -17,42 +17,30 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-@RequestMapping(method = RequestMethod.POST)
+@RequestMapping(method = RequestMethod.GET)
 @Operation(
-        summary = "Create new promo code",
-        description = "Create new promo code and return it",
-        tags = {"PROMO_CODE"},
-        requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
-                description = "The promo code to be created",
-                required = true,
-                content = @Content(
-                        mediaType = "application/json",
-                        schema = @Schema(implementation = PromoCode.class)
-                )
-        ),
+        summary = "Show all orders",
+        description = "Get a list of all existing orders in all statuses",
+        tags = {"ORDER"},
         responses = {
                 @ApiResponse(
-                        responseCode = "201",
-                        description = "The promo code created",
+                        responseCode = "200",
+                        description = "All orders received",
                         content = @Content(
                                 mediaType = "application/json",
-                                schema = @Schema(implementation = PromoCode.class)
+                                schema = @Schema(implementation = Order.class)
                         )
                 ),
                 @ApiResponse(
-                        responseCode = "400",
-                        description = "The promo code already exist",
-                        content = @Content(
-                                mediaType = "application/json",
-                                schema = @Schema(implementation = PromoCode.class)
-                        )
+                        responseCode = "204",
+                        description = "No orders found"
                 )
         },
         security = {
                 @SecurityRequirement(name = "safety requirements")
         }
 )
-public @interface CustomCreatePromoCode {
+public @interface GetAllOrdersMappingAndDocumentation {
     @AliasFor(annotation = RequestMapping.class, attribute = "path")
     String[] path() default {};
 }

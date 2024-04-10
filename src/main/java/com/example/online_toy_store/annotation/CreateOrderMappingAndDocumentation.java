@@ -1,6 +1,6 @@
 package com.example.online_toy_store.annotation;
 
-import com.example.online_toy_store.entity.Supplier;
+import com.example.online_toy_store.entity.Order;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -19,32 +19,24 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @RequestMapping(method = RequestMethod.POST)
 @Operation(
-        summary = "Create new supplier",
-        description = "Create new supplier and return him",
-        tags = {"SUPPLIER"},
+        summary = "Create new order",
+        description = "Create new order and return the order",
+        tags = {"ORDER"},
         requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
-                description = "The supplier to be created",
+                description = "The order to be created",
                 required = true,
                 content = @Content(
                         mediaType = "application/json",
-                        schema = @Schema(implementation = Supplier.class)
+                        schema = @Schema(implementation = Order.class)
                 )
         ),
         responses = {
                 @ApiResponse(
                         responseCode = "201",
-                        description = "The supplier created",
+                        description = "The order created",
                         content = @Content(
                                 mediaType = "application/json",
-                                schema = @Schema(implementation = Supplier.class)
-                        )
-                ),
-                @ApiResponse(
-                        responseCode = "400",
-                        description = "The supplier already exist",
-                        content = @Content(
-                                mediaType = "application/json",
-                                schema = @Schema(implementation = Supplier.class)
+                                schema = @Schema(implementation = Order.class)
                         )
                 )
         },
@@ -52,7 +44,7 @@ import java.lang.annotation.Target;
                 @SecurityRequirement(name = "safety requirements")
         }
 )
-public @interface CustomCreateSupplier {
+public @interface CreateOrderMappingAndDocumentation {
     @AliasFor(annotation = RequestMapping.class, attribute = "path")
     String[] path() default {};
 }
