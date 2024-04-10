@@ -53,7 +53,7 @@ class PromoCodeControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/promo/showByName/Non-existent name"))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().string("Non-existent name promo code not found"));
+                .andExpect(content().json("{\"message\":\"Non-existent name promo code not found\",\"statusCode\":404}"));
     }
 
     @Test
@@ -97,7 +97,7 @@ class PromoCodeControllerTest {
                         .content(promoCodeJSON))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().string("The promo code already exist"));;
+                .andExpect(content().json("{\"message\":\"The promo code already exist\",\"statusCode\":400}"));;
     }
 
     @Test
@@ -146,7 +146,7 @@ class PromoCodeControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.delete("/promo/delete/Non-existing promo code name"))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().string("Non-existing promo code name promo code not found"));
+                .andExpect(content().json("{\"message\":\"Non-existing promo code name promo code not found\",\"statusCode\":404}"));
     }
 
     //Нельзя удалить, потому что на него ссылается другой обект
@@ -183,7 +183,8 @@ class PromoCodeControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/promo/showAllByDiscount/40"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().string("The list of promo codes is empty"));
+                .andExpect(content()
+                        .json("{\"message\":\"The list of promo codes is empty\",\"statusCode\":200}"));
     }
 
     List<PromoCode> showAll () throws Exception{
@@ -196,6 +197,4 @@ class PromoCodeControllerTest {
         String promoCodeListJSON = mvcResult.getResponse().getContentAsString();
         return objectMapper.readValue(promoCodeListJSON, new TypeReference<List<PromoCode>>() {});
     }
-
-
 }

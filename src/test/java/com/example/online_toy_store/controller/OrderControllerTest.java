@@ -61,7 +61,7 @@ class OrderControllerTest {
                         .get("/order/showOrder/{orderId}", nonExistentID))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().string("UNSUCCESSFULLY: order does not exist"));
+                .andExpect(content().json("{\"message\":\"UNSUCCESSFULLY: order does not exist\",\"statusCode\":404}"));
     }
 
     @Test
@@ -70,7 +70,8 @@ class OrderControllerTest {
                         .get("/order/showOrder/invalidID"))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().string("showOrderById.id: !!! IT IS NOT [UUID] FORMAT"));
+                .andExpect(content()
+                        .json("{\"message\":\"!!! IT IS NOT [UUID] FORMAT\",\"statusCode\":400}"));
     }
 
     @Test
@@ -124,7 +125,7 @@ class OrderControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.delete("/order/delete/6b4e8a7c-0f64-4fd8-a37f-5c0a072d14a3"))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().string("UNSUCCESSFULLY: order does not exist"))
+                .andExpect(content().json("{\"message\":\"UNSUCCESSFULLY: order does not exist\",\"statusCode\":404}"))
                 .andReturn();
     }
 

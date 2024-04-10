@@ -69,7 +69,7 @@ public class UserControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/user/showUser/1b4a432d-1ec9-4141-ace1-1d6ed2e3de00"))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().string("User does not exist"))
+                .andExpect(content().json("{\"message\":\"User does not exist\",\"statusCode\":404}"))
                 .andReturn();
     }
 }
