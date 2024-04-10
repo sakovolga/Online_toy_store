@@ -1,6 +1,8 @@
 package com.example.online_toy_store.exception.errorMessage;
 
 public class ErrorMessage {
+
+    public static final String NOT_FOUND = "Object does not exist";
     public static final String USER_DOES_NOT_EXIST = "User does not exist";
 
     public static final String ORDER_DOES_NOT_EXIST = "UNSUCCESSFULLY: order does not exist";

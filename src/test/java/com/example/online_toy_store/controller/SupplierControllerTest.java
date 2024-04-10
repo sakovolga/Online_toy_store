@@ -72,7 +72,8 @@ class SupplierControllerTest {
                         .content(newSupplierJSON))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().string("A supplier with name Johnson Enterprises Ltd. already exists"));
+                .andExpect(content()
+                        .json("{\"message\":\"A supplier with name Johnson Enterprises Ltd. already exists\",\"statusCode\":400}"));
     }
 
     @Test
@@ -97,6 +98,6 @@ class SupplierControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/supplier/showByName/Non-existent name"))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().string("Supplier not found with name: Non-existent name"));
+                .andExpect(content().json("{\"message\":\"Supplier not found with name: Non-existent name\",\"statusCode\":404}"));
     }
 }

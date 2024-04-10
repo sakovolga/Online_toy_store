@@ -4,5 +4,4 @@ public enum Category {
     CONSTRUCTION_SETS,
     DOLLS,
     TOY_VEHICLES
-
-    }
+}

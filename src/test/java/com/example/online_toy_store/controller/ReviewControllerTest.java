@@ -55,6 +55,6 @@ public class ReviewControllerTest {
                         .get("/review/showReview/{orderId}", nonExistentID))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().string("Review does not exist"));
+                .andExpect(content().json("{\"message\":\"Review does not exist\",\"statusCode\":404}"));
     }
 }

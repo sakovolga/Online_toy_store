@@ -56,7 +56,7 @@ public class ProductControllerTest {
                         .get("/product/showProduct/{id}", nonExistentID))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().string("Product does not exist"));
+                .andExpect(content().json("{\"message\":\"Product does not exist\",\"statusCode\":404}"));
     }
 
     @Test
@@ -67,7 +67,8 @@ public class ProductControllerTest {
                         .get("/product/showProduct/{id}", invalidUUID))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().string("Invalid UUID string: invalidUUID"));
+                .andExpect(content()
+                        .json("{\"message\":\"Invalid UUID string: invalidUUID\",\"statusCode\":400}"));
     }
 
     @Test
