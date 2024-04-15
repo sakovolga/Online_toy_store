@@ -1,6 +1,6 @@
 package com.example.online_toy_store.annotation;
 
-import com.example.online_toy_store.entity.Supplier;
+import com.example.online_toy_store.entity.PromoCode;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -17,42 +17,30 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-@RequestMapping(method = RequestMethod.POST)
+@RequestMapping(method = RequestMethod.GET)
 @Operation(
-        summary = "Create new supplier",
-        description = "Create new supplier and return him",
-        tags = {"SUPPLIER"},
-        requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
-                description = "The supplier to be created",
-                required = true,
-                content = @Content(
-                        mediaType = "application/json",
-                        schema = @Schema(implementation = Supplier.class)
-                )
-        ),
+        summary = "Show all promo codes by discount amount",
+        description = "Get a list of promo codes with particular discount amount",
+        tags = {"PROMO_CODE"},
         responses = {
                 @ApiResponse(
-                        responseCode = "201",
-                        description = "The supplier created",
+                        responseCode = "200",
+                        description = "Required promo codes received",
                         content = @Content(
                                 mediaType = "application/json",
-                                schema = @Schema(implementation = Supplier.class)
+                                schema = @Schema(implementation = PromoCode.class)
                         )
                 ),
                 @ApiResponse(
-                        responseCode = "400",
-                        description = "The supplier already exist",
-                        content = @Content(
-                                mediaType = "application/json",
-                                schema = @Schema(implementation = Supplier.class)
-                        )
+                        responseCode = "200",
+                        description = "No promo codes found"
                 )
         },
         security = {
                 @SecurityRequirement(name = "safety requirements")
         }
 )
-public @interface CreateSupplierMappingAndDocumentation {
+public @interface ShowAllPromoCodesByDiscount {
     @AliasFor(annotation = RequestMapping.class, attribute = "path")
     String[] path() default {};
 }

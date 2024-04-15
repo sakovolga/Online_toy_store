@@ -116,8 +116,8 @@ CREATE TABLE IF NOT EXISTS orders (
 
 CREATE TABLE IF NOT EXISTS order_details (
     od_id	binary(16) NOT NULL,
-    order_id	binary(16) NOT NULL,
-    product_id	binary(16) NOT NULL,
+    order_id	binary(16),
+    product_id	binary(16),
     quantity	int NOT NULL,
     order_comment	text,
     PRIMARY KEY (od_id),

@@ -1,6 +1,6 @@
 package com.example.online_toy_store.controller;
 
-import com.example.online_toy_store.annotation.ShowUserByIdMappingAndDocumentation;
+import com.example.online_toy_store.annotation.ShowUserById;
 import com.example.online_toy_store.entity.User;
 import com.example.online_toy_store.service.interf.UserServices;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ public class UserController {
 
     private final UserServices userServices;
 
-    @ShowUserByIdMappingAndDocumentation(path = "/showUser/{id}")
+    @ShowUserById(path = "/showUser/{id}")
     public User showUserById(@PathVariable(name = "id") String id)  {
        return userServices.showUser(id);
     }

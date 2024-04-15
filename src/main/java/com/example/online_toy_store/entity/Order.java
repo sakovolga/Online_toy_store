@@ -41,8 +41,7 @@ public class Order {
     @JoinColumn(name = "promo_code_id", referencedColumnName = "pc_id")
     private PromoCode promoCode;
 
-//    @JsonBackReference
-    @OneToMany(mappedBy = "order", orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "order", orphanRemoval = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<OrderDetail> orderDetails;
 
     @Override
@@ -63,6 +62,10 @@ public class Order {
         return "Order{" +
                 "oId=" + oId +
                 ", orderDate=" + orderDate +
+                ", orderStatus=" + orderStatus +
+                ", user=" + user +
+                ", promoCode=" + promoCode +
+                ", orderDetails=" + orderDetails +
                 '}';
     }
 }

@@ -1,0 +1,15 @@
+{
+  "name" : "Small doll",
+  "description" : "Small beautifull doll",
+  "price" : "56.9",
+  "availableQuantity" : "10",
+  "category" : "DOLLS",
+  "supplierName" : "Johnson Enterprises Ltd",
+  "isAvailable" : "true",
+  "address" : "14 Rue de la Republique",
+  "city" : "LYON",
+  "country" : "INCORRECT COUNTRY",
+  "email" : "je@nterprises.com",
+  "phone" : "+33 1 23 45 67 89",
+  "postal_code" : "12384"
+}

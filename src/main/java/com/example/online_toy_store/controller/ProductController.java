@@ -1,11 +1,16 @@
 package com.example.online_toy_store.controller;
 
-import com.example.online_toy_store.annotation.GetAllProductsMappingAndDocumentation;
-import com.example.online_toy_store.annotation.GetProductMappingAndDocumentation;
+import com.example.online_toy_store.annotation.CreateProductDto;
+import com.example.online_toy_store.annotation.GetAllProducts;
+import com.example.online_toy_store.annotation.GetProduct;
+import com.example.online_toy_store.annotation.ProductNameAndQuantityDto;
+import com.example.online_toy_store.dto.ProductAfterCreatingDto;
+import com.example.online_toy_store.dto.ProductBeforeCreatingDto;
 import com.example.online_toy_store.entity.Product;
 import com.example.online_toy_store.service.interf.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,14 +23,24 @@ public class ProductController {
 
     private final ProductService productService;
 
-    @GetProductMappingAndDocumentation(path = "/showProduct/{id}")
+    @GetProduct(path = "/showProduct/{id}")
     public Product showProductById(@PathVariable(name = "id") String id){
         return productService.showProduct(id);
-
     }
 
-    @GetAllProductsMappingAndDocumentation(path = "/showAllProducts")
+    @GetAllProducts(path = "/showAllProducts")
     public List<Product> showAllProducts(){
         return productService.showProducts();
+    }
+
+//    @ProductNameAndQuantityDto(path = "/dto/showProduct/{id}", description = "Swagger documentation")
+//    public ProductNameAndQuantityDto getProductNameAndQuantity(@PathVariable(name = "id")String id){
+//        return productService.getProductNAQDto(id);
+////        return productService.getProductNAQDto(id);
+//    }
+
+    @CreateProductDto(path = "/dto/create")
+    public ProductAfterCreatingDto createProductDto(@RequestBody ProductBeforeCreatingDto productBeforeCreatingDto){
+        return productService.createProductDto(productBeforeCreatingDto);
     }
 }

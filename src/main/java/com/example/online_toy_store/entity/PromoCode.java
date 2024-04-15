@@ -63,8 +63,11 @@ public class PromoCode {
         return "PromoCode{" +
                 "pcId=" + pcId +
                 ", promoName='" + promoName + '\'' +
+                ", discountAmount=" + discountAmount +
                 ", startPromoDate=" + startPromoDate +
                 ", endPromoDate=" + endPromoDate +
+                ", amountOfUsers=" + amountOfUsers +
+                ", unusedQuantity=" + unusedQuantity +
                 '}';
     }
 }

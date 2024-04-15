@@ -52,18 +52,62 @@ public class ResponseExceptionHandler {
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
-    @Description(value = "Отлавливание невалидного UUID с помощью Spring")
+    @Description(value = "Отлавливание невалидного UUID с помощью Spring," +
+            " а также значений, которых нет в Enum")
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ErrorExtension> handleIllegalArgumentException(IllegalArgumentException ex) {
-        ErrorExtension body = new ErrorExtension(
-                ex.getMessage(),
+        ErrorExtension body = new ErrorExtension(ex.getMessage(),
                 HttpStatus.BAD_REQUEST.value());
+        if (ex.getMessage().contains("No enum constant com.example.online_toy_store.entity.enums.City")){
+            body = new ErrorExtension(
+                    "The city does not exist!!! Please enter an existing city",
+                    HttpStatus.BAD_REQUEST.value());
+        }
+        if (ex.getMessage().contains("No enum constant com.example.online_toy_store.entity.enums.Country")){
+            body = new ErrorExtension(
+                    "The country does not exist!!! Please enter an existing country",
+                    HttpStatus.BAD_REQUEST.value());
+        }
+        if (ex.getMessage().contains("No enum constant com.example.online_toy_store.entity.enums.Category")){
+            body = new ErrorExtension(
+                    "The category does not exist!!! Please enter an existing category",
+                    HttpStatus.BAD_REQUEST.value());
+        }
+        if (ex.getMessage().contains("No enum constant com.example.online_toy_store.entity.enums.OrderStatus")){
+            body = new ErrorExtension(
+                    "The order status does not exist!!! Please enter an existing order status",
+                    HttpStatus.BAD_REQUEST.value());
+        }
+        if (ex.getMessage().contains("No enum constant com.example.online_toy_store.entity.enums.Rating")){
+            body = new ErrorExtension(
+                    "The rating does not exist!!! Please enter an existing rating",
+                    HttpStatus.BAD_REQUEST.value());
+        }
+
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
     @Description(value = "Отлавливание исключения, когда невозможно удалить объект, на который ссылаются другие объекты")
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<ErrorExtension> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
+        ErrorExtension body = new ErrorExtension(
+                ex.getMessage(),
+                HttpStatus.BAD_REQUEST.value());
+        if (ex.getMessage().contains("(`online_toy_store`.`orders`, CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`)")){
+            body = new ErrorExtension(
+                    "User is not found! Please login",
+                    HttpStatus.BAD_REQUEST.value());
+        }
+        if (ex.getMessage().contains("(`online_toy_store`.`order_details`, CONSTRAINT `order_details_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`p_id`))")){
+            body = new ErrorExtension(
+                    "There is no such product! Please refresh the page",
+                    HttpStatus.BAD_REQUEST.value());
+        }
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<ErrorExtension> handleBadRequestException(BadRequestException ex) {
         ErrorExtension body = new ErrorExtension(
                 ex.getMessage(),
                 HttpStatus.BAD_REQUEST.value());

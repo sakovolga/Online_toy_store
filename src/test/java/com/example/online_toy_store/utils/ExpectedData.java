@@ -154,19 +154,25 @@ public class ExpectedData {
         promoCode.setPromoName("Spring Surprise");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         promoCode.setStartPromoDate(LocalDateTime.parse("2023-03-01 00:00:00", formatter));
-        promoCode.setEndPromoDate(LocalDateTime.parse("2023-03-31 23:59:59", formatter));
+        promoCode.setEndPromoDate(LocalDateTime.parse("2025-03-31 23:59:59", formatter));
         return promoCode;
     }
 
-    public static List<PromoCode> returnAllPromoCodes(){
-        PromoCode promoCode1 = returnPromo();
+    public static Set<PromoCode> returnAllPromoCodes(){
+        PromoCode promoCode = returnPromo();
         PromoCode promoCode2 = new PromoCode();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
         promoCode2.setPcId(UUID.fromString("f83d13cc-4203-4a08-a03d-30a971d87e19"));
         promoCode2.setPromoName("Black Friday");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         promoCode2.setStartPromoDate(LocalDateTime.parse("2023-11-15 00:00:00", formatter));
         promoCode2.setEndPromoDate(LocalDateTime.parse("2023-11-30 23:59:59", formatter));
-        return List.of(promoCode1, promoCode2);
+        PromoCode promoCode3 = new PromoCode();
+        promoCode3.setPcId(UUID.fromString("62ae2a48-8c85-4f2e-b7d8-91b374c94555"));
+        promoCode3.setPromoName("Smile");
+        promoCode3.setStartPromoDate(LocalDateTime.parse("2024-03-01 00:00:00", formatter));
+        promoCode3.setEndPromoDate(LocalDateTime.parse("2024-05-31 23:59:59", formatter));
+        return Set.of(promoCode, promoCode2, promoCode3);
     }
 
     public static Review returnReview(){

@@ -15,6 +15,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.util.List;
+import java.util.Set;
+
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -68,7 +70,7 @@ class PromoCodeControllerTest {
                 "    \"unusedQuantity\" : 50\n" +
                 "}";
 
-        List<PromoCode> promoCodeListBefore = showAll();
+        Set<PromoCode> promoCodeListBefore = showAll();
 
         mockMvc.perform(MockMvcRequestBuilders.post("/promo/new")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -76,7 +78,7 @@ class PromoCodeControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));
 
-        List<PromoCode> promoCodeListAfter = showAll();
+        Set<PromoCode> promoCodeListAfter = showAll();
 
         Assertions.assertEquals(promoCodeListBefore.size() + 1, promoCodeListAfter.size());
     }
@@ -103,12 +105,14 @@ class PromoCodeControllerTest {
     @Test
     void showAllPromoCodesPositiveTest() throws Exception{
 
-        List<PromoCode> expectedPromoCodeList = ExpectedData.returnAllPromoCodes();
+        Set<PromoCode> expectedPromoCodeList = ExpectedData.returnAllPromoCodes();
 
-        List<PromoCode> actualPromoCodeList = showAll();
+        Set<PromoCode> actualPromoCodeList = showAll();
 
-        Assertions.assertTrue(expectedPromoCodeList.size() == actualPromoCodeList.size() &&
-                expectedPromoCodeList.containsAll(actualPromoCodeList));
+        Assertions.assertEquals(expectedPromoCodeList, actualPromoCodeList);
+
+//        Assertions.assertTrue(expectedPromoCodeList.size() == actualPromoCodeList.size() &&
+//                expectedPromoCodeList.containsAll(actualPromoCodeList));
     }
 
     @Test
@@ -126,14 +130,13 @@ class PromoCodeControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.post("/promo/new")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(promoCodeJSON));
-
-        List<PromoCode> promoCodeListBefore = showAll();
+        Set<PromoCode> promoCodeListBefore = showAll();
 
         mockMvc.perform(MockMvcRequestBuilders.delete("/promo/delete/Hot summer discounts"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Hot summer discounts promo code SUCCESSFULLY removed"));
 
-        List<PromoCode> promoCodeListAfter = showAll();
+        Set<PromoCode> promoCodeListAfter = showAll();
 
         Assertions.assertEquals(promoCodeListBefore.size() - 1, promoCodeListAfter.size());
     }
@@ -187,7 +190,7 @@ class PromoCodeControllerTest {
                         .json("{\"message\":\"The list of promo codes is empty\",\"statusCode\":200}"));
     }
 
-    List<PromoCode> showAll () throws Exception{
+    Set<PromoCode> showAll () throws Exception{
 
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/promo/showAll"))
                 .andExpect(status().isOk())
@@ -195,6 +198,6 @@ class PromoCodeControllerTest {
                 .andReturn();
 
         String promoCodeListJSON = mvcResult.getResponse().getContentAsString();
-        return objectMapper.readValue(promoCodeListJSON, new TypeReference<List<PromoCode>>() {});
+        return objectMapper.readValue(promoCodeListJSON, new TypeReference<Set<PromoCode>>() {});
     }
 }

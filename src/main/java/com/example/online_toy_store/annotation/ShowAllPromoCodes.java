@@ -1,9 +1,7 @@
 package com.example.online_toy_store.annotation;
 
-import com.example.online_toy_store.entity.Review;
+import com.example.online_toy_store.entity.PromoCode;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -21,42 +19,28 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @RequestMapping(method = RequestMethod.GET)
 @Operation(
-        summary = "Show review by ID",
-        description = "Retrieve an review by its unique identifier",
-        tags = {"REVIEW"},
-        parameters = {
-                @Parameter(
-                        name = "id",
-                        description = "The unique identifier of the review",
-                        required = true,
-                        in = ParameterIn.PATH,
-                        schema = @Schema(type = "string", format = "uuid")
-                )
-        },
+        summary = "Show all promo codes",
+        description = "Get a list of all existing promo codes",
+        tags = {"PROMO_CODE"},
         responses = {
                 @ApiResponse(
                         responseCode = "200",
-                        description = "Review found and returned",
+                        description = "All promo codes received",
                         content = @Content(
                                 mediaType = "application/json",
-                                schema = @Schema(implementation = Review.class)
+                                schema = @Schema(implementation = PromoCode.class)
                         )
                 ),
                 @ApiResponse(
-                        responseCode = "404",
-                        description = "Review not found"
-                ),
-                @ApiResponse(
-                        responseCode = "400",
-                        description = "Invalid ID" //Спросить почему не показывает в браузере
+                        responseCode = "200",
+                        description = "No promo codes found"
                 )
         },
         security = {
                 @SecurityRequirement(name = "safety requirements")
-        },
-        hidden = false
+        }
 )
-public @interface ShowReviewByIdMappingAndDocumentation {
+public @interface ShowAllPromoCodes {
     @AliasFor(annotation = RequestMapping.class, attribute = "path")
     String[] path() default {};
 }

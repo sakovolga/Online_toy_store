@@ -1,7 +1,9 @@
 package com.example.online_toy_store.annotation;
 
-import com.example.online_toy_store.entity.Product;
+import com.example.online_toy_store.entity.Supplier;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -19,28 +21,42 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @RequestMapping(method = RequestMethod.GET)
 @Operation(
-        summary = "Show all products",
-        description = "Get a list of all existing products in all statuses",
-        tags = {"PRODUCT"},
+        summary = "Show supplier by name",
+        description = "Retrieve a supplier by its unique name",
+        tags = {"SUPPLIER"},
+        parameters = {
+                @Parameter(
+                        name = "name",
+                        description = "The supplier name",
+                        required = true,
+                        in = ParameterIn.PATH,
+                        schema = @Schema(type = "string", format = "String")
+                )
+        },
         responses = {
                 @ApiResponse(
                         responseCode = "200",
-                        description = "All products received",
+                        description = "Supplier found and returned",
                         content = @Content(
                                 mediaType = "application/json",
-                                schema = @Schema(implementation = Product.class)
+                                schema = @Schema(implementation = Supplier.class)
                         )
                 ),
                 @ApiResponse(
-                        responseCode = "204",
-                        description = "No products found"
+                        responseCode = "404",
+                        description = "Supplier not found"
+                ),
+                @ApiResponse(
+                        responseCode = "400",
+                        description = "Invalid ID" //Спросить почему не показывает в браузере
                 )
         },
         security = {
                 @SecurityRequirement(name = "safety requirements")
-        }
+        },
+        hidden = false
 )
-public @interface GetAllProductsMappingAndDocumentation {
+public @interface ShowSupplierByName {
     @AliasFor(annotation = RequestMapping.class, attribute = "path")
     String[] path() default {};
 }

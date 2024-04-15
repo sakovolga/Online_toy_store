@@ -44,7 +44,6 @@ public class Product {
     @Column(name = "is_available")
     private boolean isAvailable;
 
-//    @JsonBackReference
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "supplier_id", referencedColumnName = "s_id")
     private Supplier supplier;
@@ -53,7 +52,6 @@ public class Product {
     @OneToMany(mappedBy = "product", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<OrderDetail> orderDetails;
 
-//    @JsonBackReference
     @OneToMany(mappedBy = "product", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Review> productReviews;
 

@@ -10,4 +10,5 @@ public class ErrorExtension {
         this.message = message;
         this.statusCode = statusCode;
     }
+
 }

@@ -1,6 +1,8 @@
 package com.example.online_toy_store.controller;
 
 import com.example.online_toy_store.annotation.*;
+import com.example.online_toy_store.dto.OrderDtoAfter;
+import com.example.online_toy_store.dto.OrderDtoBefore;
 import com.example.online_toy_store.entity.Order;
 import com.example.online_toy_store.service.interf.OrderService;
 import com.example.online_toy_store.validation.UuidChecker;
@@ -19,25 +21,30 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    @GetOrderByIDMappingAndDocumentation(path = "/showOrder/{id}")
+    @GetOrderByID(path = "/showOrder/{id}")
     public Order showOrderById(@PathVariable(name = "id") @UuidChecker String id) {
         return orderService.showOrder(id);
     }
 
-    @GetAllOrdersMappingAndDocumentation(path = "/showAllOrders")
+    @GetAllOrders(path = "/showAllOrders")
     public List<Order> showAllOrders() {
         return orderService.showAllOrders();
     }
 
-    @CreateOrderMappingAndDocumentation(path = "/new")
+    @CreateOrder(path = "/new")
     @ResponseStatus(HttpStatus.CREATED)
     public Order createOrder(@RequestBody Order order) {
         return orderService.createOrder(order);
     }
 
-    @DeleteOrderMappingAndDocumentation(path = "/delete/{id}")
+    @DeleteOrder(path = "/delete/{id}")
     @ResponseStatus(HttpStatus.OK)
     public String deleteOrder(@PathVariable(name = "id") String id) {
         return orderService.deleteOrder(id);
+    }
+
+    @CreateOrderDto(path = "/dto/create")
+    public OrderDtoAfter createOrderDto(@RequestBody OrderDtoBefore orderDtoBefore) {
+    return orderService.createOrderDto(orderDtoBefore);
     }
 }

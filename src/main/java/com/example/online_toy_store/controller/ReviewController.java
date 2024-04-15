@@ -1,6 +1,6 @@
 package com.example.online_toy_store.controller;
 
-import com.example.online_toy_store.annotation.ShowReviewByIdMappingAndDocumentation;
+import com.example.online_toy_store.annotation.ShowReviewById;
 import com.example.online_toy_store.entity.Review;
 import com.example.online_toy_store.service.interf.ReviewService;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ public class ReviewController {
 
     private final ReviewService reviewService;
 
-    @ShowReviewByIdMappingAndDocumentation(path = "/showReview/{id}")
+    @ShowReviewById(path = "/showReview/{id}")
     public Review showReviewById(@PathVariable(name = "id") String id){
         return reviewService.showReview(id);
     }

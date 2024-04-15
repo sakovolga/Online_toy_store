@@ -1,0 +1,16 @@
+{
+  "userId" : "184bc3b1-6806-4924-924d-6a66b6bf91df",
+  "promoName" : "Black Friday",
+  "orderDetailsDto" : [
+    {
+      "productId" : "3b287f30-6c1c-4e71-b7bf-881e2d7b3cb4",
+      "quantity" : "1",
+      "orderComment" : "I would like to get one pink car and one black car"
+    },
+    {
+      "productId" : "9ac0037b-2a2d-4c26-9b8c-15e720f0f8db",
+      "quantity" : "1",
+      "orderComment" : "Please package it nicely because it is a gift"
+    }
+  ]
+}

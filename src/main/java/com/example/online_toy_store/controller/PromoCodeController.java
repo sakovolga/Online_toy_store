@@ -15,27 +15,27 @@ public class PromoCodeController {
 
     private final PromoCodeService promoCodeService;
 
-    @ShowPromoCodeByNameMappingAndDocumentation(path = "/showByName/{name}")
+    @ShowPromoCodeByName(path = "/showByName/{name}")
     public PromoCode showPromoCodeByName(@PathVariable(name = "name") String name) {
         return promoCodeService.showByName(name);
     }
 
-    @CreatePromoCodeMappingAndDocumentation(path = "/new")
+    @CreatePromoCode(path = "/new")
     public PromoCode createPromoCode(@RequestBody PromoCode promoCode){
         return promoCodeService.createPromoCode(promoCode);
     }
 
-    @ShowAllPromoCodesMappingAndDocumentation(path = "/showAll")
+    @ShowAllPromoCodes(path = "/showAll")
     public List<PromoCode> showAllPromoCodes(){
         return promoCodeService.showAllPromoCodes();
     }
 
-    @ShowAllPromoCodesByDiscountMappingAndDocumentation(path = "/showAllByDiscount/{discount}")
+    @ShowAllPromoCodesByDiscount(path = "/showAllByDiscount/{discount}")
     public List<PromoCode> showAllPromoCodesByDiscount(@PathVariable(name = "discount") double discount){
         return promoCodeService.showAllPromoCodesByDiscount(discount);
     }
 
-    @DeletePromoCodeByNameMappingAndDocumentation(path = "/delete/{name}")
+    @DeletePromoCodeByName(path = "/delete/{name}")
     public String deletePromoCodeByName(@PathVariable(name = "name") String name){
         return promoCodeService.deletePromoCodeByName(name);
     }
