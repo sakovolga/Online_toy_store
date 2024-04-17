@@ -1,8 +1,12 @@
 package com.example.online_toy_store.annotation;
 
+import com.example.online_toy_store.controller.handler.ErrorExtension;
+import com.example.online_toy_store.entity.Order;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -28,17 +32,31 @@ import java.lang.annotation.Target;
                         description = "The unique identifier of the order",
                         required = true,
                         in = ParameterIn.PATH,
-                        schema = @Schema(type = "string", format = "uuid")
+                        schema = @Schema(type = "string", format = "uuid"),
+                        examples = {
+                                @ExampleObject(
+                                        name = "Example Id",
+                                        value = "ed0285f4-4524-40f8-bcf5-6cb23b712347"
+                                )
+                        }
                 )
         },
         responses = {
                 @ApiResponse(
                         responseCode = "200",
-                        description = "The order deleted"
+                        description = "The order deleted",
+                        content = @Content(
+                                mediaType = "text/plain",
+                                schema = @Schema(type = "string")
+                        )
                 ),
                 @ApiResponse(
                         responseCode = "404",
-                        description = "The order does not exist"
+                        description = "The order does not exist",
+                        content = @Content(
+                                mediaType = "application/json",
+                                schema = @Schema(implementation = ErrorExtension.class)
+                        )
                 )
         },
         security = {

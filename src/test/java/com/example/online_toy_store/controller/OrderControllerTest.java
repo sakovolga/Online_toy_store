@@ -82,9 +82,7 @@ class OrderControllerTest {
 
     @Test
     void showAllOrdersTest() throws Exception {
-
         Set<Order> expectedOrderSet = ExpectedData.returnAllOrders();
-
         Set<Order> actualOrderSet = showAll();
         Assertions.assertEquals(expectedOrderSet, actualOrderSet);
     }

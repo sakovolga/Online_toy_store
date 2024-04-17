@@ -33,9 +33,9 @@ values
     (X'f83d13cc42034a08a03d30a971d87e19', 'Black Friday',
      50, '2023-11-15 00:00:00', '2023-11-30 23:59:59', 30, 15),
     (X'62ae2a488c854f2eb7d891b374c94585', 'Spring Surprise',
-     30, '2023-03-01 00:00:00', '2025-03-31 23:59:59', 40, 12),
+     30, '2023-03-01 00:00:00', '2025-03-31 23:59:59', 40, 0),
     (X'62ae2a488c854f2eb7d891b374c94555', 'Smile',
-    20, '2024-03-01 00:00:00', '2024-05-31 23:59:59', 40, 12);
+    20, '2024-03-01 00:00:00', '2025-05-31 23:59:59', 40, 12);
 
 
 insert into authorities (a_id, authority_name)
@@ -142,7 +142,7 @@ values
     (X'56b45130bdd24c7fbd9b68e08dd481fb', 'Anna', 'Belova', '2024-01-02 09:10:00',
      'USA', X'146c6e2e97904a1f9a67f50fdcc61dd5'),
     (X'184bc3b168064924924d6a66b6bf91df', 'Svetlana', 'Bolshova', '2024-01-03 19:15:43',
-     'USA', X'08ae72f74d3b4fb1bb0b1aaae6b4a8ed'),
+     'GERMANY', X'08ae72f74d3b4fb1bb0b1aaae6b4a8ed'),
     (X'a92e7e02b4804384b1db5c5f02e87c15', 'Jurii', 'Ostapov', '2024-01-04 10:15:43',
      'USA', X'8da9be6181c6499d8a0f87416e3e5414'),
     (X'6f5dc02d82d3443db59e35c4c4597080', 'Grigorii', 'Chernookov', '2024-01-05 11:19:49',
@@ -150,7 +150,7 @@ values
     (X'1b4a432d1ec94141ace11d6ed2e3de0f', 'Julija', 'Klimenko', '2024-01-07 12:20:49',
      'GERMANY', X'c9fb87a6b0ff457ba6466b4a2a107396'),
     (X'37e91890cf7143769bc98b4d94b11254', 'Tatiana', 'Kurilenko', '2024-01-08 13:20:49',
-     'FRANCE', X'1fcff618540544a2b79dd5ac86a4779e');
+     'GERMANY', X'1fcff618540544a2b79dd5ac86a4779e');
 
 
 insert into orders (o_id, user_id, order_date, promo_code_id, order_status)
@@ -158,7 +158,16 @@ values
     (X'b0e6d30d0e4d4694b7f33d40c788b2b1', X'184bc3b168064924924d6a66b6bf91df',
      '2023-11-21 13:20:49', X'f83d13cc42034a08a03d30a971d87e19', 'DELIVERED'),
     (X'ed0285f4452440f8bcf56cb23b7f81dc', X'1b4a432d1ec94141ace11d6ed2e3de0f',
-     '2024-03-05 07:11:49', X'62ae2a488c854f2eb7d891b374c94585', 'DELIVERED');
+     '2024-03-05 07:11:49', X'62ae2a488c854f2eb7d891b374c94585', 'DELIVERED'),
+
+    (X'ed0285f4452440f8bcf56cb23b712345', X'b3cf89da79d242f88f4dfcb22aa43f96',
+     '2024-02-05 07:11:49', X'62ae2a488c854f2eb7d891b374c94585', 'DELIVERED'),
+    (X'ed0285f4452440f8bcf56cb23b712346', X'fd26dcd52ba44ac28ad983750a560746',
+     '2024-02-05 07:11:49', X'62ae2a488c854f2eb7d891b374c94585', 'DELIVERED'),
+    (X'ed0285f4452440f8bcf56cb23b712347', X'56b45130bdd24c7fbd9b68e08dd481fb',
+     '2024-02-05 07:11:49', X'62ae2a488c854f2eb7d891b374c94585', 'DELIVERED'),
+    (X'ed0285f4452440f8bcf56cb23b712348', X'1b4a432d1ec94141ace11d6ed2e3de0f',
+     '2024-02-09 07:11:49', X'62ae2a488c854f2eb7d891b374c94585', 'DELIVERED');
 
 insert into orders (o_id, user_id, order_date, order_status)
 values
@@ -185,7 +194,20 @@ values
     (X'3f348f098910445e810d05fd8dd1a96d', X'4eab43a7038548f3bfd34529a2bcfd51',
      X'3b287f306c1c4e71b7bf881e2d7b3cb4', 1),
     (X'e41825613eb14f08b29bd816b8c394bb', X'4eab43a7038548f3bfd34529a2bcfd51',
-     X'9ac0037b2a2d4c269b8c15e720f0f8db', 1);
+     X'9ac0037b2a2d4c269b8c15e720f0f8db', 1),
+
+    (X'e41825613eb14f08b29bd816b8c12345', X'ed0285f4452440f8bcf56cb23b712345',
+     X'9ac0037b2a2d4c269b8c15e720f0f8db', 2),
+    (X'e41825613eb14f08b29bd816b8c12346', X'ed0285f4452440f8bcf56cb23b712346',
+     X'9ac0037b2a2d4c269b8c15e720f0f8db', 1),
+    (X'e41825613eb14f08b29bd816b8c12347', X'ed0285f4452440f8bcf56cb23b712347',
+     X'9ac0037b2a2d4c269b8c15e720f0f8db', 4),
+    (X'e41825613eb14f08b29bd816b8c12348', X'ed0285f4452440f8bcf56cb23b712348',
+     X'9ac0037b2a2d4c269b8c15e720f0f8db', 1),
+    (X'e41825613eb14f08b29bd816b8c12349', X'ed0285f4452440f8bcf56cb23b712348',
+     X'd10bb10eae564d3a91bc1961f2a29830', 1),
+    (X'e41825613eb14f08b29bd816b8c12340', X'ed0285f4452440f8bcf56cb23b712347',
+     X'3b287f306c1c4e71b7bf881e2d7b3cb4', 3);
 
 
 insert into reviews (rv_id, user_id, product_id, review_date, review_title, content, rating)

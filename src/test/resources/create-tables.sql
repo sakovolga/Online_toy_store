@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS products (
     p_id	binary(16),
     product_name varchar(256) NOT NULL,
     description	text NOT NULL,
-    price	decimal NOT NULL,
+    price	double NOT NULL,
     available_quantity int NOT NULL,
     category varchar(256) NOT NULL,
     is_available boolean NOT NULL,

@@ -1,5 +1,7 @@
 package com.example.online_toy_store.utils;
 
+import com.example.online_toy_store.dto.UserDto;
+import com.example.online_toy_store.dto.UserReportDtoAfter;
 import com.example.online_toy_store.entity.*;
 import com.example.online_toy_store.entity.enums.City;
 import com.example.online_toy_store.entity.enums.Country;
@@ -96,7 +98,27 @@ public class ExpectedData {
         LocalDateTime dateTime5 = LocalDateTime.parse("2024-03-05 07:11:49", formatter);
         order5.setOrderDate(dateTime5);
 
-        return Set.of(order1, order2, order3, order4, order5);
+        Order order6 = new Order();
+        order6.setOId(UUID.fromString("ed0285f4-4524-40f8-bcf5-6cb23b712345"));
+        LocalDateTime dateTime6 = LocalDateTime.parse("2024-02-05 07:11:49", formatter);
+        order6.setOrderDate(dateTime6);
+
+        Order order7 = new Order();
+        order7.setOId(UUID.fromString("ed0285f4-4524-40f8-bcf5-6cb23b712346"));
+        LocalDateTime dateTime7 = LocalDateTime.parse("2024-02-05 07:11:49", formatter);
+        order7.setOrderDate(dateTime7);
+
+        Order order8 = new Order();
+        order8.setOId(UUID.fromString("ed0285f4-4524-40f8-bcf5-6cb23b712347"));
+        LocalDateTime dateTime8 = LocalDateTime.parse("2024-02-05 07:11:49", formatter);
+        order8.setOrderDate(dateTime8);
+
+        Order order9 = new Order();
+        order9.setOId(UUID.fromString("ed0285f4-4524-40f8-bcf5-6cb23b712348"));
+        LocalDateTime dateTime9 = LocalDateTime.parse("2024-02-09 07:11:49", formatter);
+        order9.setOrderDate(dateTime9);
+
+        return Set.of(order1, order2, order3, order4, order5, order6, order7, order8, order9);
     }
 
     public static User returnUser(){
@@ -171,7 +193,7 @@ public class ExpectedData {
         promoCode3.setPcId(UUID.fromString("62ae2a48-8c85-4f2e-b7d8-91b374c94555"));
         promoCode3.setPromoName("Smile");
         promoCode3.setStartPromoDate(LocalDateTime.parse("2024-03-01 00:00:00", formatter));
-        promoCode3.setEndPromoDate(LocalDateTime.parse("2024-05-31 23:59:59", formatter));
+        promoCode3.setEndPromoDate(LocalDateTime.parse("2025-05-31 23:59:59", formatter));
         return Set.of(promoCode, promoCode2, promoCode3);
     }
 
@@ -182,5 +204,50 @@ public class ExpectedData {
         review.setReviewDate(LocalDateTime.parse("2023-11-25 17:11:49", formatter));
         review.setReviewTitle("Good choice for a child");
         return review;
+    }
+
+    public static List<UserDto> returnReport(){
+        UserDto userDto1 = new UserDto();
+        userDto1.setUserId("37e91890-cf71-4376-9bc9-8b4d94b11254");
+        userDto1.setFirstName("Tatiana");
+        userDto1.setLastName("Kurilenko");
+        userDto1.setSum("49.79");
+
+        UserDto userDto2 = new UserDto();
+        userDto2.setUserId("1b4a432d-1ec9-4141-ace1-1d6ed2e3de0f");
+        userDto2.setFirstName("Julija");
+        userDto2.setLastName("Klimenko");
+        userDto2.setSum("22.70");
+
+        UserDto userDto3 = new UserDto();
+        userDto3.setUserId("b3cf89da-79d2-42f8-8f4d-fcb22aa43f96");
+        userDto3.setFirstName("Ivan");
+        userDto3.setLastName("Ivanov");
+        userDto3.setSum("22.40");
+
+        return List.of(userDto1, userDto2, userDto3);
+//        return "{\n" +
+//                "  \"answer\": \"Top 3 buyers for the period: 2024-02 from GERMANY\",\n" +
+//                "  \"userDtoList\": [\n" +
+//                "    {\n" +
+//                "      \"userId\": \"37e91890-cf71-4376-9bc9-8b4d94b11254\",\n" +
+//                "      \"firstName\": \"Tatiana\",\n" +
+//                "      \"lastName\": \"Kurilenko\",\n" +
+//                "      \"sum\": \"49.79\"\n" +
+//                "    },\n" +
+//                "    {\n" +
+//                "      \"userId\": \"1b4a432d-1ec9-4141-ace1-1d6ed2e3de0f\",\n" +
+//                "      \"firstName\": \"Julija\",\n" +
+//                "      \"lastName\": \"Klimenko\",\n" +
+//                "      \"sum\": \"22.70\"\n" +
+//                "    },\n" +
+//                "    {\n" +
+//                "      \"userId\": \"b3cf89da-79d2-42f8-8f4d-fcb22aa43f96\",\n" +
+//                "      \"firstName\": \"Ivan\",\n" +
+//                "      \"lastName\": \"Ivanov\",\n" +
+//                "      \"sum\": \"22.40\"\n" +
+//                "    }\n" +
+//                "  ]\n" +
+//                "}";
     }
 }

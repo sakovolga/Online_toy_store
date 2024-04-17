@@ -104,15 +104,9 @@ class PromoCodeControllerTest {
 
     @Test
     void showAllPromoCodesPositiveTest() throws Exception{
-
-        Set<PromoCode> expectedPromoCodeList = ExpectedData.returnAllPromoCodes();
-
-        Set<PromoCode> actualPromoCodeList = showAll();
-
-        Assertions.assertEquals(expectedPromoCodeList, actualPromoCodeList);
-
-//        Assertions.assertTrue(expectedPromoCodeList.size() == actualPromoCodeList.size() &&
-//                expectedPromoCodeList.containsAll(actualPromoCodeList));
+        Set<PromoCode> expectedPromoCodeSet = ExpectedData.returnAllPromoCodes();
+        Set<PromoCode> actualPromoCodeSet = showAll();
+        Assertions.assertEquals(expectedPromoCodeSet, actualPromoCodeSet);
     }
 
     @Test

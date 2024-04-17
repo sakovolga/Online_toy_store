@@ -1,10 +1,12 @@
 package com.example.online_toy_store.annotation;
 
+import com.example.online_toy_store.controller.handler.ErrorExtension;
 import com.example.online_toy_store.entity.Order;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -30,7 +32,21 @@ import java.lang.annotation.Target;
                         description = "The unique identifier of the order",
                         required = true,
                         in = ParameterIn.PATH,
-                        schema = @Schema(type = "string", format = "uuid")
+                        schema = @Schema(type = "string", format = "uuid"),
+                        examples = {
+                                @ExampleObject(
+                                        name = "Example request with correct Id",
+                                        value = "ed0285f4-4524-40f8-bcf5-6cb23b7f81dc"
+                                ),
+                                @ExampleObject(
+                                        name = "Example request with non-exist Id",
+                                        value = "ed0285f4-4524-40f8-bcf5-6cb23b7f81dd"
+                                ),
+                                @ExampleObject(
+                                        name = "Example request with invalid Id",
+                                        value = "invalidId"
+                                )
+                        }
                 )
         },
         responses = {
@@ -44,11 +60,19 @@ import java.lang.annotation.Target;
                 ),
                 @ApiResponse(
                         responseCode = "404",
-                        description = "Order not found"
+                        description = "Order not found",
+                        content = @Content(
+                                mediaType = "application/json",
+                                schema = @Schema(implementation = ErrorExtension.class)
+                        )
                 ),
                 @ApiResponse(
                         responseCode = "400",
-                        description = "Invalid ID"
+                        description = "Invalid ID",
+                        content = @Content(
+                                mediaType = "application/json",
+                                schema = @Schema(implementation = ErrorExtension.class)
+                        )
                 )
         },
         security = {

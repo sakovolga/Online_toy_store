@@ -3,6 +3,7 @@ package com.example.online_toy_store.annotation;
 import com.example.online_toy_store.entity.Order;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -27,7 +28,14 @@ import java.lang.annotation.Target;
                 required = true,
                 content = @Content(
                         mediaType = "application/json",
-                        schema = @Schema(implementation = Order.class)
+                        schema = @Schema(implementation = Order.class),
+                        examples = {
+                                @ExampleObject(name = "Good request",
+                                        value = "{\n" +
+                                                "    \"orderDate\" : \"2024-08-20T00:00:00\"    \n" +
+                                                "}"
+                                )
+                        }
                 )
         ),
         responses = {

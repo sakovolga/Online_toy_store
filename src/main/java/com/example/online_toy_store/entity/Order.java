@@ -37,7 +37,7 @@ public class Order {
     @JoinColumn(name = "user_id", referencedColumnName = "u_id")
     private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     @JoinColumn(name = "promo_code_id", referencedColumnName = "pc_id")
     private PromoCode promoCode;
 
@@ -63,7 +63,6 @@ public class Order {
                 "oId=" + oId +
                 ", orderDate=" + orderDate +
                 ", orderStatus=" + orderStatus +
-                ", user=" + user +
                 ", promoCode=" + promoCode +
                 ", orderDetails=" + orderDetails +
                 '}';

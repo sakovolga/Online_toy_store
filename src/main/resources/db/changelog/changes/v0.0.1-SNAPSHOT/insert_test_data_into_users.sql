@@ -11,7 +11,7 @@ values
     (UNHEX('56b45130bdd24c7fbd9b68e08dd481fb'), 'Anna', 'Belova', '2024-01-02 09:10:00',
      'USA', UNHEX('146c6e2e97904a1f9a67f50fdcc61dd5')),
     (UNHEX('184bc3b168064924924d6a66b6bf91df'), 'Svetlana', 'Bolshova', '2024-01-03 19:15:43',
-     'USA', UNHEX('08ae72f74d3b4fb1bb0b1aaae6b4a8ed')),
+     'GERMANY', UNHEX('08ae72f74d3b4fb1bb0b1aaae6b4a8ed')),
     (UNHEX('a92e7e02b4804384b1db5c5f02e87c15'), 'Jurii', 'Ostapov', '2024-01-04 10:15:43',
      'USA', UNHEX('8da9be6181c6499d8a0f87416e3e5414')),
     (UNHEX('6f5dc02d82d3443db59e35c4c4597080'), 'Grigorii', 'Chernookov', '2024-01-05 11:19:49',
@@ -19,4 +19,4 @@ values
     (UNHEX('1b4a432d1ec94141ace11d6ed2e3de0f'), 'Julija', 'Klimenko', '2024-01-07 12:20:49',
      'GERMANY', UNHEX('c9fb87a6b0ff457ba6466b4a2a107396')),
     (UNHEX('37e91890cf7143769bc98b4d94b11254'), 'Tatiana', 'Kurilenko', '2024-01-08 13:20:49',
-     'FRANCE', UNHEX('1fcff618540544a2b79dd5ac86a4779e'))
+     'GERMANY', UNHEX('1fcff618540544a2b79dd5ac86a4779e'))

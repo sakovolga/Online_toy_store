@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.time.DateTimeException;
+
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @RestControllerAdvice
@@ -83,6 +85,11 @@ public class ResponseExceptionHandler {
                     "The rating does not exist!!! Please enter an existing rating",
                     HttpStatus.BAD_REQUEST.value());
         }
+        if (ex.getMessage().contains("For input string:")){
+            body = new ErrorExtension(
+                    "Please enter correct period",
+                    HttpStatus.BAD_REQUEST.value());
+        }
 
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
@@ -113,4 +120,14 @@ public class ResponseExceptionHandler {
                 HttpStatus.BAD_REQUEST.value());
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(DateTimeException.class)
+    public ResponseEntity<ErrorExtension> handleDateTimeException(DateTimeException ex) {
+        ErrorExtension body = new ErrorExtension(
+                ex.getMessage(),
+                HttpStatus.BAD_REQUEST.value());
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }
+
+
 }
