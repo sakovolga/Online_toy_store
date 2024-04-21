@@ -1,12 +1,14 @@
 package com.example.online_toy_store.controller;
 
+import com.example.online_toy_store.dto.UserBeforeCreatingDto;
+import com.example.online_toy_store.dto.UserCreatedDto;
 import com.example.online_toy_store.dto.UserDto;
 import com.example.online_toy_store.dto.UserReportDtoAfter;
-import com.example.online_toy_store.entity.Authority;
-import com.example.online_toy_store.entity.Role;
-import com.example.online_toy_store.entity.User;
+import com.example.online_toy_store.entity.*;
 import com.example.online_toy_store.utils.ExpectedData;
 import com.example.online_toy_store.utils.Utils;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -21,11 +23,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.mockito.ArgumentMatchers.contains;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -96,12 +101,87 @@ public class UserControllerTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = { "/user/getReport/099/2024/GERMANY",
-                            "/user/getReport/02/yyyy/GERMANY",
-                            "/user/getReport/02/2024/NON-EXIST COUNTY"})
-    void getTopUsersTestWithExc400(String path) throws Exception{
+    @ValueSource(strings = {"/user/getReport/099/2024/GERMANY",
+            "/user/getReport/02/yyyy/GERMANY",
+            "/user/getReport/02/2024/NON-EXIST COUNTY"})
+    void getTopUsersTestWithExc400(String path) throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get(path))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+    }
+
+    @Test
+    void CreateUserDtoPositiveTest() throws Exception {
+        UserBeforeCreatingDto userBeforeCreatingDto = ExpectedData.returnUserBeforeCreatingDto();
+
+        String json = objectMapper.writeValueAsString(userBeforeCreatingDto);
+
+        Set<User> userSetBefore = showAll();
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/user/create")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+
+        Set<User> userSetAfter = showAll();
+        Set<UserInfo> userInfoSet = showAllInfo();
+
+        Assertions.assertEquals(userSetBefore.size() + 1, userSetAfter.size());
+        boolean vasiaFound = false;
+        UserInfo userInfoVasia = new UserInfo();
+        for (UserInfo userInfo : userInfoSet) {
+            if ("Vasia".equals(userInfo.getUserName())) {
+                vasiaFound = true;
+                userInfoVasia = userInfo;
+            }
+        }
+        long count = userInfoVasia.getRoles().stream()
+                .map(Role::getRoleName)
+                .filter(roleName -> Objects.equals(roleName, "customer"))
+                .count();
+        Assertions.assertTrue(userInfoVasia.getRoles().size() == 1 && count == 1);
+
+        Assertions.assertTrue(vasiaFound);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "testdata/userExistingEmail.json",
+            "testdata/userExistingName.json",
+            "testdata/userSkippedFields.json"
+    })
+    void UserCreatedDtoTestWithExc400(String filePath) throws Exception {
+        String json = Utils.loadJsonFromFile(filePath);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/user/create")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
+    Set<User> showAll() throws Exception {
+
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/user/showAll"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andReturn();
+
+        String userListJSON = mvcResult.getResponse().getContentAsString();
+        return objectMapper.readValue(userListJSON, new TypeReference<Set<User>>() {
+        });
+    }
+
+    Set<UserInfo> showAllInfo() throws Exception {
+
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/userInfo/showAll"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andReturn();
+
+        String userInfoListJSON = mvcResult.getResponse().getContentAsString();
+        return objectMapper.readValue(userInfoListJSON, new TypeReference<Set<UserInfo>>() {
+        });
     }
 }

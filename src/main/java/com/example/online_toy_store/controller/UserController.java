@@ -1,14 +1,21 @@
 package com.example.online_toy_store.controller;
 
+import com.example.online_toy_store.annotation.CreateUserDto;
 import com.example.online_toy_store.annotation.GetTopUsers;
+import com.example.online_toy_store.annotation.ShowAllUsers;
 import com.example.online_toy_store.annotation.ShowUserById;
+import com.example.online_toy_store.dto.UserBeforeCreatingDto;
+import com.example.online_toy_store.dto.UserCreatedDto;
 import com.example.online_toy_store.dto.UserReportDtoAfter;
 import com.example.online_toy_store.entity.User;
 import com.example.online_toy_store.service.interf.UserServices;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -27,5 +34,15 @@ public class UserController {
                                           @PathVariable(name = "year") String year,
                                           @PathVariable(name = "country") String country) {
         return userServices.getTopUsers(month, year, country);
+    }
+
+    @CreateUserDto(path = "/create")
+    public UserCreatedDto createUser(@RequestBody UserBeforeCreatingDto userBeforeCreatingDto){
+        return userServices.createUser(userBeforeCreatingDto);
+    }
+
+    @ShowAllUsers(path = "/showAll")
+    public List<User> showAll(){
+        return userServices.showAll();
     }
 }

@@ -69,7 +69,13 @@ public class UserInfo {
         return "UserInfo{" +
                 "uID=" + uID +
                 ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", address='" + address + '\'' +
+                ", city=" + city +
+                ", postalCode='" + postalCode + '\'' +
                 ", email='" + email + '\'' +
+                ", cardNumber='" + cardNumber + '\'' +
+                ", roles=" + roles +
                 '}';
     }
 }

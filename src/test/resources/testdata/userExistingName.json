@@ -1,0 +1,12 @@
+{
+  "userName" : "anna_belova",
+  "password" : "7654",
+  "firstName" : "Vasiliy",
+  "lastName" : "Vasiliev",
+  "country" : "FRANCE",
+  "address": "Main Street, 35",
+  "city" : "LYON",
+  "postalCode" : "12344",
+  "email" : "vasvas@gmail.com",
+  "cardNumber" : "12345677788990009888"
+}

@@ -75,7 +75,7 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", createdAt=" + createdAt +
                 ", country=" + country +
-                ", userOrders=" + userOrders +
+                ", userInfo=" + userInfo +
                 '}';
     }
 }

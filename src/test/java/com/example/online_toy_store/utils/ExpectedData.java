@@ -1,5 +1,6 @@
 package com.example.online_toy_store.utils;
 
+import com.example.online_toy_store.dto.UserBeforeCreatingDto;
 import com.example.online_toy_store.dto.UserDto;
 import com.example.online_toy_store.dto.UserReportDtoAfter;
 import com.example.online_toy_store.entity.*;
@@ -226,28 +227,20 @@ public class ExpectedData {
         userDto3.setSum("22.40");
 
         return List.of(userDto1, userDto2, userDto3);
-//        return "{\n" +
-//                "  \"answer\": \"Top 3 buyers for the period: 2024-02 from GERMANY\",\n" +
-//                "  \"userDtoList\": [\n" +
-//                "    {\n" +
-//                "      \"userId\": \"37e91890-cf71-4376-9bc9-8b4d94b11254\",\n" +
-//                "      \"firstName\": \"Tatiana\",\n" +
-//                "      \"lastName\": \"Kurilenko\",\n" +
-//                "      \"sum\": \"49.79\"\n" +
-//                "    },\n" +
-//                "    {\n" +
-//                "      \"userId\": \"1b4a432d-1ec9-4141-ace1-1d6ed2e3de0f\",\n" +
-//                "      \"firstName\": \"Julija\",\n" +
-//                "      \"lastName\": \"Klimenko\",\n" +
-//                "      \"sum\": \"22.70\"\n" +
-//                "    },\n" +
-//                "    {\n" +
-//                "      \"userId\": \"b3cf89da-79d2-42f8-8f4d-fcb22aa43f96\",\n" +
-//                "      \"firstName\": \"Ivan\",\n" +
-//                "      \"lastName\": \"Ivanov\",\n" +
-//                "      \"sum\": \"22.40\"\n" +
-//                "    }\n" +
-//                "  ]\n" +
-//                "}";
+    }
+
+    public static UserBeforeCreatingDto returnUserBeforeCreatingDto(){
+        UserBeforeCreatingDto userBeforeCreatingDto = new UserBeforeCreatingDto();
+        userBeforeCreatingDto.setAddress("Main Street, 35");
+        userBeforeCreatingDto.setCity("LYON");
+        userBeforeCreatingDto.setEmail("vasvas@gmail.com");
+        userBeforeCreatingDto.setCardNumber("12345677788990009888");
+        userBeforeCreatingDto.setCountry("FRANCE");
+        userBeforeCreatingDto.setPassword("7654");
+        userBeforeCreatingDto.setFirstName("Vasiliy");
+        userBeforeCreatingDto.setUserName("Vasia");
+        userBeforeCreatingDto.setLastName("Vasiliev");
+        userBeforeCreatingDto.setPostalCode("12344");
+        return userBeforeCreatingDto;
     }
 }

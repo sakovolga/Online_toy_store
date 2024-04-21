@@ -110,6 +110,21 @@ public class ResponseExceptionHandler {
                     "There is no such product! Please refresh the page",
                     HttpStatus.BAD_REQUEST.value());
         }
+        if (ex.getMessage().contains("for key 'users_info.user_name")) {
+            body = new ErrorExtension(
+                    "A user with the same name already exists",
+                    HttpStatus.BAD_REQUEST.value());
+        }
+        if (ex.getMessage().contains("for key 'users_info.email")) {
+            body = new ErrorExtension(
+                    "A user with the same email already exists",
+                    HttpStatus.BAD_REQUEST.value());
+        }
+        if (ex.getMessage().contains("cannot be null")) {
+            body = new ErrorExtension(
+                    "Please fill in all fields",
+                    HttpStatus.BAD_REQUEST.value());
+        }
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
@@ -126,6 +141,19 @@ public class ResponseExceptionHandler {
         ErrorExtension body = new ErrorExtension(
                 ex.getMessage(),
                 HttpStatus.BAD_REQUEST.value());
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(NullPointerException.class)
+    public ResponseEntity<ErrorExtension> handleNullPointerException(NullPointerException ex) {
+        ErrorExtension body = new ErrorExtension(
+                ex.getMessage(),
+                HttpStatus.BAD_REQUEST.value());
+        if (ex.getMessage().contains("is null")) {
+            body = new ErrorExtension(
+                    "Please fill in all fields",
+                    HttpStatus.BAD_REQUEST.value());
+        }
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 

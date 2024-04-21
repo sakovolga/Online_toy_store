@@ -74,12 +74,12 @@ CREATE TABLE IF NOT EXISTS authorities_roles (
 
 CREATE TABLE IF NOT EXISTS users_info (
     ui_id	binary(16) NOT NULL,
-    user_name	varchar(128) NOT NULL,
+    user_name	varchar(128) NOT NULL unique,
     password	varchar(128) NOT NULL,
     address	varchar(128) NOT NULL,
     city	varchar(128) NOT NULL,
     postal_code	varchar(128) NOT NULL,
-    email	varchar(128) NOT NULL,
+    email	varchar(128) NOT NULL unique,
     card_number	varchar(128),
     PRIMARY KEY (ui_id)
 );
