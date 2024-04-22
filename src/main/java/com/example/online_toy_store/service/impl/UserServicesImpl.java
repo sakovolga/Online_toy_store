@@ -37,8 +37,7 @@ public class UserServicesImpl implements UserServices {
     @Transactional
     public User showUser(String id) {
 
-        return userRepository.findById
-                (UUID.fromString(id))
+        return userRepository.findById(UUID.fromString(id))
                 .orElseThrow(() -> new UserDoesNotExistException(ErrorMessage.USER_DOES_NOT_EXIST));
     }
 
