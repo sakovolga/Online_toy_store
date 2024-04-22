@@ -1,12 +1,16 @@
 package com.example.online_toy_store.controller;
 
 import com.example.online_toy_store.annotation.CreateSupplier;
+import com.example.online_toy_store.annotation.ShowAllSuppliers;
 import com.example.online_toy_store.annotation.ShowSupplierByName;
 import com.example.online_toy_store.entity.Supplier;
 import com.example.online_toy_store.service.interf.SupplierService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/supplier")
@@ -26,5 +30,8 @@ public class SupplierController {
         return supplierService.showByName(name);
     }
 
-
+    @ShowAllSuppliers(path = "/showAll")
+    public List<Supplier> showAll(){
+        return supplierService.showAll();
+    }
 }

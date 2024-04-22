@@ -9,6 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Set;
+
 @Service
 @RequiredArgsConstructor
 public class SupplierServiceImpl implements SupplierService {
@@ -29,5 +32,10 @@ public class SupplierServiceImpl implements SupplierService {
         Supplier supplier = supplierRepository.findBySupplierName(name);
         if (supplier == null) throw new SupplierDoesNotExistException("Supplier not found with name: " + name);
         return supplier;
+    }
+
+    @Override
+    public List<Supplier> showAll() {
+        return supplierRepository.findAll();
     }
 }

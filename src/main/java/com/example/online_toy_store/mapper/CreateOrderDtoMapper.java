@@ -33,7 +33,6 @@ public interface CreateOrderDtoMapper {
     default Set<OrderDetail> mapToOrderDetails(OrderDtoBefore orderDtoBefore) {
         return orderDtoBefore.getOrderDetailsDto().stream()
                 .map(this::mapToOrderDetail)
-                .peek(System.out::println)
                 .collect(Collectors.toSet());
     }
 

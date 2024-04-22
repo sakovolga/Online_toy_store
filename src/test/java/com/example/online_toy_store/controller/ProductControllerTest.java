@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Set;
 
 import static org.hamcrest.Matchers.containsString;
@@ -108,15 +109,49 @@ public class ProductControllerTest {
                 "}";
 
         Set<Product> productSetBefore = showAllProducts();
-//        Set<Supplier> supplierSetBefore =
+        List<Supplier> supplierListBefore = showAllSuppliers();
 
         mockMvc.perform(MockMvcRequestBuilders.post("/product/dto/create")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(ProductBeforeCreatingDtoJSON));
 
         Set<Product> productSetAfter = showAllProducts();
+        List<Supplier> supplierListAfter = showAllSuppliers();
 
         Assertions.assertEquals(productSetBefore.size(), productSetAfter.size() - 1);
+        Assertions.assertEquals(supplierListBefore.size(), supplierListAfter.size());
+    }
+
+    @Test
+    void createProductDtoWithNonExistSupplierTest() throws Exception {
+        String ProductBeforeCreatingDtoJSON = "{\n" +
+                "    \"name\" : \"Small doll\",\n" +
+                "    \"description\" : \"Small beautifull doll\",\n" +
+                "    \"price\" : \"56.9\",\n" +
+                "    \"availableQuantity\" : \"10\",\n" +
+                "    \"category\" : \"DOLLS\",\n" +
+                "    \"supplierName\" : \"New supplier Name\",\n" +
+                "    \"isAvailable\" : \"true\",\n" +
+                "    \"address\" : \"14 Rue de la Republique\",\n" +
+                "    \"city\" : \"LYON\",\n" +
+                "    \"country\" : \"FRANCE\",\n" +
+                "    \"email\" : \"je@nterprises.com\",\n" +
+                "    \"phone\" : \"+33 1 23 45 67 89\",\n" +
+                "    \"postal_code\" : \"12384\"\n" +
+                "}";
+
+        Set<Product> productSetBefore = showAllProducts();
+        List<Supplier> supplierListBefore = showAllSuppliers();
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/product/dto/create")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(ProductBeforeCreatingDtoJSON));
+
+        Set<Product> productSetAfter = showAllProducts();
+        List<Supplier> supplierListAfter = showAllSuppliers();
+
+        Assertions.assertEquals(productSetBefore.size(), productSetAfter.size() - 1);
+        Assertions.assertEquals(supplierListBefore.size(), supplierListAfter.size() -1);
     }
 
     @ParameterizedTest
@@ -150,6 +185,18 @@ public class ProductControllerTest {
 
         String productsResultJSON = showAllProductsResult.getResponse().getContentAsString();
         return objectMapper.readValue(productsResultJSON, new TypeReference<Set<Product>>() {});
+    }
+
+    List<Supplier> showAllSuppliers() throws Exception {
+        MvcResult showAllSuppliersResult =
+                mockMvc
+                        .perform(MockMvcRequestBuilders.get("/supplier/showAll"))
+                        .andExpect(status().isOk())
+                        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                        .andReturn();
+
+        String suppliersResultJSON = showAllSuppliersResult.getResponse().getContentAsString();
+        return objectMapper.readValue(suppliersResultJSON, new TypeReference<List<Supplier>>() {});
     }
 
 }

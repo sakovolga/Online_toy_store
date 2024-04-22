@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -34,12 +35,57 @@ import java.lang.annotation.Target;
                 required = true,
                 content = @Content(
                         mediaType = "application/json",
-                        schema = @Schema(implementation = ProductBeforeCreatingDto.class)
+                        schema = @Schema(implementation = ProductBeforeCreatingDto.class),
+                        examples = {
+                                @ExampleObject(name = "Product with existing supplier",
+                                        value = "{\n" +
+                                                "    \"name\" : \"Small doll\",\n" +
+                                                "    \"description\" : \"description\",\n" +
+                                                "    \"price\" : \"56.9\",\n" +
+                                                "    \"availableQuantity\" : \"10\",\n" +
+                                                "    \"category\" : \"DOLLS\",\n" +
+                                                "    \"supplierName\" : \"Johnson Enterprises Ltd.\"\n" +
+                                                "}"
+                                ),
+                                @ExampleObject(name = "Product with non-exist supplier",
+                                        value = "{\n" +
+                                                "    \"name\" : \"Small doll\",\n" +
+                                                "    \"description\" : \"description\",\n" +
+                                                "    \"price\" : \"56.9\",\n" +
+                                                "    \"availableQuantity\" : \"10\",\n" +
+                                                "    \"category\" : \"DOLLS\",\n" +
+                                                "    \"supplierName\" : \"New supplier Name\",\n" +
+                                                "    \"isAvailable\" : \"true\",\n" +
+                                                "    \"address\" : \"14 Rue de la Republique\",\n" +
+                                                "    \"city\" : \"LYON\",\n" +
+                                                "    \"country\" : \"FRANCE\",\n" +
+                                                "    \"email\" : \"je@nterprises.com\",\n" +
+                                                "    \"phone\" : \"+33 1 23 45 67 89\",\n" +
+                                                "    \"postal_code\" : \"12384\"\n" +
+                                                "}"
+                                ),
+                                @ExampleObject(name = "Product with incorrect data",
+                                        value = "{\n" +
+                                                "    \"name\" : \"Small doll\",\n" +
+                                                "    \"description\" : \"description\",\n" +
+                                                "    \"price\" : \"56.9\",\n" +
+                                                "    \"availableQuantity\" : \"10\",\n" +
+                                                "    \"category\" : \"DOLL\",\n" +
+                                                "    \"supplierName\" : \"New supplier Name\",\n" +
+                                                "    \"isAvailable\" : \"true\",\n" +
+                                                "    \"address\" : \"14 Rue de la Republique\",\n" +
+                                                "    \"city\" : \"LYON\",\n" +
+                                                "    \"country\" : \"FRANC\",\n" +
+                                                "    \"email\" : \"je@nterprises.com\",\n" +
+                                                "    \"phone\" : \"+33 1 23 45 67 89\",\n" +
+                                                "    \"postal_code\" : \"12384\"\n" +
+                                                "}")
+                                        }
                 )
         ),
         responses = {
                 @ApiResponse(
-                        responseCode = "201",
+                        responseCode = "200",
                         description = "The product created",
                         content = @Content(
                                 mediaType = "application/json",

@@ -56,6 +56,8 @@ public class OrderDetail {
                 "odId=" + odId +
                 ", quantity=" + quantity +
                 ", orderComment='" + orderComment + '\'' +
+                ", order=" + order +
+                ", product=" + product +
                 '}';
     }
 }
