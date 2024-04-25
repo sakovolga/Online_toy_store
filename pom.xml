@@ -203,6 +203,21 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.12</version>
+                <configuration>
+                    <outputDirectory>${project.basedir}/target/site/jacoco</outputDirectory>
+                    <excludes>
+                        <exclude>com/example/online_toy_store/aspect/*</exclude>
+                        <exclude>com/example/online_toy_store/entity/*</exclude>
+                        <exclude>com/example/online_toy_store/entity/enums/*</exclude>
+                        <exclude>com/example/online_toy_store/controller/handler/*</exclude>
+                        <exclude>com/example/online_toy_store/dto/*</exclude>
+                        <exclude>com/example/online_toy_store/exception/*</exclude>
+                        <exclude>com/example/online_toy_store/exception/errorMessage/*</exclude>
+                        <exclude>com/example/online_toy_store/mapper/*</exclude>
+                        <exclude>com/example/online_toy_store/configuration/*</exclude>
+                        <exclude>com/example/online_toy_store/OnlineToyStoreApplication.class</exclude>
+                    </excludes>
+                </configuration>
                 <executions>
                     <execution>
                         <id>prepare-agent</id>
