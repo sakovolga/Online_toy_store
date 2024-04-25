@@ -3,7 +3,6 @@ package com.example.online_toy_store.controller;
 import com.example.online_toy_store.annotation.CreateProductDto;
 import com.example.online_toy_store.annotation.GetAllProducts;
 import com.example.online_toy_store.annotation.GetProduct;
-import com.example.online_toy_store.annotation.ProductNameAndQuantityDto;
 import com.example.online_toy_store.dto.ProductAfterCreatingDto;
 import com.example.online_toy_store.dto.ProductBeforeCreatingDto;
 import com.example.online_toy_store.entity.Product;
@@ -32,12 +31,6 @@ public class ProductController {
     public List<Product> showAllProducts(){
         return productService.showProducts();
     }
-
-//    @ProductNameAndQuantityDto(path = "/dto/showProduct/{id}", description = "Swagger documentation")
-//    public ProductNameAndQuantityDto getProductNameAndQuantity(@PathVariable(name = "id")String id){
-//        return productService.getProductNAQDto(id);
-////        return productService.getProductNAQDto(id);
-//    }
 
     @CreateProductDto(path = "/dto/create")
     public ProductAfterCreatingDto createProductDto(@RequestBody ProductBeforeCreatingDto productBeforeCreatingDto){

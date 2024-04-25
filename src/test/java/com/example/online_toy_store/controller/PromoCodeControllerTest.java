@@ -61,14 +61,15 @@ class PromoCodeControllerTest {
     @Test
     void createPromoCodePositiveTest() throws Exception{
 
-        String promoCodeJSON = "{\n" +
-                "    \"promoName\" : \"Hot summer discounts\",\n" +
-                "    \"discountAmount\" : 15.5,\n" +
-                "    \"startPromoDate\" : \"2024-08-20T00:00:00\",\n" +
-                "    \"endPromoDate\" : \"2024-08-31T00:00:00\",\n" +
-                "    \"amountOfUsers\" : 50,\n" +
-                "    \"unusedQuantity\" : 50\n" +
-                "}";
+        String promoCodeJSON = """
+                {
+                    "promoName" : "Hot summer discounts",
+                    "discountAmount" : 15.5,
+                    "startPromoDate" : "2024-08-20T00:00:00",
+                    "endPromoDate" : "2024-08-31T00:00:00",
+                    "amountOfUsers" : 50,
+                    "unusedQuantity" : 50
+                }""";
 
         Set<PromoCode> promoCodeListBefore = showAll();
 
@@ -85,21 +86,22 @@ class PromoCodeControllerTest {
 
     @Test
     void createPromoCodeTestWithException() throws Exception{
-        String promoCodeJSON = "{\n" +
-                "    \"promoName\" : \"Spring Surprise\",\n" +
-                "    \"discountAmount\" : 15.5,\n" +
-                "    \"startPromoDate\" : \"2024-08-20T00:00:00\",\n" +
-                "    \"endPromoDate\" : \"2024-08-31T00:00:00\",\n" +
-                "    \"amountOfUsers\" : 50,\n" +
-                "    \"unusedQuantity\" : 50\n" +
-                "}";
+        String promoCodeJSON = """
+                {
+                    "promoName" : "Spring Surprise",
+                    "discountAmount" : 15.5,
+                    "startPromoDate" : "2024-08-20T00:00:00",
+                    "endPromoDate" : "2024-08-31T00:00:00",
+                    "amountOfUsers" : 50,
+                    "unusedQuantity" : 50
+                }""";
 
         mockMvc.perform(MockMvcRequestBuilders.post("/promo/new")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(promoCodeJSON))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().json("{\"message\":\"The promo code already exist\",\"statusCode\":400}"));;
+                .andExpect(content().json("{\"message\":\"The promo code already exist\",\"statusCode\":400}"));
     }
 
     @Test
@@ -112,14 +114,15 @@ class PromoCodeControllerTest {
     @Test
     void deletePromoCodeByNamePositiveTest() throws Exception{
 
-        String promoCodeJSON = "{\n" +
-                "    \"promoName\" : \"Hot summer discounts\",\n" +
-                "    \"discountAmount\" : 15.5,\n" +
-                "    \"startPromoDate\" : \"2024-08-20T00:00:00\",\n" +
-                "    \"endPromoDate\" : \"2024-08-31T00:00:00\",\n" +
-                "    \"amountOfUsers\" : 50,\n" +
-                "    \"unusedQuantity\" : 50\n" +
-                "}";
+        String promoCodeJSON = """
+                {
+                    "promoName" : "Hot summer discounts",
+                    "discountAmount" : 15.5,
+                    "startPromoDate" : "2024-08-20T00:00:00",
+                    "endPromoDate" : "2024-08-31T00:00:00",
+                    "amountOfUsers" : 50,
+                    "unusedQuantity" : 50
+                }""";
 
         mockMvc.perform(MockMvcRequestBuilders.post("/promo/new")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -168,7 +171,8 @@ class PromoCodeControllerTest {
 
         String promoCodeListJSON = mvcResult.getResponse().getContentAsString();
         List<PromoCode> actualPromoCodeList = objectMapper
-                .readValue(promoCodeListJSON, new TypeReference<List<PromoCode>>() {});
+                .readValue(promoCodeListJSON, new TypeReference<>() {
+                });
 
         Assertions.assertTrue(expectedPromoCodeList.size() == actualPromoCodeList.size() &&
                 expectedPromoCodeList.containsAll(actualPromoCodeList));
@@ -192,6 +196,7 @@ class PromoCodeControllerTest {
                 .andReturn();
 
         String promoCodeListJSON = mvcResult.getResponse().getContentAsString();
-        return objectMapper.readValue(promoCodeListJSON, new TypeReference<Set<PromoCode>>() {});
+        return objectMapper.readValue(promoCodeListJSON, new TypeReference<>() {
+        });
     }
 }

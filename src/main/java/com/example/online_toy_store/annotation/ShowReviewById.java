@@ -1,10 +1,12 @@
 package com.example.online_toy_store.annotation;
 
+import com.example.online_toy_store.controller.handler.ErrorExtension;
 import com.example.online_toy_store.entity.Review;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -30,7 +32,21 @@ import java.lang.annotation.Target;
                         description = "The unique identifier of the review",
                         required = true,
                         in = ParameterIn.PATH,
-                        schema = @Schema(type = "string", format = "uuid")
+                        schema = @Schema(type = "string", format = "uuid"),
+                        examples = {
+                                @ExampleObject(
+                                        name = "Example request with correct Id",
+                                        value = "725d8b16-b473-4816-84cb-13e90d7c4e65"
+                                ),
+                                @ExampleObject(
+                                        name = "Example request with non-exist Id",
+                                        value = "ed0285f4-4524-40f8-bcf5-6cb23b7f81dd"
+                                ),
+                                @ExampleObject(
+                                        name = "Example request with invalid Id",
+                                        value = "invalidId"
+                                )
+                        }
                 )
         },
         responses = {
@@ -44,17 +60,24 @@ import java.lang.annotation.Target;
                 ),
                 @ApiResponse(
                         responseCode = "404",
-                        description = "Review not found"
+                        description = "Review not found",
+                        content = @Content(
+                                mediaType = "application/json",
+                                schema = @Schema(implementation = ErrorExtension.class)
+                        )
                 ),
                 @ApiResponse(
                         responseCode = "400",
-                        description = "Invalid ID" //Спросить почему не показывает в браузере
+                        description = "Invalid ID",
+                        content = @Content(
+                                mediaType = "application/json",
+                                schema = @Schema(implementation = ErrorExtension.class)
+                        )
                 )
         },
         security = {
                 @SecurityRequirement(name = "safety requirements")
-        },
-        hidden = false
+        }
 )
 public @interface ShowReviewById {
     @AliasFor(annotation = RequestMapping.class, attribute = "path")

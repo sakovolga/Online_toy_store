@@ -3,7 +3,10 @@ package com.example.online_toy_store.service.impl;
 import com.example.online_toy_store.dto.OrderDtoAfter;
 import com.example.online_toy_store.dto.OrderDtoBefore;
 import com.example.online_toy_store.entity.*;
-import com.example.online_toy_store.exception.*;
+import com.example.online_toy_store.exception.OrderDoesNotExistException;
+import com.example.online_toy_store.exception.ProductsAreOutException;
+import com.example.online_toy_store.exception.PromoCodeAreOutException;
+import com.example.online_toy_store.exception.PromoCodeDoesNotExistException;
 import com.example.online_toy_store.exception.errorMessage.ErrorMessage;
 import com.example.online_toy_store.mapper.CreateOrderDtoMapper;
 import com.example.online_toy_store.repository.OrderRepository;
@@ -17,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -83,7 +85,7 @@ public class OrderServiceImpl implements OrderService {
         if (promoCode != null){
             int unusedQuantity = promoCode.getUnusedQuantity() - 1;
             promoCode.setUnusedQuantity(unusedQuantity);
-            if (unusedQuantity < 0) throw new PromoCodeAreOutException
+            if (unusedQuantity <= 0) throw new PromoCodeAreOutException
                     ("All available units of promo code " + promoCode.getPromoName() + " have been used");
             if (orderAfterSaving.getOrderDate().isBefore(promoCode.getStartPromoDate()) ||
                     orderAfterSaving.getOrderDate().isAfter(promoCode.getEndPromoDate()))

@@ -2,7 +2,6 @@ package com.example.online_toy_store.utils;
 
 import com.example.online_toy_store.dto.UserBeforeCreatingDto;
 import com.example.online_toy_store.dto.UserDto;
-import com.example.online_toy_store.dto.UserReportDtoAfter;
 import com.example.online_toy_store.entity.*;
 import com.example.online_toy_store.entity.enums.City;
 import com.example.online_toy_store.entity.enums.Country;
@@ -56,15 +55,15 @@ public class ExpectedData {
         return supplier;
     }
 
-    public static Set<Review> returnReviewSet(){
-        Review review = new Review();
-        review.setRvId(UUID.fromString("dd25f121-d167-4b96-8d09-12528c53a50f"));
-        review.setReviewTitle("I was not happy with the purchase");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime dateTime = LocalDateTime.parse("2024-02-05 13:11:34", formatter);
-        review.setReviewDate(dateTime);
-        return Set.of(review);
-    }
+//    public static Set<Review> returnReviewSet(){
+//        Review review = new Review();
+//        review.setRvId(UUID.fromString("dd25f121-d167-4b96-8d09-12528c53a50f"));
+//        review.setReviewTitle("I was not happy with the purchase");
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+//        LocalDateTime dateTime = LocalDateTime.parse("2024-02-05 13:11:34", formatter);
+//        review.setReviewDate(dateTime);
+//        return Set.of(review);
+//    }
 
     public static Order returnOrder(){
         Order order = new Order();

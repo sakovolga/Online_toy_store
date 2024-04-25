@@ -33,7 +33,11 @@ import java.lang.annotation.Target;
                 ),
                 @ApiResponse(
                         responseCode = "200",
-                        description = "No promo codes found"
+                        description = "No promo codes found",
+                        content = @Content(
+                                mediaType = "application/json",
+                                schema = @Schema(implementation = PromoCode.class)
+                        )
                 )
         },
         security = {

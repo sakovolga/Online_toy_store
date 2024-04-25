@@ -7,8 +7,6 @@ import com.example.online_toy_store.entity.User;
 import com.example.online_toy_store.entity.UserInfo;
 import com.example.online_toy_store.entity.enums.City;
 import com.example.online_toy_store.util.PasswordHashing;
-import de.mkammerer.argon2.Argon2;
-import de.mkammerer.argon2.Argon2Factory;
 import org.mapstruct.*;
 import org.springframework.stereotype.Component;
 

@@ -4,14 +4,15 @@ import com.example.online_toy_store.entity.enums.OrderStatus;
 import com.example.online_toy_store.generator.UuidTimeSequenceGenerator;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
-import java.util.UUID;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "orders")

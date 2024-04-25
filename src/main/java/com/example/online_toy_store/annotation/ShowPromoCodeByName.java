@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -30,7 +31,13 @@ import java.lang.annotation.Target;
                         description = "The promo code name",
                         required = true,
                         in = ParameterIn.PATH,
-                        schema = @Schema(type = "string", format = "String")
+                        schema = @Schema(type = "string", format = "String"),
+                        examples = {
+                                @ExampleObject(name = "CorrectName",
+                                value = "Smile"),
+                                @ExampleObject(name = "IncorrectName",
+                                        value = "Smiles"),
+                        }
                 )
         },
         responses = {
@@ -53,8 +60,7 @@ import java.lang.annotation.Target;
         },
         security = {
                 @SecurityRequirement(name = "safety requirements")
-        },
-        hidden = false
+        }
 )
 public @interface ShowPromoCodeByName {
     @AliasFor(annotation = RequestMapping.class, attribute = "path")

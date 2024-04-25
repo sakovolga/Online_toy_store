@@ -1,10 +1,9 @@
 package com.example.online_toy_store.annotation;
 
+import com.example.online_toy_store.controller.handler.ErrorExtension;
 import com.example.online_toy_store.dto.ProductAfterCreatingDto;
 import com.example.online_toy_store.dto.ProductBeforeCreatingDto;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -38,48 +37,51 @@ import java.lang.annotation.Target;
                         schema = @Schema(implementation = ProductBeforeCreatingDto.class),
                         examples = {
                                 @ExampleObject(name = "Product with existing supplier",
-                                        value = "{\n" +
-                                                "    \"name\" : \"Small doll\",\n" +
-                                                "    \"description\" : \"description\",\n" +
-                                                "    \"price\" : \"56.9\",\n" +
-                                                "    \"availableQuantity\" : \"10\",\n" +
-                                                "    \"category\" : \"DOLLS\",\n" +
-                                                "    \"supplierName\" : \"Johnson Enterprises Ltd.\"\n" +
-                                                "}"
+                                        value = """
+                                                {
+                                                    "name" : "Small doll",
+                                                    "description" : "description",
+                                                    "price" : "56.9",
+                                                    "availableQuantity" : "10",
+                                                    "category" : "DOLLS",
+                                                    "supplierName" : "Johnson Enterprises Ltd."
+                                                }"""
                                 ),
                                 @ExampleObject(name = "Product with non-exist supplier",
-                                        value = "{\n" +
-                                                "    \"name\" : \"Small doll\",\n" +
-                                                "    \"description\" : \"description\",\n" +
-                                                "    \"price\" : \"56.9\",\n" +
-                                                "    \"availableQuantity\" : \"10\",\n" +
-                                                "    \"category\" : \"DOLLS\",\n" +
-                                                "    \"supplierName\" : \"New supplier Name\",\n" +
-                                                "    \"isAvailable\" : \"true\",\n" +
-                                                "    \"address\" : \"14 Rue de la Republique\",\n" +
-                                                "    \"city\" : \"LYON\",\n" +
-                                                "    \"country\" : \"FRANCE\",\n" +
-                                                "    \"email\" : \"je@nterprises.com\",\n" +
-                                                "    \"phone\" : \"+33 1 23 45 67 89\",\n" +
-                                                "    \"postal_code\" : \"12384\"\n" +
-                                                "}"
+                                        value = """
+                                                {
+                                                    "name" : "Small doll",
+                                                    "description" : "description",
+                                                    "price" : "56.9",
+                                                    "availableQuantity" : "10",
+                                                    "category" : "DOLLS",
+                                                    "supplierName" : "New supplier Name",
+                                                    "isAvailable" : "true",
+                                                    "address" : "14 Rue de la Republic",
+                                                    "city" : "LYON",
+                                                    "country" : "FRANCE",
+                                                    "email" : "je@nterprises.com",
+                                                    "phone" : "+33 1 23 45 67 89",
+                                                    "postal_code" : "12384"
+                                                }"""
                                 ),
                                 @ExampleObject(name = "Product with incorrect data",
-                                        value = "{\n" +
-                                                "    \"name\" : \"Small doll\",\n" +
-                                                "    \"description\" : \"description\",\n" +
-                                                "    \"price\" : \"56.9\",\n" +
-                                                "    \"availableQuantity\" : \"10\",\n" +
-                                                "    \"category\" : \"DOLL\",\n" +
-                                                "    \"supplierName\" : \"New supplier Name\",\n" +
-                                                "    \"isAvailable\" : \"true\",\n" +
-                                                "    \"address\" : \"14 Rue de la Republique\",\n" +
-                                                "    \"city\" : \"LYON\",\n" +
-                                                "    \"country\" : \"FRANC\",\n" +
-                                                "    \"email\" : \"je@nterprises.com\",\n" +
-                                                "    \"phone\" : \"+33 1 23 45 67 89\",\n" +
-                                                "    \"postal_code\" : \"12384\"\n" +
-                                                "}")
+                                        value = """
+                                                {
+                                                    "name" : "Small doll",
+                                                    "description" : "description",
+                                                    "price" : "56.9",
+                                                    "availableQuantity" : "10",
+                                                    "category" : "DOLL",
+                                                    "supplierName" : "New supplier Name",
+                                                    "isAvailable" : "true",
+                                                    "address" : "14 Rue de la Republic",
+                                                    "city" : "LYON",
+                                                    "country" : "FRANC",
+                                                    "email" : "je@nterprises.com",
+                                                    "phone" : "+33 1 23 45 67 89",
+                                                    "postal_code" : "12384"
+                                                }""")
                                         }
                 )
         ),
@@ -99,7 +101,7 @@ import java.lang.annotation.Target;
                                 "were entered incorrectly",
                         content = @Content(
                                 mediaType = "application/json",
-                                schema = @Schema(implementation = ProductAfterCreatingDto.class)
+                                schema = @Schema(implementation = ErrorExtension.class)
                         )
                 ),
         },

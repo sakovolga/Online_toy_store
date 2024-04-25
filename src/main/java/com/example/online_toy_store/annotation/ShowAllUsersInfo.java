@@ -1,7 +1,5 @@
 package com.example.online_toy_store.annotation;
 
-import com.example.online_toy_store.controller.handler.ErrorExtension;
-import com.example.online_toy_store.entity.User;
 import com.example.online_toy_store.entity.UserInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -27,18 +25,10 @@ import java.lang.annotation.Target;
         responses = {
                 @ApiResponse(
                         responseCode = "200",
-                        description = "All usersInfo received",
+                        description = "All usersInfo received or no usersInfo found",
                         content = @Content(
                                 mediaType = "application/json",
                                 schema = @Schema(implementation = UserInfo.class)
-                        )
-                ),
-                @ApiResponse(
-                        responseCode = "200",
-                        description = "No usersInfo found",
-                        content = @Content(
-                                mediaType = "application/json",
-                                schema = @Schema(implementation = ErrorExtension.class)
                         )
                 )
         },

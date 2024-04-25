@@ -1,7 +1,6 @@
 package com.example.online_toy_store.controller;
 
 import com.example.online_toy_store.entity.Order;
-import com.example.online_toy_store.entity.Product;
 import com.example.online_toy_store.entity.enums.OrderStatus;
 import com.example.online_toy_store.utils.ExpectedData;
 import com.example.online_toy_store.utils.Utils;
@@ -19,11 +18,11 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
-import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -135,22 +134,23 @@ class OrderControllerTest {
 
     @Test
     void createOrderDtoPositiveTest() throws Exception {
-        String json = "{\n" +
-                "    \"userId\" : \"184bc3b1-6806-4924-924d-6a66b6bf91df\",\n" +
-                "    \"promoName\" : \"Smile\",\n" +
-                "    \"orderDetailsDto\" : [\n" +
-                "        { \n" +
-                "            \"productId\" : \"3b287f30-6c1c-4e71-b7bf-881e2d7b3cb4\",          \n" +
-                "            \"quantity\" : \"2\",\n" +
-                "            \"orderComment\" : \"I would like to get one pink car and one black car\"\n" +
-                "        },\n" +
-                "        {\n" +
-                "            \"productId\" : \"9ac0037b-2a2d-4c26-9b8c-15e720f0f8db\",            \n" +
-                "            \"quantity\" : \"1\",\n" +
-                "            \"orderComment\" : \"Please package it nicely because it is a gift\"\n" +
-                "        }\n" +
-                "    ]\n" +
-                "}";
+        String json = """
+                {
+                    "userId" : "184bc3b1-6806-4924-924d-6a66b6bf91df",
+                    "promoName" : "Smile",
+                    "orderDetailsDto" : [
+                        {\s
+                            "productId" : "3b287f30-6c1c-4e71-b7bf-881e2d7b3cb4",         \s
+                            "quantity" : "2",
+                            "orderComment" : "I would like to get one pink car and one black car"
+                        },
+                        {
+                            "productId" : "9ac0037b-2a2d-4c26-9b8c-15e720f0f8db",           \s
+                            "quantity" : "1",
+                            "orderComment" : "Please package it nicely because it is a gift"
+                        }
+                    ]
+                }""";
 
         Set<Order> orderSetBefore = showAll();
 
@@ -168,7 +168,8 @@ class OrderControllerTest {
             "testdata/orderIncorrectQuantityOfProduct.json",
             "testdata/orderInvalidProductId.json",
             "testdata/orderInvalidPromoDate.json",
-            "testdata/orderInvalidUserId.json"
+            "testdata/orderInvalidUserId.json",
+            "testdata/orderWithLeftZeroPromoUnits.json"
     })
     void createOrderDtoWithException400Test(String filePath) throws Exception{
         String json = Utils.loadJsonFromFile(filePath);
@@ -183,6 +184,7 @@ class OrderControllerTest {
     @ParameterizedTest
     @ValueSource(strings = {
             "testdata/orderInvalidPromoName.json"
+
     })
     void createOrderDtoWithException404Test(String filePath) throws Exception{
         String json = Utils.loadJsonFromFile(filePath);
@@ -203,7 +205,7 @@ class OrderControllerTest {
                         .andReturn();
 
         String ordersResultJSON = showAllOrders.getResponse().getContentAsString();
-        return objectMapper.readValue(ordersResultJSON, new TypeReference<Set<Order>>() {
+        return objectMapper.readValue(ordersResultJSON, new TypeReference<>() {
         });
     }
 }

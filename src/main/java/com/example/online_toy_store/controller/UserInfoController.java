@@ -1,12 +1,10 @@
 package com.example.online_toy_store.controller;
 
 import com.example.online_toy_store.annotation.ShowAllUsersInfo;
-import com.example.online_toy_store.annotation.ShowUserById;
 import com.example.online_toy_store.annotation.ShowUserInfoById;
 import com.example.online_toy_store.annotation.UpdateUserInfoRoles;
 import com.example.online_toy_store.dto.UserInfoRolesResponse;
 import com.example.online_toy_store.dto.UserInfoUpdateRolesDto;
-import com.example.online_toy_store.entity.User;
 import com.example.online_toy_store.entity.UserInfo;
 import com.example.online_toy_store.service.interf.UserInfoService;
 import lombok.RequiredArgsConstructor;

@@ -9,10 +9,16 @@ spring:
     serialization:
       fail-on-empty-beans: false
 
+#  datasource:
+#    url: ${DATASOURCE.URL}
+#    username: ${DATASOURCE.USERNAME}
+#    password: ${DATASOURCE.PASSWORD}
+
+
   datasource:
-    url: ${DATASOURCE.URL}
-    username: ${DATASOURCE.USERNAME}
-    password: ${DATASOURCE.PASSWORD}
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:online_toy_store}
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:23402}
 
   liquibase:
     change-log: classpath:db/changelog/changelog-master.xml

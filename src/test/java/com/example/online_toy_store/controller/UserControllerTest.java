@@ -1,13 +1,14 @@
 package com.example.online_toy_store.controller;
 
 import com.example.online_toy_store.dto.UserBeforeCreatingDto;
-import com.example.online_toy_store.dto.UserCreatedDto;
 import com.example.online_toy_store.dto.UserDto;
 import com.example.online_toy_store.dto.UserReportDtoAfter;
-import com.example.online_toy_store.entity.*;
+import com.example.online_toy_store.entity.Authority;
+import com.example.online_toy_store.entity.Role;
+import com.example.online_toy_store.entity.User;
+import com.example.online_toy_store.entity.UserInfo;
 import com.example.online_toy_store.utils.ExpectedData;
 import com.example.online_toy_store.utils.Utils;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
@@ -23,14 +24,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 import static org.hamcrest.Matchers.containsString;
-import static org.mockito.ArgumentMatchers.contains;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -169,7 +168,7 @@ public class UserControllerTest {
                 .andReturn();
 
         String userListJSON = mvcResult.getResponse().getContentAsString();
-        return objectMapper.readValue(userListJSON, new TypeReference<Set<User>>() {
+        return objectMapper.readValue(userListJSON, new TypeReference<>() {
         });
     }
 
@@ -181,7 +180,7 @@ public class UserControllerTest {
                 .andReturn();
 
         String userInfoListJSON = mvcResult.getResponse().getContentAsString();
-        return objectMapper.readValue(userInfoListJSON, new TypeReference<Set<UserInfo>>() {
+        return objectMapper.readValue(userInfoListJSON, new TypeReference<>() {
         });
     }
 }

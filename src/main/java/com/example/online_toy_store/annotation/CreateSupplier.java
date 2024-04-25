@@ -1,8 +1,10 @@
 package com.example.online_toy_store.annotation;
 
+import com.example.online_toy_store.controller.handler.ErrorExtension;
 import com.example.online_toy_store.entity.Supplier;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -27,7 +29,31 @@ import java.lang.annotation.Target;
                 required = true,
                 content = @Content(
                         mediaType = "application/json",
-                        schema = @Schema(implementation = Supplier.class)
+                        schema = @Schema(implementation = Supplier.class),
+                        examples = {
+                                @ExampleObject(name = "Good request",
+                                value = """
+                                        {
+                                            "supplierName" : "New supplier",
+                                            "phone" : "76544387654",
+                                            "email" : "supplier@g.com",
+                                            "address" : "Some street, 78",
+                                            "city" : "DRESDEN",
+                                            "postalCode" : "987",
+                                            "country" : "GERMANY"
+                                        }"""),
+                                @ExampleObject(name = "Request with existing name",
+                                        value = """
+                                                {
+                                                    "supplierName" : "Global Importers Co.",
+                                                    "phone" : "76544387654",
+                                                    "email" : "supplier@g.com",
+                                                    "address" : "Some street, 78",
+                                                    "city" : "DRESDEN",
+                                                    "postalCode" : "987",
+                                                    "country" : "GERMANY"
+                                                }"""),
+                        }
                 )
         ),
         responses = {
@@ -44,7 +70,7 @@ import java.lang.annotation.Target;
                         description = "The supplier already exist",
                         content = @Content(
                                 mediaType = "application/json",
-                                schema = @Schema(implementation = Supplier.class)
+                                schema = @Schema(implementation = ErrorExtension.class)
                         )
                 )
         },

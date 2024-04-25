@@ -25,15 +25,11 @@ import java.lang.annotation.Target;
         responses = {
                 @ApiResponse(
                         responseCode = "200",
-                        description = "All products received",
+                        description = "All products received or no products found",
                         content = @Content(
                                 mediaType = "application/json",
                                 schema = @Schema(implementation = Product.class)
                         )
-                ),
-                @ApiResponse(
-                        responseCode = "204",
-                        description = "No products found"
                 )
         },
         security = {

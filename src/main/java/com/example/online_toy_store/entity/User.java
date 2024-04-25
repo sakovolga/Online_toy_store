@@ -2,14 +2,13 @@ package com.example.online_toy_store.entity;
 
 import com.example.online_toy_store.entity.enums.Country;
 import com.example.online_toy_store.generator.UuidTimeSequenceGenerator;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
-import org.hibernate.annotations.Fetch;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
@@ -46,7 +45,7 @@ public class User {
     @JoinColumn(name = "user_info", referencedColumnName = "ui_id")
     private UserInfo userInfo;
 
-    @OneToMany(mappedBy = "user", orphanRemoval = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<Order> userOrders;
 

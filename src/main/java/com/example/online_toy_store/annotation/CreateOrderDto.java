@@ -3,8 +3,6 @@ package com.example.online_toy_store.annotation;
 import com.example.online_toy_store.controller.handler.ErrorExtension;
 import com.example.online_toy_store.dto.OrderDtoAfter;
 import com.example.online_toy_store.dto.OrderDtoBefore;
-import com.example.online_toy_store.dto.ProductAfterCreatingDto;
-import com.example.online_toy_store.dto.ProductBeforeCreatingDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
@@ -33,7 +31,7 @@ import java.lang.annotation.Target;
                 "(processing is automatically assigned), order details (product name, quantity, price, comment), " +
                 "the total cost of the order is calculated, the discount is indicated, the price with a discount. " +
                 "After executing the query in the database, the number of units of the remaining product is reduced, " +
-                "the field isAvalible is changed, and the number of remaining units of the promotional code is reduced." +
+                "the field isAvailable is changed, and the number of remaining units of the promotional code is reduced." +
                 " The validity date of the promotional code is also checked.",
         tags = {"ORDER_DTO"},
         requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
@@ -44,130 +42,137 @@ import java.lang.annotation.Target;
                         schema = @Schema(implementation = OrderDtoBefore.class),
                         examples = {
                                 @ExampleObject(name = "Good request",
-                                        value = "{\n" +
-                                                "    \"userId\" : \"184bc3b1-6806-4924-924d-6a66b6bf91df\",\n" +
-                                                "    \"promoName\" : \"Smile\",\n" +
-                                                "    \"orderDetailsDto\" : [\n" +
-                                                "        { \n" +
-                                                "            \"productId\" : \"3b287f30-6c1c-4e71-b7bf-881e2d7b3cb4\",          \n" +
-                                                "            \"quantity\" : \"2\",\n" +
-                                                "            \"orderComment\" : \"I would like to get one pink car and one black car\"\n" +
-                                                "        },\n" +
-                                                "        {\n" +
-                                                "            \"productId\" : \"9ac0037b-2a2d-4c26-9b8c-15e720f0f8db\",            \n" +
-                                                "            \"quantity\" : \"1\",\n" +
-                                                "            \"orderComment\" : \"Please package it nicely because it is a gift\"\n" +
-                                                "        }\n" +
-                                                "    ]\n" +
-                                                "}"
+                                        value = """
+                                                {
+                                                    "userId" : "184bc3b1-6806-4924-924d-6a66b6bf91df",
+                                                    "promoName" : "Smile",
+                                                    "orderDetailsDto" : [
+                                                        {\s
+                                                            "productId" : "3b287f30-6c1c-4e71-b7bf-881e2d7b3cb4",         \s
+                                                            "quantity" : "2",
+                                                            "orderComment" : "I would like to get one pink car and one black car"
+                                                        },
+                                                        {
+                                                            "productId" : "9ac0037b-2a2d-4c26-9b8c-15e720f0f8db",           \s
+                                                            "quantity" : "1",
+                                                            "orderComment" : "Please package it nicely because it is a gift"
+                                                        }
+                                                    ]
+                                                }"""
                                 ),
                                 @ExampleObject(name = "Request with invalid date ot promoCode",
-                                        value = "{\n" +
-                                                "    \"userId\" : \"184bc3b1-6806-4924-924d-6a66b6bf91df\",\n" +
-                                                "    \"promoName\" : \"Black Friday\",\n" +
-                                                "    \"orderDetailsDto\" : [\n" +
-                                                "        { \n" +
-                                                "            \"productId\" : \"3b287f30-6c1c-4e71-b7bf-881e2d7b3cb4\",          \n" +
-                                                "            \"quantity\" : \"2\",\n" +
-                                                "            \"orderComment\" : \"I would like to get one pink car and one black car\"\n" +
-                                                "        },\n" +
-                                                "        {\n" +
-                                                "            \"productId\" : \"9ac0037b-2a2d-4c26-9b8c-15e720f0f8db\",            \n" +
-                                                "            \"quantity\" : \"1\",\n" +
-                                                "            \"orderComment\" : \"Please package it nicely because it is a gift\"\n" +
-                                                "        }\n" +
-                                                "    ]\n" +
-                                                "}"
+                                        value = """
+                                                {
+                                                    "userId" : "184bc3b1-6806-4924-924d-6a66b6bf91df",
+                                                    "promoName" : "Black Friday",
+                                                    "orderDetailsDto" : [
+                                                        {\s
+                                                            "productId" : "3b287f30-6c1c-4e71-b7bf-881e2d7b3cb4",         \s
+                                                            "quantity" : "2",
+                                                            "orderComment" : "I would like to get one pink car and one black car"
+                                                        },
+                                                        {
+                                                            "productId" : "9ac0037b-2a2d-4c26-9b8c-15e720f0f8db",           \s
+                                                            "quantity" : "1",
+                                                            "orderComment" : "Please package it nicely because it is a gift"
+                                                        }
+                                                    ]
+                                                }"""
                                 ),
                                 @ExampleObject(name = "Request with invalid userId",
-                                        value = "{\n" +
-                                                "    \"userId\" : \"184bc3b1-6806-4924-924d-6a66b6bf91d1\",\n" +
-                                                "    \"promoName\" : \"Smile\",\n" +
-                                                "    \"orderDetailsDto\" : [\n" +
-                                                "        { \n" +
-                                                "            \"productId\" : \"3b287f30-6c1c-4e71-b7bf-881e2d7b3cb4\",          \n" +
-                                                "            \"quantity\" : \"2\",\n" +
-                                                "            \"orderComment\" : \"I would like to get one pink car and one black car\"\n" +
-                                                "        },\n" +
-                                                "        {\n" +
-                                                "            \"productId\" : \"9ac0037b-2a2d-4c26-9b8c-15e720f0f8db\",            \n" +
-                                                "            \"quantity\" : \"1\",\n" +
-                                                "            \"orderComment\" : \"Please package it nicely because it is a gift\"\n" +
-                                                "        }\n" +
-                                                "    ]\n" +
-                                                "}"
+                                        value = """
+                                                {
+                                                    "userId" : "184bc3b1-6806-4924-924d-6a66b6bf91d1",
+                                                    "promoName" : "Smile",
+                                                    "orderDetailsDto" : [
+                                                        {\s
+                                                            "productId" : "3b287f30-6c1c-4e71-b7bf-881e2d7b3cb4",         \s
+                                                            "quantity" : "2",
+                                                            "orderComment" : "I would like to get one pink car and one black car"
+                                                        },
+                                                        {
+                                                            "productId" : "9ac0037b-2a2d-4c26-9b8c-15e720f0f8db",           \s
+                                                            "quantity" : "1",
+                                                            "orderComment" : "Please package it nicely because it is a gift"
+                                                        }
+                                                    ]
+                                                }"""
                                 ),
                                 @ExampleObject(name = "Request with invalid productId",
-                                        value = "{\n" +
-                                                "    \"userId\" : \"184bc3b1-6806-4924-924d-6a66b6bf91df\",\n" +
-                                                "    \"promoName\" : \"Smile\",\n" +
-                                                "    \"orderDetailsDto\" : [\n" +
-                                                "        { \n" +
-                                                "            \"productId\" : \"3b287f30-6c1c-4e71-b7bf-881e2d7b3cb1\",          \n" +
-                                                "            \"quantity\" : \"2\",\n" +
-                                                "            \"orderComment\" : \"I would like to get one pink car and one black car\"\n" +
-                                                "        },\n" +
-                                                "        {\n" +
-                                                "            \"productId\" : \"9ac0037b-2a2d-4c26-9b8c-15e720f0f8db\",            \n" +
-                                                "            \"quantity\" : \"1\",\n" +
-                                                "            \"orderComment\" : \"Please package it nicely because it is a gift\"\n" +
-                                                "        }\n" +
-                                                "    ]\n" +
-                                                "}"
+                                        value = """
+                                                {
+                                                    "userId" : "184bc3b1-6806-4924-924d-6a66b6bf91df",
+                                                    "promoName" : "Smile",
+                                                    "orderDetailsDto" : [
+                                                        {\s
+                                                            "productId" : "3b287f30-6c1c-4e71-b7bf-881e2d7b3cb1",         \s
+                                                            "quantity" : "2",
+                                                            "orderComment" : "I would like to get one pink car and one black car"
+                                                        },
+                                                        {
+                                                            "productId" : "9ac0037b-2a2d-4c26-9b8c-15e720f0f8db",           \s
+                                                            "quantity" : "1",
+                                                            "orderComment" : "Please package it nicely because it is a gift"
+                                                        }
+                                                    ]
+                                                }"""
                                 ),
                                 @ExampleObject(name = "Request with too many products",
-                                        value = "{\n" +
-                                                "    \"userId\" : \"184bc3b1-6806-4924-924d-6a66b6bf91df\",\n" +
-                                                "    \"promoName\" : \"Smile\",\n" +
-                                                "    \"orderDetailsDto\" : [\n" +
-                                                "        { \n" +
-                                                "            \"productId\" : \"3b287f30-6c1c-4e71-b7bf-881e2d7b3cb4\",          \n" +
-                                                "            \"quantity\" : \"200\",\n" +
-                                                "            \"orderComment\" : \"I would like to get one pink car and one black car\"\n" +
-                                                "        },\n" +
-                                                "        {\n" +
-                                                "            \"productId\" : \"9ac0037b-2a2d-4c26-9b8c-15e720f0f8db\",            \n" +
-                                                "            \"quantity\" : \"1\",\n" +
-                                                "            \"orderComment\" : \"Please package it nicely because it is a gift\"\n" +
-                                                "        }\n" +
-                                                "    ]\n" +
-                                                "}"
+                                        value = """
+                                                {
+                                                    "userId" : "184bc3b1-6806-4924-924d-6a66b6bf91df",
+                                                    "promoName" : "Smile",
+                                                    "orderDetailsDto" : [
+                                                        {\s
+                                                            "productId" : "3b287f30-6c1c-4e71-b7bf-881e2d7b3cb4",         \s
+                                                            "quantity" : "200",
+                                                            "orderComment" : "I would like to get one pink car and one black car"
+                                                        },
+                                                        {
+                                                            "productId" : "9ac0037b-2a2d-4c26-9b8c-15e720f0f8db",           \s
+                                                            "quantity" : "1",
+                                                            "orderComment" : "Please package it nicely because it is a gift"
+                                                        }
+                                                    ]
+                                                }"""
                                 ),
                                 @ExampleObject(name = "request with a completed number of promo codes",
-                                        value = "{\n" +
-                                                "    \"userId\" : \"184bc3b1-6806-4924-924d-6a66b6bf91df\",\n" +
-                                                "    \"promoName\" : \"Spring Surprise\",\n" +
-                                                "    \"orderDetailsDto\" : [\n" +
-                                                "        { \n" +
-                                                "            \"productId\" : \"3b287f30-6c1c-4e71-b7bf-881e2d7b3cb4\",          \n" +
-                                                "            \"quantity\" : \"1\",\n" +
-                                                "            \"orderComment\" : \"I would like to get one pink car and one black car\"\n" +
-                                                "        },\n" +
-                                                "        {\n" +
-                                                "            \"productId\" : \"9ac0037b-2a2d-4c26-9b8c-15e720f0f8db\",            \n" +
-                                                "            \"quantity\" : \"1\",\n" +
-                                                "            \"orderComment\" : \"Please package it nicely because it is a gift\"\n" +
-                                                "        }\n" +
-                                                "    ]\n" +
-                                                "}"
+                                        value = """
+                                                {
+                                                    "userId" : "184bc3b1-6806-4924-924d-6a66b6bf91df",
+                                                    "promoName" : "Spring Surprise",
+                                                    "orderDetailsDto" : [
+                                                        {\s
+                                                            "productId" : "3b287f30-6c1c-4e71-b7bf-881e2d7b3cb4",         \s
+                                                            "quantity" : "1",
+                                                            "orderComment" : "I would like to get one pink car and one black car"
+                                                        },
+                                                        {
+                                                            "productId" : "9ac0037b-2a2d-4c26-9b8c-15e720f0f8db",           \s
+                                                            "quantity" : "1",
+                                                            "orderComment" : "Please package it nicely because it is a gift"
+                                                        }
+                                                    ]
+                                                }"""
                                 ),
                                 @ExampleObject(name = "request with a completed number of promo codes",
-                                        value = "{\n" +
-                                                "    \"userId\" : \"184bc3b1-6806-4924-924d-6a66b6bf91df\",\n" +
-                                                "    \"promoName\" : \"Non-existent Name\",\n" +
-                                                "    \"orderDetailsDto\" : [\n" +
-                                                "        { \n" +
-                                                "            \"productId\" : \"3b287f30-6c1c-4e71-b7bf-881e2d7b3cb4\",          \n" +
-                                                "            \"quantity\" : \"1\",\n" +
-                                                "            \"orderComment\" : \"I would like to get one pink car and one black car\"\n" +
-                                                "        },\n" +
-                                                "        {\n" +
-                                                "            \"productId\" : \"9ac0037b-2a2d-4c26-9b8c-15e720f0f8db\",            \n" +
-                                                "            \"quantity\" : \"1\",\n" +
-                                                "            \"orderComment\" : \"Please package it nicely because it is a gift\"\n" +
-                                                "        }\n" +
-                                                "    ]\n" +
-                                                "}"
+                                        value = """
+                                                {
+                                                    "userId" : "184bc3b1-6806-4924-924d-6a66b6bf91df",
+                                                    "promoName" : "Non-existent Name",
+                                                    "orderDetailsDto" : [
+                                                        {\s
+                                                            "productId" : "3b287f30-6c1c-4e71-b7bf-881e2d7b3cb4",         \s
+                                                            "quantity" : "1",
+                                                            "orderComment" : "I would like to get one pink car and one black car"
+                                                        },
+                                                        {
+                                                            "productId" : "9ac0037b-2a2d-4c26-9b8c-15e720f0f8db",           \s
+                                                            "quantity" : "1",
+                                                            "orderComment" : "Please package it nicely because it is a gift"
+                                                        }
+                                                    ]
+                                                }"""
                                 ),
                         }
                 )

@@ -3,6 +3,7 @@ package com.example.online_toy_store.annotation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -28,7 +29,15 @@ import java.lang.annotation.Target;
                         description = "The unique promo code name",
                         required = true,
                         in = ParameterIn.PATH,
-                        schema = @Schema(type = "string", format = "String")
+                        schema = @Schema(type = "string", format = "String"),
+                        examples = {
+                                @ExampleObject(name = "Good request",
+                                        value = "Smile"),
+                                @ExampleObject(name = "Request with non-exist Id",
+                                        value = "Smiles"),
+                                @ExampleObject(name = "Request with associated promo code",
+                                        value = "Spring Surprise")
+                        }
                 )
         },
         responses = {

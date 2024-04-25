@@ -77,8 +77,7 @@ import java.lang.annotation.Target;
         },
         security = {
                 @SecurityRequirement(name = "safety requirements")
-        },
-        hidden = false
+        }
 )
 public @interface GetOrderByID {
     @AliasFor(annotation = RequestMapping.class, attribute = "path")
