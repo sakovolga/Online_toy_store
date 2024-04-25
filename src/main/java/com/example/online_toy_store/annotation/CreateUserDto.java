@@ -3,7 +3,6 @@ package com.example.online_toy_store.annotation;
 import com.example.online_toy_store.controller.handler.ErrorExtension;
 import com.example.online_toy_store.dto.UserBeforeCreatingDto;
 import com.example.online_toy_store.dto.UserCreatedDto;
-import com.example.online_toy_store.entity.User;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
@@ -37,59 +36,63 @@ import java.lang.annotation.Target;
                         schema = @Schema(implementation = UserBeforeCreatingDto.class),
                         examples = {
                                 @ExampleObject(name = "Good request",
-                                        value = "{\n" +
-                                                "    \"userName\" : \"Vasia\",\n" +
-                                                "    \"password\" : \"7654\",\n" +
-                                                "    \"firstName\" : \"Vasiliy\",\n" +
-                                                "    \"lastName\" : \"Vasiliev\",\n" +
-                                                "    \"country\" : \"FRANCE\",\n" +
-                                                "    \"address\": \"Main Street, 35\",\n" +
-                                                "    \"city\" : \"LYON\",\n" +
-                                                "    \"postalCode\" : \"12344\",\n" +
-                                                "    \"email\" : \"vasvas@gmail.com\",\n" +
-                                                "    \"cardNumber\" : \"12345677788990009888\"\n" +
-                                                "}"
+                                        value = """
+                                                {
+                                                    "userName" : "Vasa",
+                                                    "password" : "7654",
+                                                    "firstName" : "Vasiliy",
+                                                    "lastName" : "Vasiliev",
+                                                    "country" : "FRANCE",
+                                                    "address": "Main Street, 35",
+                                                    "city" : "LYON",
+                                                    "postalCode" : "12344",
+                                                    "email" : "vasvas@gmail.com",
+                                                    "cardNumber" : "12345677788990009888"
+                                                }"""
                                 ),
                                 @ExampleObject(name = "Existing name",
-                                        value = "{\n" +
-                                                "    \"userName\" : \"anna_belova\",\n" +
-                                                "    \"password\" : \"7654\",\n" +
-                                                "    \"firstName\" : \"Vasiliy\",\n" +
-                                                "    \"lastName\" : \"Vasiliev\",\n" +
-                                                "    \"country\" : \"FRANCE\",\n" +
-                                                "    \"address\": \"Main Street, 35\",\n" +
-                                                "    \"city\" : \"LYON\",\n" +
-                                                "    \"postalCode\" : \"12344\",\n" +
-                                                "    \"email\" : \"vasvas@gmail.com\",\n" +
-                                                "    \"cardNumber\" : \"12345677788990009888\"\n" +
-                                                "}"
+                                        value = """
+                                                {
+                                                    "userName" : "anna_belova",
+                                                    "password" : "7654",
+                                                    "firstName" : "Vasiliy",
+                                                    "lastName" : "Vasiliev",
+                                                    "country" : "FRANCE",
+                                                    "address": "Main Street, 35",
+                                                    "city" : "LYON",
+                                                    "postalCode" : "12344",
+                                                    "email" : "vasvas@gmail.com",
+                                                    "cardNumber" : "12345677788990009888"
+                                                }"""
                                 ),
                                 @ExampleObject(name = "Existing email",
-                                        value = "{\n" +
-                                                "    \"userName\" : \"Vasilii\",\n" +
-                                                "    \"password\" : \"7654\",\n" +
-                                                "    \"firstName\" : \"Vasiliy\",\n" +
-                                                "    \"lastName\" : \"Vasiliev\",\n" +
-                                                "    \"country\" : \"FRANCE\",\n" +
-                                                "    \"address\": \"Main Street, 35\",\n" +
-                                                "    \"city\" : \"LYON\",\n" +
-                                                "    \"postalCode\" : \"12344\",\n" +
-                                                "    \"email\" : \"belova@gmail.com\",\n" +
-                                                "    \"cardNumber\" : \"12345677788990009888\"\n" +
-                                                "}"
+                                        value = """
+                                                {
+                                                    "userName" : "Vasilii",
+                                                    "password" : "7654",
+                                                    "firstName" : "Vasiliy",
+                                                    "lastName" : "Vasiliev",
+                                                    "country" : "FRANCE",
+                                                    "address": "Main Street, 35",
+                                                    "city" : "LYON",
+                                                    "postalCode" : "12344",
+                                                    "email" : "belova@gmail.com",
+                                                    "cardNumber" : "12345677788990009888"
+                                                }"""
                                 ),
                                 @ExampleObject(name = "Skipped fields",
-                                        value = "{\n" +
-                                                "    \"userName\" : \"Vasia\",\n" +
-                                                "    \"password\" : \"7654\",\n" +
-                                                "    \"firstName\" : \"Vasiliy\",\n" +
-                                                "    \"lastName\" : \"Vasiliev\",\n" +
-                                                "    \"country\" : \"FRANCE\",\n" +
-                                                "    \"address\": \"Main Street, 35\",\n" +
-                                                "    \"city\" : \"LYON\",\n" +
-                                                "    \"postalCode\" : \"12344\",\n" +
-                                                "    \"cardNumber\" : \"12345677788990009888\"\n" +
-                                                "}"
+                                        value = """
+                                                {
+                                                    "userName" : "Vasa",
+                                                    "password" : "7654",
+                                                    "firstName" : "Vasiliy",
+                                                    "lastName" : "Vasiliev",
+                                                    "country" : "FRANCE",
+                                                    "address": "Main Street, 35",
+                                                    "city" : "LYON",
+                                                    "postalCode" : "12344",
+                                                    "cardNumber" : "12345677788990009888"
+                                                }"""
                                 ),
 
                         }

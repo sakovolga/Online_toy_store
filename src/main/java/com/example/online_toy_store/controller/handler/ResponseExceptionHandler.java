@@ -1,21 +1,18 @@
 package com.example.online_toy_store.controller.handler;
 
-import com.example.online_toy_store.exception.*;
+import com.example.online_toy_store.exception.BadRequestException;
+import com.example.online_toy_store.exception.ListIsEmptyException;
+import com.example.online_toy_store.exception.ObjectAlreadyExistsException;
 import com.example.online_toy_store.exception.ObjectDoesNotExistException;
-import com.example.online_toy_store.exception.errorMessage.ErrorMessage;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.context.annotation.Description;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.DateTimeException;
-
-import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @RestControllerAdvice
 public class ResponseExceptionHandler {
@@ -54,8 +51,6 @@ public class ResponseExceptionHandler {
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
-    @Description(value = "Отлавливание невалидного UUID с помощью Spring," +
-            " а также значений, которых нет в Enum")
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ErrorExtension> handleIllegalArgumentException(IllegalArgumentException ex) {
         ErrorExtension body = new ErrorExtension(ex.getMessage(),
@@ -94,7 +89,6 @@ public class ResponseExceptionHandler {
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
-    @Description(value = "Отлавливание исключения, когда невозможно удалить объект, на который ссылаются другие объекты")
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<ErrorExtension> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
         ErrorExtension body = new ErrorExtension(
@@ -123,6 +117,13 @@ public class ResponseExceptionHandler {
         if (ex.getMessage().contains("cannot be null")) {
             body = new ErrorExtension(
                     "Please fill in all fields",
+                    HttpStatus.BAD_REQUEST.value());
+        }
+        if (ex.getMessage().contains("Cannot delete or update a parent row: " +
+                "a foreign key constraint fails (`online_toy_store`.`orders`, CONSTRAINT `orders_ibfk_2` " +
+                "FOREIGN KEY (`promo_code_id`) REFERENCES `promo_codes` (`pc_id`))")) {
+            body = new ErrorExtension(
+                    "The promo code cannot be deleted because other objects reference it",
                     HttpStatus.BAD_REQUEST.value());
         }
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);

@@ -1,6 +1,7 @@
 package com.example.online_toy_store.repository;
 
 import com.example.online_toy_store.entity.PromoCode;
+import jakarta.annotation.Nonnull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +14,8 @@ public interface PromoCodeRepository extends JpaRepository<PromoCode, UUID> {
     PromoCode findPromoCodeByPromoName(String name);
 
     @Override
-    Optional<PromoCode> findById(UUID uuid);
+    @Nonnull
+    Optional<PromoCode> findById(@Nonnull UUID uuid);
 
     void deletePromoCodeByPromoName(String name);
 

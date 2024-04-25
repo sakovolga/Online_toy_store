@@ -2,7 +2,6 @@ package com.example.online_toy_store.annotation;
 
 import com.example.online_toy_store.controller.handler.ErrorExtension;
 import com.example.online_toy_store.dto.UserInfoRolesResponse;
-import com.example.online_toy_store.entity.UserInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -57,12 +56,13 @@ import java.lang.annotation.Target;
                         schema = @Schema(implementation = UpdateUserInfoRoles.class),
                         examples = {
                                 @ExampleObject(name = "Good request",
-                                        value = "{\n" +
-                                                "    \"isCustomer\" : true,\n" +
-                                                "    \"isManager\" : true,\n" +
-                                                "    \"isSuper_manager\" : true,\n" +
-                                                "    \"isAdmin\" : false\n" +
-                                                "}"
+                                        value = """
+                                                {
+                                                    "isCustomer" : true,
+                                                    "isManager" : true,
+                                                    "isSuper_manager" : true,
+                                                    "isAdmin" : false
+                                                }"""
                                 )
                         }
                 )

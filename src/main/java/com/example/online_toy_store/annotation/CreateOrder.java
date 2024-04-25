@@ -31,9 +31,10 @@ import java.lang.annotation.Target;
                         schema = @Schema(implementation = Order.class),
                         examples = {
                                 @ExampleObject(name = "Good request",
-                                        value = "{\n" +
-                                                "    \"orderDate\" : \"2024-08-20T00:00:00\"    \n" +
-                                                "}"
+                                        value = """
+                                                {
+                                                    "orderDate" : "2024-08-20T00:00:00"   \s
+                                                }"""
                                 )
                         }
                 )

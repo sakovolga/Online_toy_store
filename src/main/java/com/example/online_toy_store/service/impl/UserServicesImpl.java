@@ -33,6 +33,7 @@ public class UserServicesImpl implements UserServices {
     private final MapperUtil mapperUtil;
     private final GetTopUsersMapper getTopUsersMapper;
     private final CreateUserMapper createUserMapper;
+
     @Override
     @Transactional
     public User showUser(String id) {
@@ -47,7 +48,7 @@ public class UserServicesImpl implements UserServices {
         List<User> userList = userRepository.findAllByCountry(Country.valueOf(country));
         LocalDateTime startDate = mapperUtil.getFirstDayOfMonth(year, month);
         LocalDateTime finalDate = mapperUtil.getLastDayOfMonth(year, month);
-        for(User user: userList){
+        for (User user : userList) {
             Set<Order> orderSet = orderRepository
                     .findAllByUserAndOrderDateAfterAndOrderDateBefore(user, startDate, finalDate);
             user.setUserOrders(orderSet);

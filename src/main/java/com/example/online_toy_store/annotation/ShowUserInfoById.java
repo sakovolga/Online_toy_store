@@ -1,12 +1,12 @@
 package com.example.online_toy_store.annotation;
 
 import com.example.online_toy_store.controller.handler.ErrorExtension;
-import com.example.online_toy_store.entity.User;
 import com.example.online_toy_store.entity.UserInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -32,7 +32,21 @@ import java.lang.annotation.Target;
                         description = "The unique identifier of the userInfo",
                         required = true,
                         in = ParameterIn.PATH,
-                        schema = @Schema(type = "string", format = "uuid")
+                        schema = @Schema(type = "string", format = "uuid"),
+                        examples = {
+                                @ExampleObject(
+                                        name = "Example request with correct Id",
+                                        value = "08ae72f7-4d3b-4fb1-bb0b-1aaae6b4a8ed"
+                                ),
+                                @ExampleObject(
+                                        name = "Example request with non-exist Id",
+                                        value = "ed0285f4-4524-40f8-bcf5-6cb23b7f81dd"
+                                ),
+                                @ExampleObject(
+                                        name = "Example request with invalid Id",
+                                        value = "invalidId"
+                                )
+                        }
                 )
         },
         responses = {

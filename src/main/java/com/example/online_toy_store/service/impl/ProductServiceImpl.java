@@ -2,14 +2,12 @@ package com.example.online_toy_store.service.impl;
 
 import com.example.online_toy_store.dto.ProductAfterCreatingDto;
 import com.example.online_toy_store.dto.ProductBeforeCreatingDto;
-import com.example.online_toy_store.dto.ProductNameAndQuantityDto;
 import com.example.online_toy_store.entity.Product;
 import com.example.online_toy_store.entity.Supplier;
 import com.example.online_toy_store.exception.NoProductsFoundException;
 import com.example.online_toy_store.exception.ProductDoesNotExistException;
 import com.example.online_toy_store.exception.errorMessage.ErrorMessage;
 import com.example.online_toy_store.mapper.CreateProductDtoMapper;
-import com.example.online_toy_store.mapper.ProductNameAndQuantityMapper;
 import com.example.online_toy_store.repository.ProductRepository;
 import com.example.online_toy_store.repository.SupplierRepository;
 import com.example.online_toy_store.service.interf.ProductService;
@@ -18,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -26,9 +23,9 @@ import java.util.UUID;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
-    private final ProductNameAndQuantityMapper mapper;
     private final CreateProductDtoMapper createProductDtoMapper;
     private final SupplierRepository supplierRepository;
+
     @Override
     @Transactional
     public Product showProduct(String id) {
@@ -47,44 +44,18 @@ public class ProductServiceImpl implements ProductService {
         return productList;
     }
 
-//    @Override
-//    @Transactional
-//    public ProductNameAndQuantityDto getProductNAQDto(String id) {
-//        Optional<Product> product = productRepository.findById(UUID.fromString(id));
-//        return mapper.toDto(product.get());
-//    }
-
     @Override
     @Transactional
     public ProductAfterCreatingDto createProductDto(ProductBeforeCreatingDto productBeforeCreatingDto) {
         Product product = createProductDtoMapper.toEntity(productBeforeCreatingDto);
         Supplier supplier = supplierRepository.findBySupplierName(productBeforeCreatingDto.getSupplierName());
-        if (supplier == null){
+        if (supplier == null) {
             Supplier newSupplier = createProductDtoMapper.toSupplier((productBeforeCreatingDto));
             Supplier supplier1 = supplierRepository.saveAndFlush(newSupplier);
             product.setSupplier(supplier1);
-        }else {
+        } else {
             product.setSupplier(supplier);
         }
         return createProductDtoMapper.toDto(productRepository.saveAndFlush(product));
     }
-
-//    @Override
-//    @Transactional
-//    public ProductAfterCreatingDto createProductDto(ProductBeforeCreatingDto productBeforeCreatingDto) {
-//        Supplier supplier = supplierRepository.findBySupplierName(productBeforeCreatingDto.getSupplierName());
-//        Product product;
-//        ProductAfterCreatingDto productAfterCreatingDto;
-//        if (supplier == null){
-//            productAfterCreatingDto = createProductDtoMapper
-//                    .toDto(productRepository.saveAndFlush(createProductDtoMapper
-//                            .toEntityWithSupplier(productBeforeCreatingDto)));
-//        }else {
-//            product = createProductDtoMapper.toEntity(productBeforeCreatingDto);
-//            product.setSupplier(supplier);
-//            productAfterCreatingDto = createProductDtoMapper
-//                    .toDto(productRepository.saveAndFlush(product));
-//        }
-//        return productAfterCreatingDto;
-//    }
 }

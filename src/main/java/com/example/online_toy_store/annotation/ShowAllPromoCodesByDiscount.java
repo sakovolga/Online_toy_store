@@ -2,7 +2,10 @@ package com.example.online_toy_store.annotation;
 
 import com.example.online_toy_store.entity.PromoCode;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -22,18 +25,33 @@ import java.lang.annotation.Target;
         summary = "Show all promo codes by discount amount",
         description = "Get a list of promo codes with particular discount amount",
         tags = {"PROMO_CODE"},
+        parameters = {
+                @Parameter(
+                        name = "Discount amount",
+                        description = "Discount amount",
+                        required = true,
+                        in = ParameterIn.PATH,
+                        schema = @Schema(type = "double"),
+                        examples = {
+                                @ExampleObject(
+                                        name = "Existing discount amount",
+                                        value = "30"
+                                ),
+                                @ExampleObject(
+                                        name = "Non-existing discount amount",
+                                        value = "5"
+                                )
+                        }
+                )
+        },
         responses = {
                 @ApiResponse(
                         responseCode = "200",
-                        description = "Required promo codes received",
+                        description = "Required promo codes received or no promo codes found",
                         content = @Content(
                                 mediaType = "application/json",
                                 schema = @Schema(implementation = PromoCode.class)
                         )
-                ),
-                @ApiResponse(
-                        responseCode = "200",
-                        description = "No promo codes found"
                 )
         },
         security = {

@@ -1,8 +1,10 @@
 package com.example.online_toy_store.annotation;
 
+import com.example.online_toy_store.controller.handler.ErrorExtension;
 import com.example.online_toy_store.entity.PromoCode;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -27,12 +29,34 @@ import java.lang.annotation.Target;
                 required = true,
                 content = @Content(
                         mediaType = "application/json",
-                        schema = @Schema(implementation = PromoCode.class)
+                        schema = @Schema(implementation = PromoCode.class),
+                        examples = {
+                                @ExampleObject(name = "Good request",
+                                        value = """
+                                                {
+                                                    "promoName" : "Hot summer discounts",
+                                                    "discountAmount" : 15.5,
+                                                    "startPromoDate" : "2024-08-20T00:00:00",
+                                                    "endPromoDate" : "2024-08-31T00:00:00",
+                                                    "amountOfUsers" : 50,
+                                                    "unusedQuantity" : 50
+                                                }"""),
+                                @ExampleObject(name = "Request with existing promo code name",
+                                        value = """
+                                                {
+                                                    "promoName" : "Spring Surprise",
+                                                    "discountAmount" : 15.5,
+                                                    "startPromoDate" : "2024-08-20T00:00:00",
+                                                    "endPromoDate" : "2024-08-31T00:00:00",
+                                                    "amountOfUsers" : 50,
+                                                    "unusedQuantity" : 50
+                                                }""")
+                        }
                 )
         ),
         responses = {
                 @ApiResponse(
-                        responseCode = "201",
+                        responseCode = "200",
                         description = "The promo code created",
                         content = @Content(
                                 mediaType = "application/json",
@@ -44,7 +68,7 @@ import java.lang.annotation.Target;
                         description = "The promo code already exist",
                         content = @Content(
                                 mediaType = "application/json",
-                                schema = @Schema(implementation = PromoCode.class)
+                                schema = @Schema(implementation = ErrorExtension.class)
                         )
                 )
         },

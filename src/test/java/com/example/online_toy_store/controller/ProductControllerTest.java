@@ -92,21 +92,22 @@ public class ProductControllerTest {
 
     @Test
     void createProductDtoWithExistingSupplierTest() throws Exception {
-        String ProductBeforeCreatingDtoJSON = "{\n" +
-                "    \"name\" : \"Small doll\",\n" +
-                "    \"description\" : \"Small beautifull doll\",\n" +
-                "    \"price\" : \"56.9\",\n" +
-                "    \"availableQuantity\" : \"10\",\n" +
-                "    \"category\" : \"DOLLS\",\n" +
-                "    \"supplierName\" : \"Johnson Enterprises Ltd.\",\n" +
-                "    \"isAvailable\" : \"true\",\n" +
-                "    \"address\" : \"14 Rue de la Republique\",\n" +
-                "    \"city\" : \"LYON\",\n" +
-                "    \"country\" : \"FRANCE\",\n" +
-                "    \"email\" : \"je@nterprises.com\",\n" +
-                "    \"phone\" : \"+33 1 23 45 67 89\",\n" +
-                "    \"postal_code\" : \"12384\"\n" +
-                "}";
+        String ProductBeforeCreatingDtoJSON = """
+                {
+                    "name" : "Small doll",
+                    "description" : "Small beautifull doll",
+                    "price" : "56.9",
+                    "availableQuantity" : "10",
+                    "category" : "DOLLS",
+                    "supplierName" : "Johnson Enterprises Ltd.",
+                    "isAvailable" : "true",
+                    "address" : "14 Rue de la Republique",
+                    "city" : "LYON",
+                    "country" : "FRANCE",
+                    "email" : "je@nterprises.com",
+                    "phone" : "+33 1 23 45 67 89",
+                    "postal_code" : "12384"
+                }""";
 
         Set<Product> productSetBefore = showAllProducts();
         List<Supplier> supplierListBefore = showAllSuppliers();
@@ -124,21 +125,22 @@ public class ProductControllerTest {
 
     @Test
     void createProductDtoWithNonExistSupplierTest() throws Exception {
-        String ProductBeforeCreatingDtoJSON = "{\n" +
-                "    \"name\" : \"Small doll\",\n" +
-                "    \"description\" : \"Small beautifull doll\",\n" +
-                "    \"price\" : \"56.9\",\n" +
-                "    \"availableQuantity\" : \"10\",\n" +
-                "    \"category\" : \"DOLLS\",\n" +
-                "    \"supplierName\" : \"New supplier Name\",\n" +
-                "    \"isAvailable\" : \"true\",\n" +
-                "    \"address\" : \"14 Rue de la Republique\",\n" +
-                "    \"city\" : \"LYON\",\n" +
-                "    \"country\" : \"FRANCE\",\n" +
-                "    \"email\" : \"je@nterprises.com\",\n" +
-                "    \"phone\" : \"+33 1 23 45 67 89\",\n" +
-                "    \"postal_code\" : \"12384\"\n" +
-                "}";
+        String ProductBeforeCreatingDtoJSON = """
+                {
+                    "name" : "Small doll",
+                    "description" : "Small beautifull doll",
+                    "price" : "56.9",
+                    "availableQuantity" : "10",
+                    "category" : "DOLLS",
+                    "supplierName" : "New supplier Name",
+                    "isAvailable" : "true",
+                    "address" : "14 Rue de la Republique",
+                    "city" : "LYON",
+                    "country" : "FRANCE",
+                    "email" : "je@nterprises.com",
+                    "phone" : "+33 1 23 45 67 89",
+                    "postal_code" : "12384"
+                }""";
 
         Set<Product> productSetBefore = showAllProducts();
         List<Supplier> supplierListBefore = showAllSuppliers();
@@ -184,7 +186,8 @@ public class ProductControllerTest {
                         .andReturn();
 
         String productsResultJSON = showAllProductsResult.getResponse().getContentAsString();
-        return objectMapper.readValue(productsResultJSON, new TypeReference<Set<Product>>() {});
+        return objectMapper.readValue(productsResultJSON, new TypeReference<>() {
+        });
     }
 
     List<Supplier> showAllSuppliers() throws Exception {
@@ -196,7 +199,8 @@ public class ProductControllerTest {
                         .andReturn();
 
         String suppliersResultJSON = showAllSuppliersResult.getResponse().getContentAsString();
-        return objectMapper.readValue(suppliersResultJSON, new TypeReference<List<Supplier>>() {});
+        return objectMapper.readValue(suppliersResultJSON, new TypeReference<>() {
+        });
     }
 
 }
