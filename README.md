@@ -2,7 +2,8 @@
 
  There is a prototype of the BackEnd Online Shop's Core Services data.
  
- Data consist of products, orders, order_details, users, users_info, roles, authorities, reviews, suppliers, promocodes.
+ Data consist of products, orders, order_details, users, users_info, roles, 
+ authorities, reviews, suppliers, promocodes.
  ___
  
 ## Database structure
