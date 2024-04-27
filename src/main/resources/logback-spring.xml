@@ -30,7 +30,7 @@
 
             <maxHistory>10</maxHistory>
 
-            <totalSizeCap>1GB</totalSizeCap>
+            <totalSizeCap>10MB</totalSizeCap>
 
         </rollingPolicy>
         <layout class="ch.qos.logback.classic.PatternLayout">
