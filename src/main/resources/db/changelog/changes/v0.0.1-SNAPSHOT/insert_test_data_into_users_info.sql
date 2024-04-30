@@ -4,7 +4,7 @@
 
 insert into users_info (ui_id, user_name, password, address, city, postal_code, email, card_number)
 values
-    (UNHEX('f8d7988476d343d48f2b880ff944e45b'), 'ivan_ivanov', 'ubwuyt!529', 'Musterstrabe 123',
+    (UNHEX('f8d7988476d343d48f2b880ff944e45b'), 'ivan_ivanov', '$2y$10$AymOht7z6iwnV9r8fO/vhOSQTs/UHtE8L/sJfvjt5/9lTt.eIKXhu', 'Musterstrabe 123',
      'DRESDEN', '32415', 'ivanov@gmail.com', '1234 5678 9012 3452'),
     (UNHEX('ef6de8c01d7241cfae4a7498632c6929'), 'petr_petrov', 'ybvmkgf&54091',
      '17 Rue de la Republique', 'PARIS', '76539', 'petrov@gmail.com', '4556 1148 0236 8949'),

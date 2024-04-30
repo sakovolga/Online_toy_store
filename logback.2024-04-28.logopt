@@ -1,0 +1,250 @@
+28.04.2024 17:11:17.196 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
+     2 changesets check sum
+          db/changelog/changes/v0.0.1-SNAPSHOT/insert_test_data_into_roles.sql::9::liquibase was: 9:98b4bc6f65577891cf7276c2f043de38 but is now: 9:12b455ed557acc7e0c50ca8396325997
+          db/changelog/changes/v0.0.1-SNAPSHOT/insert_test_data_into_users_info.sql::12::liquibase was: 9:99623ee6368148939c90d11395d186af but is now: 9:2264df42cdb7b4dbda948171168ef41e
+
+28.04.2024 17:11:17.239 [main] ERROR o.s.b.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
+     2 changesets check sum
+          db/changelog/changes/v0.0.1-SNAPSHOT/insert_test_data_into_roles.sql::9::liquibase was: 9:98b4bc6f65577891cf7276c2f043de38 but is now: 9:12b455ed557acc7e0c50ca8396325997
+          db/changelog/changes/v0.0.1-SNAPSHOT/insert_test_data_into_users_info.sql::12::liquibase was: 9:99623ee6368148939c90d11395d186af but is now: 9:2264df42cdb7b4dbda948171168ef41e
+
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1786)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:312)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1231)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:949)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at com.example.online_toy_store.OnlineToyStoreApplication.main(OnlineToyStoreApplication.java:10)
+Caused by: liquibase.exception.UnexpectedLiquibaseException: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
+     2 changesets check sum
+          db/changelog/changes/v0.0.1-SNAPSHOT/insert_test_data_into_roles.sql::9::liquibase was: 9:98b4bc6f65577891cf7276c2f043de38 but is now: 9:12b455ed557acc7e0c50ca8396325997
+          db/changelog/changes/v0.0.1-SNAPSHOT/insert_test_data_into_users_info.sql::12::liquibase was: 9:99623ee6368148939c90d11395d186af but is now: 9:2264df42cdb7b4dbda948171168ef41e
+
+	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:304)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1833)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782)
+	... 18 common frames omitted
+Caused by: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
+     2 changesets check sum
+          db/changelog/changes/v0.0.1-SNAPSHOT/insert_test_data_into_roles.sql::9::liquibase was: 9:98b4bc6f65577891cf7276c2f043de38 but is now: 9:12b455ed557acc7e0c50ca8396325997
+          db/changelog/changes/v0.0.1-SNAPSHOT/insert_test_data_into_users_info.sql::12::liquibase was: 9:99623ee6368148939c90d11395d186af but is now: 9:2264df42cdb7b4dbda948171168ef41e
+
+	at liquibase.command.CommandScope.execute(CommandScope.java:253)
+	at liquibase.Liquibase.lambda$update$0(Liquibase.java:245)
+	at liquibase.Scope.lambda$child$0(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:195)
+	at liquibase.Scope.child(Scope.java:185)
+	at liquibase.Scope.child(Scope.java:164)
+	at liquibase.Liquibase.runInScope(Liquibase.java:1419)
+	at liquibase.Liquibase.update(Liquibase.java:234)
+	at liquibase.Liquibase.update(Liquibase.java:212)
+	at liquibase.integration.spring.SpringLiquibase.performUpdate(SpringLiquibase.java:343)
+	at liquibase.integration.spring.SpringLiquibase.lambda$afterPropertiesSet$0(SpringLiquibase.java:294)
+	at liquibase.Scope.lambda$child$0(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:195)
+	at liquibase.Scope.child(Scope.java:185)
+	at liquibase.Scope.child(Scope.java:164)
+	at liquibase.Scope.child(Scope.java:252)
+	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:287)
+	... 20 common frames omitted
+Caused by: liquibase.exception.ValidationFailedException: Validation Failed:
+     2 changesets check sum
+          db/changelog/changes/v0.0.1-SNAPSHOT/insert_test_data_into_roles.sql::9::liquibase was: 9:98b4bc6f65577891cf7276c2f043de38 but is now: 9:12b455ed557acc7e0c50ca8396325997
+          db/changelog/changes/v0.0.1-SNAPSHOT/insert_test_data_into_users_info.sql::12::liquibase was: 9:99623ee6368148939c90d11395d186af but is now: 9:2264df42cdb7b4dbda948171168ef41e
+
+	at liquibase.changelog.DatabaseChangeLog.validate(DatabaseChangeLog.java:358)
+	at liquibase.command.core.helpers.DatabaseChangelogCommandStep.run(DatabaseChangelogCommandStep.java:92)
+	at liquibase.command.CommandScope.execute(CommandScope.java:217)
+	... 36 common frames omitted
+28.04.2024 17:11:55.113 [main] WARN  liquibase.changelog - liquibase.statement.core.CreateSequenceStatement is not supported on mysql, but createSequence will still execute
+28.04.2024 17:11:55.119 [main] WARN  liquibase.changelog - liquibase.statement.core.CreateSequenceStatement is not supported on mysql, but createSequence will still execute
+28.04.2024 17:11:55.174 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.suppliers'
+28.04.2024 17:11:55.176 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.products'
+28.04.2024 17:11:55.178 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.promo_codes'
+28.04.2024 17:11:55.180 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.authorities'
+28.04.2024 17:11:55.181 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.roles'
+28.04.2024 17:11:55.183 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.authorities_roles'
+28.04.2024 17:11:55.185 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.users_info'
+28.04.2024 17:11:55.186 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.users_info_roles'
+28.04.2024 17:11:55.189 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.users'
+28.04.2024 17:11:55.190 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.orders'
+28.04.2024 17:11:55.192 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.order_details'
+28.04.2024 17:11:55.193 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.reviews'
+28.04.2024 17:13:16.433 [http-nio-8080-exec-3] WARN  o.s.s.c.b.BCryptPasswordEncoder - Encoded password does not look like BCrypt
+28.04.2024 17:13:44.652 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
+     1 changesets check sum
+          db/changelog/changes/v0.0.1-SNAPSHOT/insert_test_data_into_users_info.sql::12::liquibase was: 9:2264df42cdb7b4dbda948171168ef41e but is now: 9:740aa300f44c6c9e79edb6f72e5a54b8
+
+28.04.2024 17:13:44.681 [main] ERROR o.s.b.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
+     1 changesets check sum
+          db/changelog/changes/v0.0.1-SNAPSHOT/insert_test_data_into_users_info.sql::12::liquibase was: 9:2264df42cdb7b4dbda948171168ef41e but is now: 9:740aa300f44c6c9e79edb6f72e5a54b8
+
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1786)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:312)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1231)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:949)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at com.example.online_toy_store.OnlineToyStoreApplication.main(OnlineToyStoreApplication.java:10)
+Caused by: liquibase.exception.UnexpectedLiquibaseException: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
+     1 changesets check sum
+          db/changelog/changes/v0.0.1-SNAPSHOT/insert_test_data_into_users_info.sql::12::liquibase was: 9:2264df42cdb7b4dbda948171168ef41e but is now: 9:740aa300f44c6c9e79edb6f72e5a54b8
+
+	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:304)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1833)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782)
+	... 18 common frames omitted
+Caused by: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
+     1 changesets check sum
+          db/changelog/changes/v0.0.1-SNAPSHOT/insert_test_data_into_users_info.sql::12::liquibase was: 9:2264df42cdb7b4dbda948171168ef41e but is now: 9:740aa300f44c6c9e79edb6f72e5a54b8
+
+	at liquibase.command.CommandScope.execute(CommandScope.java:253)
+	at liquibase.Liquibase.lambda$update$0(Liquibase.java:245)
+	at liquibase.Scope.lambda$child$0(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:195)
+	at liquibase.Scope.child(Scope.java:185)
+	at liquibase.Scope.child(Scope.java:164)
+	at liquibase.Liquibase.runInScope(Liquibase.java:1419)
+	at liquibase.Liquibase.update(Liquibase.java:234)
+	at liquibase.Liquibase.update(Liquibase.java:212)
+	at liquibase.integration.spring.SpringLiquibase.performUpdate(SpringLiquibase.java:343)
+	at liquibase.integration.spring.SpringLiquibase.lambda$afterPropertiesSet$0(SpringLiquibase.java:294)
+	at liquibase.Scope.lambda$child$0(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:195)
+	at liquibase.Scope.child(Scope.java:185)
+	at liquibase.Scope.child(Scope.java:164)
+	at liquibase.Scope.child(Scope.java:252)
+	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:287)
+	... 20 common frames omitted
+Caused by: liquibase.exception.ValidationFailedException: Validation Failed:
+     1 changesets check sum
+          db/changelog/changes/v0.0.1-SNAPSHOT/insert_test_data_into_users_info.sql::12::liquibase was: 9:2264df42cdb7b4dbda948171168ef41e but is now: 9:740aa300f44c6c9e79edb6f72e5a54b8
+
+	at liquibase.changelog.DatabaseChangeLog.validate(DatabaseChangeLog.java:358)
+	at liquibase.command.core.helpers.DatabaseChangelogCommandStep.run(DatabaseChangelogCommandStep.java:92)
+	at liquibase.command.CommandScope.execute(CommandScope.java:217)
+	... 36 common frames omitted
+28.04.2024 17:14:05.922 [main] WARN  liquibase.changelog - liquibase.statement.core.CreateSequenceStatement is not supported on mysql, but createSequence will still execute
+28.04.2024 17:14:05.930 [main] WARN  liquibase.changelog - liquibase.statement.core.CreateSequenceStatement is not supported on mysql, but createSequence will still execute
+28.04.2024 17:14:05.993 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.suppliers'
+28.04.2024 17:14:05.995 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.products'
+28.04.2024 17:14:05.996 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.promo_codes'
+28.04.2024 17:14:05.998 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.authorities'
+28.04.2024 17:14:05.999 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.roles'
+28.04.2024 17:14:06.000 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.authorities_roles'
+28.04.2024 17:14:06.002 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.users_info'
+28.04.2024 17:14:06.003 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.users_info_roles'
+28.04.2024 17:14:06.004 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.users'
+28.04.2024 17:14:06.006 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.orders'
+28.04.2024 17:14:06.007 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.order_details'
+28.04.2024 17:14:06.009 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.reviews'
+28.04.2024 17:14:33.874 [http-nio-8080-exec-1] WARN  o.s.s.c.b.BCryptPasswordEncoder - Encoded password does not look like BCrypt
+28.04.2024 17:14:48.815 [http-nio-8080-exec-6] WARN  o.s.s.c.b.BCryptPasswordEncoder - Encoded password does not look like BCrypt
+28.04.2024 17:16:12.127 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
+     1 changesets check sum
+          db/changelog/changes/v0.0.1-SNAPSHOT/insert_test_data_into_users_info.sql::12::liquibase was: 9:740aa300f44c6c9e79edb6f72e5a54b8 but is now: 9:2bd51348989312ec7d97ff4f89c03c85
+
+28.04.2024 17:16:12.158 [main] ERROR o.s.b.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
+     1 changesets check sum
+          db/changelog/changes/v0.0.1-SNAPSHOT/insert_test_data_into_users_info.sql::12::liquibase was: 9:740aa300f44c6c9e79edb6f72e5a54b8 but is now: 9:2bd51348989312ec7d97ff4f89c03c85
+
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1786)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:312)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1231)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:949)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at com.example.online_toy_store.OnlineToyStoreApplication.main(OnlineToyStoreApplication.java:10)
+Caused by: liquibase.exception.UnexpectedLiquibaseException: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
+     1 changesets check sum
+          db/changelog/changes/v0.0.1-SNAPSHOT/insert_test_data_into_users_info.sql::12::liquibase was: 9:740aa300f44c6c9e79edb6f72e5a54b8 but is now: 9:2bd51348989312ec7d97ff4f89c03c85
+
+	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:304)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1833)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782)
+	... 18 common frames omitted
+Caused by: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
+     1 changesets check sum
+          db/changelog/changes/v0.0.1-SNAPSHOT/insert_test_data_into_users_info.sql::12::liquibase was: 9:740aa300f44c6c9e79edb6f72e5a54b8 but is now: 9:2bd51348989312ec7d97ff4f89c03c85
+
+	at liquibase.command.CommandScope.execute(CommandScope.java:253)
+	at liquibase.Liquibase.lambda$update$0(Liquibase.java:245)
+	at liquibase.Scope.lambda$child$0(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:195)
+	at liquibase.Scope.child(Scope.java:185)
+	at liquibase.Scope.child(Scope.java:164)
+	at liquibase.Liquibase.runInScope(Liquibase.java:1419)
+	at liquibase.Liquibase.update(Liquibase.java:234)
+	at liquibase.Liquibase.update(Liquibase.java:212)
+	at liquibase.integration.spring.SpringLiquibase.performUpdate(SpringLiquibase.java:343)
+	at liquibase.integration.spring.SpringLiquibase.lambda$afterPropertiesSet$0(SpringLiquibase.java:294)
+	at liquibase.Scope.lambda$child$0(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:195)
+	at liquibase.Scope.child(Scope.java:185)
+	at liquibase.Scope.child(Scope.java:164)
+	at liquibase.Scope.child(Scope.java:252)
+	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:287)
+	... 20 common frames omitted
+Caused by: liquibase.exception.ValidationFailedException: Validation Failed:
+     1 changesets check sum
+          db/changelog/changes/v0.0.1-SNAPSHOT/insert_test_data_into_users_info.sql::12::liquibase was: 9:740aa300f44c6c9e79edb6f72e5a54b8 but is now: 9:2bd51348989312ec7d97ff4f89c03c85
+
+	at liquibase.changelog.DatabaseChangeLog.validate(DatabaseChangeLog.java:358)
+	at liquibase.command.core.helpers.DatabaseChangelogCommandStep.run(DatabaseChangelogCommandStep.java:92)
+	at liquibase.command.CommandScope.execute(CommandScope.java:217)
+	... 36 common frames omitted
+28.04.2024 17:16:35.893 [main] WARN  liquibase.changelog - liquibase.statement.core.CreateSequenceStatement is not supported on mysql, but createSequence will still execute
+28.04.2024 17:16:35.901 [main] WARN  liquibase.changelog - liquibase.statement.core.CreateSequenceStatement is not supported on mysql, but createSequence will still execute
+28.04.2024 17:16:35.958 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.suppliers'
+28.04.2024 17:16:35.960 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.products'
+28.04.2024 17:16:35.963 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.promo_codes'
+28.04.2024 17:16:35.965 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.authorities'
+28.04.2024 17:16:35.966 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.roles'
+28.04.2024 17:16:35.968 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.authorities_roles'
+28.04.2024 17:16:35.969 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.users_info'
+28.04.2024 17:16:35.971 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.users_info_roles'
+28.04.2024 17:16:35.972 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.users'
+28.04.2024 17:16:35.974 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.orders'
+28.04.2024 17:16:35.978 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.order_details'
+28.04.2024 17:16:35.980 [main] WARN  liquibase.executor - Unknown table 'online_toy_store.reviews'
+28.04.2024 18:26:16.403 [HikariPool-1 housekeeper] WARN  c.z.h.p.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h7m40s890ms472µs200ns).
+28.04.2024 18:58:05.237 [HikariPool-1 housekeeper] WARN  c.z.h.p.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=20m57s787ms937µs700ns).

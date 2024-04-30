@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Set;
@@ -40,6 +41,7 @@ class OrderControllerTest {
     private ObjectMapper objectMapper;
 
     @Test
+//    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "CUSTOMER")
     void showOrderByIdPositiveTest() throws Exception {
 
         Order expectedOrder = ExpectedData.returnOrder();
