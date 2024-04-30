@@ -34,8 +34,13 @@ public class OrderController {
 
     @GetAllOrders(path = "/showAllOrders")
     public List<Order> showAllOrders(HttpServletRequest request) {
+<<<<<<< HEAD
 
         System.out.println("******************************");
+=======
+        System.out.println("***********************************************************");
+
+>>>>>>> 459537334812a2c5c9a905745dfbd9786b18ead5
         handleRequest(request);
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();
@@ -47,6 +52,10 @@ public class OrderController {
             System.out.println("USERNAME: " + username);
             System.out.println("PASSWORD: " + password);
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 459537334812a2c5c9a905745dfbd9786b18ead5
         return orderService.showAllOrders();
     }
 
@@ -71,6 +80,15 @@ public class OrderController {
         Cookie[] cookies = request.getCookies();
         if (cookies!= null){
             for (Cookie cookie: cookies){
+                System.out.println("JSESSIONID: " + cookie.getValue());
+            }
+        }
+    }
+
+    private void handleRequest(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        if(cookies !=null) {
+            for (Cookie cookie : cookies) {
                 System.out.println("JSESSIONID: " + cookie.getValue());
             }
         }
