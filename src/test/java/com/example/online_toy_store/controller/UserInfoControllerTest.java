@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -30,6 +31,7 @@ public class UserInfoControllerTest {
     private ObjectMapper objectMapper;
 
     @Test
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "ADMIN")
     void updateUserInfoRolesPositiveTest() throws Exception {
         String id = "08ae72f7-4d3b-4fb1-bb0b-1aaae6b4a8ed";
         String requestBody = "{\"isCustomer\" : true, \"isManager\" : true, \"isSuper_manager\" : true, \"isAdmin\" : false}";
@@ -56,6 +58,7 @@ public class UserInfoControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "ADMIN")
     void updateUserInfoRolesTestExc404() throws Exception{
         String nonExistId = "08ae72f7-4d3b-4fb1-bb0b-1aaae6b4a8e1";
         String requestBody = "{\"isCustomer\" : true, \"isManager\" : true, \"isSuper_manager\" : true, \"isAdmin\" : false}";

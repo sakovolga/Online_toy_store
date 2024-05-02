@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -34,6 +35,7 @@ class PromoCodeControllerTest {
     ObjectMapper objectMapper;
 
     @Test
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "CUSTOMER")
     void showPromoCodeByNamePositiveTest() throws Exception {
         PromoCode expectedPromoCode = ExpectedData.returnPromo();
 
@@ -50,6 +52,7 @@ class PromoCodeControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "CUSTOMER")
     void showPromoCodeByNameTestWithException() throws Exception{
 
         mockMvc.perform(MockMvcRequestBuilders.get("/promo/showByName/Non-existent name"))
@@ -59,6 +62,7 @@ class PromoCodeControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "SUPER_MANAGER")
     void createPromoCodePositiveTest() throws Exception{
 
         String promoCodeJSON = """
@@ -85,6 +89,7 @@ class PromoCodeControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "SUPER_MANAGER")
     void createPromoCodeTestWithException() throws Exception{
         String promoCodeJSON = """
                 {
@@ -105,6 +110,7 @@ class PromoCodeControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "SUPER_MANAGER")
     void showAllPromoCodesPositiveTest() throws Exception{
         Set<PromoCode> expectedPromoCodeSet = ExpectedData.returnAllPromoCodes();
         Set<PromoCode> actualPromoCodeSet = showAll();
@@ -112,6 +118,7 @@ class PromoCodeControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "SUPER_MANAGER")
     void deletePromoCodeByNamePositiveTest() throws Exception{
 
         String promoCodeJSON = """
@@ -138,9 +145,8 @@ class PromoCodeControllerTest {
         Assertions.assertEquals(promoCodeListBefore.size() - 1, promoCodeListAfter.size());
     }
 
-
-    //Нельзя удалить, потому что не существует
     @Test
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "SUPER_MANAGER")
     void deletePromoCodeByNameTestWithException() throws Exception{
 
         mockMvc.perform(MockMvcRequestBuilders.delete("/promo/delete/Non-existing promo code name"))
@@ -149,8 +155,8 @@ class PromoCodeControllerTest {
                 .andExpect(content().json("{\"message\":\"Non-existing promo code name promo code not found\",\"statusCode\":404}"));
     }
 
-    //Нельзя удалить, потому что на него ссылается другой обект
     @Test
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "SUPER_MANAGER")
     void deletePromoCodeByNameTestWithDataIntegrityViolationException() throws Exception{
 
         mockMvc.perform(MockMvcRequestBuilders.delete("/promo/delete/Spring Surprise"))
@@ -160,6 +166,7 @@ class PromoCodeControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "MANAGER")
     void showAllPromoCodesByDiscountPositiveTest() throws Exception{
 
         List<PromoCode> expectedPromoCodeList = List.of(ExpectedData.returnPromo());
@@ -179,6 +186,7 @@ class PromoCodeControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "MANAGER")
     void showAllPromoCodesByDiscountTestWithException() throws Exception{
 
         mockMvc.perform(MockMvcRequestBuilders.get("/promo/showAllByDiscount/40"))

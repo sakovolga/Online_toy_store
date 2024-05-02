@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -41,7 +42,7 @@ class OrderControllerTest {
     private ObjectMapper objectMapper;
 
     @Test
-//    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "CUSTOMER")
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "MANAGER")
     void showOrderByIdPositiveTest() throws Exception {
 
         Order expectedOrder = ExpectedData.returnOrder();
@@ -60,6 +61,7 @@ class OrderControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "MANAGER")
     void showOrderByIdTestWithException() throws Exception {
 
         String nonExistentID = "4eab43a7-0385-48f3-bfd3-4529a2bcfd52";
@@ -72,6 +74,7 @@ class OrderControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "MANAGER")
     void showOrderByIdTestWithFailedValidation() throws Exception{
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/order/showOrder/invalidID"))
@@ -82,6 +85,7 @@ class OrderControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "CUSTOMER")
     void showAllOrdersTest() throws Exception {
         Set<Order> expectedOrderSet = ExpectedData.returnAllOrders();
         Set<Order> actualOrderSet = showAll();
@@ -89,6 +93,7 @@ class OrderControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "CUSTOMER")
     void createOrderTest() throws Exception {
 
         Order order = new Order();
@@ -112,6 +117,7 @@ class OrderControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "CUSTOMER")
     void deleteOrderTestPositive() throws Exception {
 
         Set<Order> orderSetBefore = showAll();
@@ -125,6 +131,7 @@ class OrderControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "CUSTOMER")
     void deleteOrderTestWithException() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.delete("/order/delete/6b4e8a7c-0f64-4fd8-a37f-5c0a072d14a3"))
@@ -135,6 +142,7 @@ class OrderControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "CUSTOMER")
     void createOrderDtoPositiveTest() throws Exception {
         String json = """
                 {
@@ -166,6 +174,7 @@ class OrderControllerTest {
     }
 
     @ParameterizedTest
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "CUSTOMER")
     @ValueSource(strings = {
             "testdata/orderIncorrectQuantityOfProduct.json",
             "testdata/orderInvalidProductId.json",
@@ -184,6 +193,7 @@ class OrderControllerTest {
     }
 
     @ParameterizedTest
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "CUSTOMER")
     @ValueSource(strings = {
             "testdata/orderInvalidPromoName.json"
 
