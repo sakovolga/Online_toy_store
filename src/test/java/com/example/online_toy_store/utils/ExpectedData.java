@@ -144,7 +144,7 @@ public class ExpectedData {
 
         Role role1 = new Role();
         role1.setRId(UUID.fromString("e8e47c95-84bb-4262-819f-7eace92d5b7b"));
-        role1.setRoleName("customer");
+        role1.setRoleName("ROLE_CUSTOMER");
         Set<Role> roleSet = Set.of(role1);
         userInfo.setRoles(roleSet);
 

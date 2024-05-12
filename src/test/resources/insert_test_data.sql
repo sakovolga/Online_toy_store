@@ -55,10 +55,10 @@ values
 
 insert into roles (r_id, role_name)
 values
-    (X'e8e47c9584bb4262819f7eace92d5b7b', 'customer'),
-    (X'1c7e315b38e14e899b5640c5098d3b8f', 'manager'),
-    (X'ba26b7c508cb46c5bbf035203e269306', 'super manager'),
-    (X'2057a26e3d3e4e8e84bcd3b9002de4f3', 'admin');
+    (X'e8e47c9584bb4262819f7eace92d5b7b', 'ROLE_CUSTOMER'),
+    (X'1c7e315b38e14e899b5640c5098d3b8f', 'ROLE_MANAGER'),
+    (X'ba26b7c508cb46c5bbf035203e269306', 'ROLE_SUPER_MANAGER'),
+    (X'2057a26e3d3e4e8e84bcd3b9002de4f3', 'ROLE_ADMIN');
 
 
 insert into authorities_roles (a_id, r_id)

@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -47,6 +48,8 @@ public class UserControllerTest {
     private ObjectMapper objectMapper;
 
     @Test
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "ADMIN")
+
     void showUserTestPositive() throws Exception {
 
         User user = ExpectedData.returnUser();
@@ -76,6 +79,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "ADMIN")
     void showUserTestNegative() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/user/showUser/1b4a432d-1ec9-4141-ace1-1d6ed2e3de00"))
                 .andExpect(status().isNotFound())
@@ -84,6 +88,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "SUPER_MANAGER")
     void getTopUsersPositiveTest() throws Exception {
         List<UserDto> userDtoList = ExpectedData.returnReport();
 
@@ -100,6 +105,7 @@ public class UserControllerTest {
     }
 
     @ParameterizedTest
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "SUPER_MANAGER")
     @ValueSource(strings = {"/user/getReport/099/2024/GERMANY",
             "/user/getReport/02/yyyy/GERMANY",
             "/user/getReport/02/2024/NON-EXIST COUNTY"})
@@ -110,6 +116,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "ADMIN")
     void CreateUserDtoPositiveTest() throws Exception {
         UserBeforeCreatingDto userBeforeCreatingDto = ExpectedData.returnUserBeforeCreatingDto();
 
@@ -137,14 +144,15 @@ public class UserControllerTest {
         }
         long count = userInfoVasia.getRoles().stream()
                 .map(Role::getRoleName)
-                .filter(roleName -> Objects.equals(roleName, "customer"))
+                .filter(roleName -> Objects.equals(roleName, "ROLE_CUSTOMER"))
                 .count();
-        Assertions.assertTrue(userInfoVasia.getRoles().size() == 1 && count == 1);
-
         Assertions.assertTrue(vasiaFound);
+
+        Assertions.assertTrue(userInfoVasia.getRoles().size() == 1 && count == 1);
     }
 
     @ParameterizedTest
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "ADMIN")
     @ValueSource(strings = {
             "testdata/userExistingEmail.json",
             "testdata/userExistingName.json",

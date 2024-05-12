@@ -14,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -43,6 +44,7 @@ public class ProductControllerTest {
     private ObjectMapper objectMapper;
 
     @Test
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "CUSTOMER")
     void showProductTestPositive() throws Exception{
         Product expectedProduct = ExpectedData.returnProduct();
 
@@ -60,6 +62,7 @@ public class ProductControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "CUSTOMER")
     void showProductWithExceptionTest() throws Exception{
         String nonExistentID = "4eab43a7-0385-48f3-bfd3-4529a2bcfd52";
 
@@ -71,6 +74,7 @@ public class ProductControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "CUSTOMER")
     void showProductWithNotValidUUIDTest() throws Exception{
         String invalidUUID = "invalidUUID";
 
@@ -83,6 +87,7 @@ public class ProductControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "SUPER_MANAGER")
     void showAllProductsTest () throws Exception{
         Set<Product> expectedProductSet = ExpectedData.returnAllProducts();
 
@@ -91,6 +96,7 @@ public class ProductControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "SUPER_MANAGER")
     void createProductDtoWithExistingSupplierTest() throws Exception {
         String ProductBeforeCreatingDtoJSON = """
                 {
@@ -124,6 +130,7 @@ public class ProductControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "SUPER_MANAGER")
     void createProductDtoWithNonExistSupplierTest() throws Exception {
         String ProductBeforeCreatingDtoJSON = """
                 {
@@ -157,6 +164,7 @@ public class ProductControllerTest {
     }
 
     @ParameterizedTest
+    @WithMockUser(username = "ivan_ivanov", password = "529", roles = "SUPER_MANAGER")
     @ValueSource(strings = {
             "testdata/productWithIncorrectCategory.json",
             "testdata/productWithIncorrectCity.json",

@@ -17,4 +17,6 @@ public interface  UserRepository extends JpaRepository<User, UUID> {
     Optional<User> findById(@Nonnull UUID id);
 
     List<User> findAllByCountry(Country country);
+
+    User findUserByUserInfoAddress(String address);
 }
