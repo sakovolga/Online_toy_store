@@ -12,10 +12,15 @@ import com.example.online_toy_store.exception.errorMessage.ErrorMessage;
 import com.example.online_toy_store.mapper.CreateUserMapper;
 import com.example.online_toy_store.mapper.GetTopUsersMapper;
 import com.example.online_toy_store.repository.OrderRepository;
+import com.example.online_toy_store.repository.RoleRepository;
 import com.example.online_toy_store.repository.UserRepository;
 import com.example.online_toy_store.service.interf.UserServices;
 import com.example.online_toy_store.util.MapperUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,16 +28,18 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class UserServicesImpl implements UserServices {
+public class UserServicesImpl implements UserServices, UserDetailsService {
 
     private final UserRepository userRepository;
     private final OrderRepository orderRepository;
     private final MapperUtil mapperUtil;
     private final GetTopUsersMapper getTopUsersMapper;
     private final CreateUserMapper createUserMapper;
+    private final RoleRepository roleRepository;
 
     @Override
     @Transactional
@@ -69,5 +76,23 @@ public class UserServicesImpl implements UserServices {
         return userRepository.findAll();
     }
 
+    @Override
+    public User showByUserInfo_UserName(String username) {
+        return userRepository.findByUserInfo_UserName(username);
+    }
 
+    @Override
+    @Transactional
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUserInfo_UserName(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        return new org.springframework.security.core.userdetails.User(
+                user.getUserInfo().getUserName(),
+                user.getUserInfo().getPassword(),
+                user.getUserInfo().getRoles().stream()
+                        .map(role -> new SimpleGrantedAuthority(role.getRoleName()))
+                        .collect(Collectors.toList()));
+    }
 }

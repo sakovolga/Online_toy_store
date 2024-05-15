@@ -12,4 +12,6 @@ public interface UserInfoService {
     UserInfoRolesResponse updateUserInfo(String uiId, UserInfoUpdateRolesDto userInfoUpdateRolesDto);
 
     UserInfo showUserInfo(String id);
+
+    UserInfo showByUserName(String name);
 }

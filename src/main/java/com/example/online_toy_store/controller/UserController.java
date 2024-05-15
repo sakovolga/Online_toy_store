@@ -10,11 +10,9 @@ import com.example.online_toy_store.dto.UserReportDtoAfter;
 import com.example.online_toy_store.entity.User;
 import com.example.online_toy_store.service.interf.UserServices;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -44,5 +42,10 @@ public class UserController {
     @ShowAllUsers(path = "/showAll")
     public List<User> showAll(){
         return userServices.showAll();
+    }
+
+    @GetMapping("/info")
+    public String userData(Principal principal){
+        return principal.getName();
     }
 }

@@ -15,4 +15,6 @@ public interface UserServices {
     UserCreatedDto createUser(UserBeforeCreatingDto userBeforeCreatingDto);
 
     List<User> showAll();
+
+    User showByUserInfo_UserName(String username);
 }

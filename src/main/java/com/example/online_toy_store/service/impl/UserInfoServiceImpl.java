@@ -46,4 +46,13 @@ public class UserInfoServiceImpl implements UserInfoService {
         return userInfoRepository.findById(UUID.fromString(id))
                 .orElseThrow(() -> new UserDoesNotExistException(ErrorMessage.USER_DOES_NOT_EXIST));
     }
+
+    @Override
+    public UserInfo showByUserName(String name) {
+        Optional<UserInfo> optionalUserInfo = userInfoRepository.findByUserName(name);
+        if (optionalUserInfo.isEmpty()){
+            throw new UserDoesNotExistException(ErrorMessage.USER_DOES_NOT_EXIST);
+        }
+        return optionalUserInfo.get();
+    }
 }

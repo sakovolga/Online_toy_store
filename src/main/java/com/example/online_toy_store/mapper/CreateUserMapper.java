@@ -6,7 +6,6 @@ import com.example.online_toy_store.entity.Role;
 import com.example.online_toy_store.entity.User;
 import com.example.online_toy_store.entity.UserInfo;
 import com.example.online_toy_store.entity.enums.City;
-import com.example.online_toy_store.util.PasswordHashing;
 import org.mapstruct.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -36,7 +35,6 @@ public interface CreateUserMapper {
         UserInfo userInfo = new UserInfo();
         userInfo.setUserName(userBeforeCreatingDto.getUserName());
         userInfo.setPassword(new BCryptPasswordEncoder().encode(userBeforeCreatingDto.getPassword()));
-//        userInfo.setPassword(PasswordHashing.hashPassword(userBeforeCreatingDto.getPassword()));
         userInfo.setAddress(userBeforeCreatingDto.getAddress());
         userInfo.setCity(City.valueOf(userBeforeCreatingDto.getCity()));
         userInfo.setPostalCode(userBeforeCreatingDto.getPostalCode());

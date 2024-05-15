@@ -1,51 +1,47 @@
-//package com.example.online_toy_store.configuration;
+//package com.example.online_toy_store.config;
 //
-//import com.example.online_toy_store.security.UserDetailsServiceImpl;
+//import com.example.online_toy_store.security.jwt.JwtTokenProvider;
 //import lombok.RequiredArgsConstructor;
-//
+//import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.context.annotation.Bean;
 //import org.springframework.context.annotation.Configuration;
-//import org.springframework.security.authentication.AuthenticationProvider;
-//import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+//import org.springframework.security.authentication.AuthenticationManager;
 //import org.springframework.security.config.Customizer;
+//import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 //import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 //import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-//
-//import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 //import org.springframework.security.config.http.SessionCreationPolicy;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-//import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 //import org.springframework.security.web.SecurityFilterChain;
-//import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 //
 //import static com.example.online_toy_store.security.securityUtil.AuthorityList.*;
-//import static org.springframework.security.config.Customizer.withDefaults;
+//
 //
 //@Configuration
 //@EnableWebSecurity
-//@RequiredArgsConstructor
-//public class SecurityConfig {
+//public class SecurityConfig{
 //
-//    private final UserDetailsServiceImpl userDetailsService;
+//    private final JwtTokenProvider jwtTokenProvider;
 //
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
+//    private static final String ADMIN_ENDPOINT = "/api/v1/admin/**";
+//    private static final String LOGIN_ENDPOINT = "/api/v1/auth/login";
+//
+//    @Autowired
+//    public SecurityConfig(JwtTokenProvider jwtTokenProvider) {
+//        this.jwtTokenProvider = jwtTokenProvider;
 //    }
 //
 //    @Bean
-//    public AuthenticationProvider getAuthenticationProvider() {
-//        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-//        provider.setUserDetailsService(userDetailsService);
-//        provider.setPasswordEncoder(passwordEncoder());
-//        return provider;
+//    public AuthenticationManager authenticationManagerBean() throws Exception {
+//        return authenticationManagerBean();
 //    }
+//
 //
 //    @Bean
 //    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 //        http
-//                .cors(AbstractHttpConfigurer::disable)
-//                .csrf(AbstractHttpConfigurer::disable)
+//                .cors.disable
+//                .csrf.disable
 //                .authorizeHttpRequests(auth ->
 //                        auth
 //                                .requestMatchers(CUSTOMER_LIST).hasRole(CUSTOMER)
@@ -61,4 +57,3 @@
 //        return http.build();
 //    }
 //}
-//

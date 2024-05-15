@@ -23,3 +23,7 @@ spring:
   h2:
     console:
       enabled: true
+
+jwt:
+  secret: a5f11ec8520dc165b59e4e2da5c848aff4a292cfe7f7b7c86d268532f2c3e088
+  lifetime: 30m
