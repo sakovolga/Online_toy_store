@@ -133,6 +133,3 @@
 | amount_of_users  | int          | Maximum number of customers who can take advantage of the discount |
 | unused_quantity  | int          | Number of promo code units available for use                       |
 
-
-
-
