@@ -60,39 +60,5 @@ public class SecurityConfig {
                 .formLogin(Customizer.withDefaults());
         return http.build();
     }
-
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http
-//                .cors(AbstractHttpConfigurer::disable)//
-//                .csrf(AbstractHttpConfigurer::disable)
-//                .authorizeHttpRequests(a -> a
-//                        .requestMatchers(SWAGGER_LIST).permitAll()
-//                        .requestMatchers(USER_LIST).hasRole("USER")
-//                        .requestMatchers("/customer/deleteCustomer/**").hasRole("ADMIN")
-//                        .anyRequest().authenticated())
-//                .httpBasic(withDefaults())
-//                .formLogin(withDefaults())
-//                .logout(logoutPage -> logoutPage.logoutSuccessUrl("/"))
-//                .sessionManagement(sessionManagement ->
-//                        sessionManagement
-//                                .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//                .authenticationProvider(authenticationProvider())
-//                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-//        return http.build();
-//    }
-
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http
-//                .authorizeHttpRequests((authz) -> authz
-//                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
-//                        .requestMatchers("/api/user/**").hasRole("USER")
-//                        .anyRequest().authenticated()
-//                );
-//        return http.build();
-//    }
-
-
 }
 
