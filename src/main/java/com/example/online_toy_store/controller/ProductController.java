@@ -22,6 +22,10 @@ public class ProductController {
 
     private final ProductService productService;
 
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
+
     @GetProduct(path = "/showProduct/{id}")
     public Product showProductById(@PathVariable(name = "id") String id){
         return productService.showProduct(id);

@@ -18,9 +18,7 @@ public class UuidTimeSequenceGenerator implements IdentifierGenerator {
     }
     private UUID concatUUIDAndTime(long currTimeMillis, UUID uuid) {
         String millisHex = Long.toHexString(currTimeMillis);
-        // Преобразование UUID в строку без дефисов и сокращение до первых 16 символов
         String uuidStr = uuid.toString().replace("-", "").substring(0, 16);
-        // Форматирование строки для обеспечения фиксированной длины
         String concatenated = String.format("%016x%s", Long.parseLong(millisHex, 16), uuidStr);
         String concatenatedWithDashes = concatenated.substring(0, 8) + "-" +
                 concatenated.substring(8, 12) + "-" +

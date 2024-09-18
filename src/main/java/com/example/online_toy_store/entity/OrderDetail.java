@@ -12,8 +12,6 @@ import java.util.UUID;
 @Entity
 @Table(name = "order_details")
 @NoArgsConstructor
-@Getter
-@Setter
 public class OrderDetail {
 
     @Id
@@ -36,6 +34,46 @@ public class OrderDetail {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id", referencedColumnName = "p_id")
     private Product product;
+
+    public UUID getOdId() {
+        return odId;
+    }
+
+    public void setOdId(UUID odId) {
+        this.odId = odId;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getOrderComment() {
+        return orderComment;
+    }
+
+    public void setOrderComment(String orderComment) {
+        this.orderComment = orderComment;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -17,8 +17,6 @@ import java.util.UUID;
 @Entity
 @Table(name = "orders")
 @NoArgsConstructor
-@Getter
-@Setter
 public class Order {
     @Id
     @GeneratedValue(generator = "UUID")
@@ -44,6 +42,54 @@ public class Order {
 
     @OneToMany(mappedBy = "order", orphanRemoval = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<OrderDetail> orderDetails;
+
+    public UUID getoId() {
+        return oId;
+    }
+
+    public void setoId(UUID oId) {
+        this.oId = oId;
+    }
+
+    public LocalDateTime getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(LocalDateTime orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public PromoCode getPromoCode() {
+        return promoCode;
+    }
+
+    public void setPromoCode(PromoCode promoCode) {
+        this.promoCode = promoCode;
+    }
+
+    public Set<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(Set<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
+    }
 
     @Override
     public boolean equals(Object o) {

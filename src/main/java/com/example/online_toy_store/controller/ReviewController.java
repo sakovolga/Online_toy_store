@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/review")
-@RequiredArgsConstructor
 public class ReviewController {
 
     private final ReviewService reviewService;
+
+    public ReviewController(ReviewService reviewService) {
+        this.reviewService = reviewService;
+    }
 
     @ShowReviewById(path = "/showReview/{id}")
     public Review showReviewById(@PathVariable(name = "id") String id){

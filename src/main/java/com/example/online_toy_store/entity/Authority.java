@@ -53,4 +53,28 @@ public class Authority {
                 ", authorityName='" + authorityName + '\'' +
                 '}';
     }
+
+    public UUID getaId() {
+        return aId;
+    }
+
+    public void setaId(UUID aId) {
+        this.aId = aId;
+    }
+
+    public String getAuthorityName() {
+        return authorityName;
+    }
+
+    public void setAuthorityName(String authorityName) {
+        this.authorityName = authorityName;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 }

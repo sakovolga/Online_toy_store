@@ -17,9 +17,6 @@ import java.util.UUID;
 @Entity
 @Table(name = "users")
 @NoArgsConstructor
-@Getter
-@Setter
-
 public class User {
 
     @Id
@@ -52,6 +49,70 @@ public class User {
     @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<Review> userReviews;
+
+    public UUID getuID() {
+        return uID;
+    }
+
+    public void setuID(UUID uID) {
+        this.uID = uID;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
+
+    public Set<Order> getUserOrders() {
+        return userOrders;
+    }
+
+    public void setUserOrders(Set<Order> userOrders) {
+        this.userOrders = userOrders;
+    }
+
+    public Set<Review> getUserReviews() {
+        return userReviews;
+    }
+
+    public void setUserReviews(Set<Review> userReviews) {
+        this.userReviews = userReviews;
+    }
 
     @Override
     public boolean equals(Object o) {

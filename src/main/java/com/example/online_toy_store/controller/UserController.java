@@ -19,10 +19,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
-@RequiredArgsConstructor
 public class UserController {
 
     private final UserServices userServices;
+
+    public UserController(UserServices userServices) {
+        this.userServices = userServices;
+    }
 
     @ShowUserById(path = "/showUser/{id}")
     public User showUserById(@PathVariable(name = "id") String id) {

@@ -10,10 +10,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/promo")
-@RequiredArgsConstructor
 public class PromoCodeController {
 
     private final PromoCodeService promoCodeService;
+
+    public PromoCodeController(PromoCodeService promoCodeService) {
+        this.promoCodeService = promoCodeService;
+    }
 
     @ShowPromoCodeByName(path = "/showByName/{name}")
     public PromoCode showPromoCodeByName(@PathVariable(name = "name") String name) {

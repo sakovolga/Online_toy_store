@@ -17,10 +17,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/userInfo")
-@RequiredArgsConstructor
 public class UserInfoController {
 
     private final UserInfoService userInfoService;
+
+    public UserInfoController(UserInfoService userInfoService) {
+        this.userInfoService = userInfoService;
+    }
+
     @ShowAllUsersInfo(path = "/showAll")
     public List<UserInfo> showAll(){
         return userInfoService.showAll();

@@ -13,10 +13,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/supplier")
-@RequiredArgsConstructor
 public class SupplierController {
 
     private final SupplierService supplierService;
+
+    public SupplierController(SupplierService supplierService) {
+        this.supplierService = supplierService;
+    }
 
     @ResponseStatus(HttpStatus.CREATED)
     @CreateSupplier(path = "/new")

@@ -13,8 +13,6 @@ import java.util.UUID;
 @Entity
 @Table(name = "promo_codes")
 @NoArgsConstructor
-@Getter
-@Setter
 public class PromoCode {
 
     @Id
@@ -44,6 +42,70 @@ public class PromoCode {
     @JsonBackReference
     @OneToMany(mappedBy = "promoCode", fetch = FetchType.LAZY)
     private Set<Order> promoOrders;
+
+    public UUID getPcId() {
+        return pcId;
+    }
+
+    public void setPcId(UUID pcId) {
+        this.pcId = pcId;
+    }
+
+    public String getPromoName() {
+        return promoName;
+    }
+
+    public void setPromoName(String promoName) {
+        this.promoName = promoName;
+    }
+
+    public double getDiscountAmount() {
+        return discountAmount;
+    }
+
+    public void setDiscountAmount(double discountAmount) {
+        this.discountAmount = discountAmount;
+    }
+
+    public LocalDateTime getStartPromoDate() {
+        return startPromoDate;
+    }
+
+    public void setStartPromoDate(LocalDateTime startPromoDate) {
+        this.startPromoDate = startPromoDate;
+    }
+
+    public LocalDateTime getEndPromoDate() {
+        return endPromoDate;
+    }
+
+    public void setEndPromoDate(LocalDateTime endPromoDate) {
+        this.endPromoDate = endPromoDate;
+    }
+
+    public int getAmountOfUsers() {
+        return amountOfUsers;
+    }
+
+    public void setAmountOfUsers(int amountOfUsers) {
+        this.amountOfUsers = amountOfUsers;
+    }
+
+    public int getUnusedQuantity() {
+        return unusedQuantity;
+    }
+
+    public void setUnusedQuantity(int unusedQuantity) {
+        this.unusedQuantity = unusedQuantity;
+    }
+
+    public Set<Order> getPromoOrders() {
+        return promoOrders;
+    }
+
+    public void setPromoOrders(Set<Order> promoOrders) {
+        this.promoOrders = promoOrders;
+    }
 
     @Override
     public boolean equals(Object o) {

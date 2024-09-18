@@ -15,8 +15,6 @@ import java.util.UUID;
 @Entity
 @Table(name = "roles")
 @NoArgsConstructor
-@Getter
-@Setter
 public class Role {
 
     @Id
@@ -28,14 +26,44 @@ public class Role {
     @Column(name = "role_name")
     private String roleName;
 
-//    @JsonBackReference
     @JsonIgnore
     @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
     private Set<UserInfo> users;
 
-//    @JsonBackReference
     @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
     private Set<Authority> authorities;
+
+    public UUID getrId() {
+        return rId;
+    }
+
+    public void setrId(UUID rId) {
+        this.rId = rId;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public Set<UserInfo> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<UserInfo> users) {
+        this.users = users;
+    }
+
+    public Set<Authority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Set<Authority> authorities) {
+        this.authorities = authorities;
+    }
 
     @Override
     public boolean equals(Object o) {

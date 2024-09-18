@@ -8,12 +8,7 @@ import com.example.online_toy_store.service.interf.OrderService;
 import com.example.online_toy_store.validation.UuidChecker;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,10 +17,13 @@ import java.util.List;
 @Validated
 @RestController
 @RequestMapping("/order")
-@RequiredArgsConstructor
 public class OrderController {
 
     private final OrderService orderService;
+
+    public OrderController(OrderService orderService) {
+        this.orderService = orderService;
+    }
 
     @GetOrderByID(path = "/showOrder/{id}")
     public Order showOrderById(@PathVariable(name = "id") @UuidChecker String id) {
@@ -34,21 +32,6 @@ public class OrderController {
 
     @GetAllOrders(path = "/showAllOrders")
     public List<Order> showAllOrders(HttpServletRequest request) {
-
-
-//        System.out.println("******************************");
-//        handleRequest(request);
-//        SecurityContext securityContext = SecurityContextHolder.getContext();
-//        Authentication authentication = securityContext.getAuthentication();
-//
-//        Object principal = authentication.getPrincipal();
-//        if (principal instanceof UserDetails) {
-//            String username = ((UserDetails) principal).getUsername();
-//            String password = ((UserDetails) principal).getPassword();
-//            System.out.println("USERNAME: " + username);
-//            System.out.println("PASSWORD: " + password);
-//        }
-
         return orderService.showAllOrders();
     }
 
@@ -77,13 +60,4 @@ public class OrderController {
             }
         }
     }
-
-//    private void handleRequest(HttpServletRequest request) {
-//        Cookie[] cookies = request.getCookies();
-//        if(cookies !=null) {
-//            for (Cookie cookie : cookies) {
-//                System.out.println("JSESSIONID: " + cookie.getValue());
-//            }
-//        }
-//    }
 }

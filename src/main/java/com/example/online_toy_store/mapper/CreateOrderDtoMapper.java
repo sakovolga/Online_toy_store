@@ -41,7 +41,7 @@ public interface CreateOrderDtoMapper {
         orderDetail.setOrderComment(orderDetailDto.getOrderComment());
         orderDetail.setQuantity(Integer.parseInt(orderDetailDto.getQuantity()));
         Product product = new Product();
-        product.setPId(UUID.fromString(orderDetailDto.getProductId()));
+        product.setpId(UUID.fromString(orderDetailDto.getProductId()));
         orderDetail.setProduct(product);
         return orderDetail;
     }
@@ -52,7 +52,7 @@ public interface CreateOrderDtoMapper {
         order.setOrderStatus(OrderStatus.PROCESSING);
         order.setOrderDetails(mapToOrderDetails(orderDtoBefore));
         User user = new User();
-        user.setUID(UUID.fromString(orderDtoBefore.getUserId()));
+        user.setuID(UUID.fromString(orderDtoBefore.getUserId()));
         order.setUser(user);
     }
 
