@@ -42,7 +42,7 @@ public interface CreateUserMapper {
         userInfo.setEmail(userBeforeCreatingDto.getEmail());
         userInfo.setCardNumber(userBeforeCreatingDto.getCardNumber());
         Role role = new Role();
-        role.setRId(UUID.fromString("e8e47c95-84bb-4262-819f-7eace92d5b7b"));
+        role.setrId(UUID.fromString("e8e47c95-84bb-4262-819f-7eace92d5b7b"));
         userInfo.setRoles(Set.of(role));
         user.setUserInfo(userInfo);
         user.setCreatedAt(LocalDateTime.now());

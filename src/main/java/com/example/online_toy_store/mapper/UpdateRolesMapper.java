@@ -17,20 +17,20 @@ import java.util.UUID;
 public interface UpdateRolesMapper {
     default UserInfo toEntity(String id, UserInfoUpdateRolesDto userInfoUpdateRolesDto){
         UserInfo userInfo = new UserInfo();
-        userInfo.setUID(UUID.fromString(id));
+        userInfo.setuID(UUID.fromString(id));
         Set<Role> roleSet = new HashSet<>();
         Role customer = new Role();
-        customer.setRId(UUID.fromString("e8e47c95-84bb-4262-819f-7eace92d5b7b"));
+        customer.setrId(UUID.fromString("e8e47c95-84bb-4262-819f-7eace92d5b7b"));
         Role manager = new Role();
-        manager.setRId(UUID.fromString("1c7e315b-38e1-4e89-9b56-40c5098d3b8f"));
+        manager.setrId(UUID.fromString("1c7e315b-38e1-4e89-9b56-40c5098d3b8f"));
         Role super_manager = new Role();
-        super_manager.setRId(UUID.fromString("ba26b7c5-08cb-46c5-bbf0-35203e269306"));
+        super_manager.setrId(UUID.fromString("ba26b7c5-08cb-46c5-bbf0-35203e269306"));
         Role admin = new Role();
-        admin.setRId(UUID.fromString("2057a26e-3d3e-4e8e-84bc-d3b9002de4f3"));
-        if (userInfoUpdateRolesDto.getIsCustomer()) roleSet.add(customer);
-        if (userInfoUpdateRolesDto.getIsManager()) roleSet.add(manager);
-        if (userInfoUpdateRolesDto.getIsSuper_manager()) roleSet.add(super_manager);
-        if (userInfoUpdateRolesDto.getIsAdmin()) roleSet.add(admin);
+        admin.setrId(UUID.fromString("2057a26e-3d3e-4e8e-84bc-d3b9002de4f3"));
+        if (userInfoUpdateRolesDto.getCustomer()) roleSet.add(customer);
+        if (userInfoUpdateRolesDto.getManager()) roleSet.add(manager);
+        if (userInfoUpdateRolesDto.getSuper_manager()) roleSet.add(super_manager);
+        if (userInfoUpdateRolesDto.getAdmin()) roleSet.add(admin);
         userInfo.setRoles(roleSet);
         return userInfo;
     }

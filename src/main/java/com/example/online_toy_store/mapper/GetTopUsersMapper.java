@@ -33,7 +33,7 @@ public interface GetTopUsersMapper {
 
     default UserDto mapToUserDto(User user){
         UserDto userDto = new UserDto();
-        userDto.setUserId(String.valueOf(user.getUID()));
+        userDto.setUserId(String.valueOf(user.getuID()));
         userDto.setFirstName(user.getFirstName());
         userDto.setLastName(user.getLastName());
         userDto.setSum(getSum(user));
