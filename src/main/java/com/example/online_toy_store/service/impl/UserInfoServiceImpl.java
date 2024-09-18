@@ -17,11 +17,15 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-@RequiredArgsConstructor
 public class UserInfoServiceImpl implements UserInfoService {
 
     private final UserInfoRepository userInfoRepository;
     private final UpdateRolesMapper updateRolesMapper;
+
+    public UserInfoServiceImpl(UserInfoRepository userInfoRepository, UpdateRolesMapper updateRolesMapper) {
+        this.userInfoRepository = userInfoRepository;
+        this.updateRolesMapper = updateRolesMapper;
+    }
 
     @Override
     public List<UserInfo> showAll() {

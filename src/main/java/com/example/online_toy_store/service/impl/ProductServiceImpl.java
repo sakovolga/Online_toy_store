@@ -11,7 +11,6 @@ import com.example.online_toy_store.mapper.CreateProductDtoMapper;
 import com.example.online_toy_store.repository.ProductRepository;
 import com.example.online_toy_store.repository.SupplierRepository;
 import com.example.online_toy_store.service.interf.ProductService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,12 +18,17 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-@RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final CreateProductDtoMapper createProductDtoMapper;
     private final SupplierRepository supplierRepository;
+
+    public ProductServiceImpl(ProductRepository productRepository, CreateProductDtoMapper createProductDtoMapper, SupplierRepository supplierRepository) {
+        this.productRepository = productRepository;
+        this.createProductDtoMapper = createProductDtoMapper;
+        this.supplierRepository = supplierRepository;
+    }
 
     @Override
     @Transactional

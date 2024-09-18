@@ -23,7 +23,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
@@ -31,6 +30,14 @@ public class OrderServiceImpl implements OrderService {
     private final PromoCodeRepository promoCodeRepository;
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
+
+    public OrderServiceImpl(OrderRepository orderRepository, CreateOrderDtoMapper createOrderDtoMapper, PromoCodeRepository promoCodeRepository, UserRepository userRepository, ProductRepository productRepository) {
+        this.orderRepository = orderRepository;
+        this.createOrderDtoMapper = createOrderDtoMapper;
+        this.promoCodeRepository = promoCodeRepository;
+        this.userRepository = userRepository;
+        this.productRepository = productRepository;
+    }
 
     @Override
     @Transactional
@@ -70,7 +77,7 @@ public class OrderServiceImpl implements OrderService {
 
         for (OrderDetail od : orderAfterSaving.getOrderDetails()) {
             od.setOrder(orderAfterSaving);
-            Optional<Product> product = productRepository.findById(od.getProduct().getPId());
+            Optional<Product> product = productRepository.findById(od.getProduct().getpId());
             Product changedProduct = product.orElse(null);
             if (changedProduct != null){
                 int availableQuantity = changedProduct.getAvailableQuantity() - od.getQuantity();
@@ -96,5 +103,4 @@ public class OrderServiceImpl implements OrderService {
         orderAfterSaving.setUser(user.orElse(null));
         return createOrderDtoMapper.toDto(orderAfterSaving);
     }
-
 }

@@ -14,10 +14,14 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class PromoCodeServiceImpl implements PromoCodeService {
 
     private final PromoCodeRepository promoCodeRepository;
+
+    public PromoCodeServiceImpl(PromoCodeRepository promoCodeRepository) {
+        this.promoCodeRepository = promoCodeRepository;
+    }
+
     @Override
     @Transactional
     public PromoCode showByName(String name) {

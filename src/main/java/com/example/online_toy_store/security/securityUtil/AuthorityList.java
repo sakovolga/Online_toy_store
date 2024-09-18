@@ -22,7 +22,6 @@ public class AuthorityList {
             "/order/new",
             "/order/delete/**",
             "/order/dto/create",
-//            "/product/showAllProducts",
             "/product/showProduct/*",
             "/promo/showByName/*",
             "/review/showReview/*",
@@ -40,10 +39,7 @@ public class AuthorityList {
 
     public static final String[] MANAGER_LIST = {
             "/order/showOrder/*",
-
-
-            "/promo/showAllByDiscount/*",
-//            "/repository/OrderRepository/*"
+            "/promo/showAllByDiscount/*"
     };
 
     public static final String[] SUPER_MANAGER_LIST = {

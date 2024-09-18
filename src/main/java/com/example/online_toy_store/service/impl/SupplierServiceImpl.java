@@ -5,17 +5,20 @@ import com.example.online_toy_store.exception.ASupplierWithTheSameNameAlreadyExi
 import com.example.online_toy_store.exception.SupplierDoesNotExistException;
 import com.example.online_toy_store.repository.SupplierRepository;
 import com.example.online_toy_store.service.interf.SupplierService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class SupplierServiceImpl implements SupplierService {
 
     private final SupplierRepository supplierRepository;
+
+    public SupplierServiceImpl(SupplierRepository supplierRepository) {
+        this.supplierRepository = supplierRepository;
+    }
+
     @Override
     @Transactional
     public Supplier createSupplier(Supplier supplier) {

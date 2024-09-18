@@ -5,17 +5,19 @@ import com.example.online_toy_store.exception.ReviewDoesNotExistException;
 import com.example.online_toy_store.exception.errorMessage.ErrorMessage;
 import com.example.online_toy_store.repository.ReviewRepository;
 import com.example.online_toy_store.service.interf.ReviewService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
 @Service
-@RequiredArgsConstructor
 public class ReviewServiceImpl implements ReviewService {
 
     private final ReviewRepository reviewRepository;
+
+    public ReviewServiceImpl(ReviewRepository reviewRepository) {
+        this.reviewRepository = reviewRepository;
+    }
 
     @Override
     @Transactional

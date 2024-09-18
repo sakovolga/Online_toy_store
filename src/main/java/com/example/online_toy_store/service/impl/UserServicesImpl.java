@@ -15,7 +15,6 @@ import com.example.online_toy_store.repository.OrderRepository;
 import com.example.online_toy_store.repository.UserRepository;
 import com.example.online_toy_store.service.interf.UserServices;
 import com.example.online_toy_store.util.MapperUtil;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,7 +24,6 @@ import java.util.Set;
 import java.util.UUID;
 
 @Service
-@RequiredArgsConstructor
 public class UserServicesImpl implements UserServices {
 
     private final UserRepository userRepository;
@@ -33,6 +31,14 @@ public class UserServicesImpl implements UserServices {
     private final MapperUtil mapperUtil;
     private final GetTopUsersMapper getTopUsersMapper;
     private final CreateUserMapper createUserMapper;
+
+    public UserServicesImpl(UserRepository userRepository, OrderRepository orderRepository, MapperUtil mapperUtil, GetTopUsersMapper getTopUsersMapper, CreateUserMapper createUserMapper) {
+        this.userRepository = userRepository;
+        this.orderRepository = orderRepository;
+        this.mapperUtil = mapperUtil;
+        this.getTopUsersMapper = getTopUsersMapper;
+        this.createUserMapper = createUserMapper;
+    }
 
     @Override
     @Transactional
@@ -68,6 +74,4 @@ public class UserServicesImpl implements UserServices {
     public List<User> showAll() {
         return userRepository.findAll();
     }
-
-
 }
